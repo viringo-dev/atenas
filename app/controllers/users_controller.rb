@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :destroy, :update]
   before_action :redirect_if_authenticated, only: [:create, :new]
+  before_action :check_password_params, only: [:update]
 
   def create
     @user = User.new(create_user_params)
@@ -24,7 +25,7 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.authenticate(update_user_params[:current_password])
+    if @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
         if update_user_params[:unconfirmed_email].present?
           @user.send_confirmation_email!
@@ -52,6 +53,13 @@ class UsersController < ApplicationController
   end
 
   def update_user_params
-    params.require(:user).permit(:name, :surname, :username, :phone, :birthdate, :gender, :current_password, :password, :password_confirmation, :unconfirmed_email)
+    params.require(:user).permit(:name, :surname, :username, :phone, :birthdate, :gender, :password, :password_confirmation)
+  end
+
+  def check_password_params
+    unless params[:user][:password].present? || params[:user][:password_confirmation].present?
+      params[:user][:password] = params[:user][:current_password]
+      params[:user].delete(:password_confirmation)
+    end
   end
 end
