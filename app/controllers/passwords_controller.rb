@@ -6,21 +6,21 @@ class PasswordsController < ApplicationController
     if @user.present?
       if @user.confirmed?
         @user.send_password_reset_email!
-        redirect_to root_path, notice: "i18n Si el usuario existe, enviaremos las instrucciones a su correo."
+        redirect_to root_path, notice: t("pages.password.notices.if_user_exists")
       else
-        redirect_to new_confirmation_path, alert: "Por favor confirmar tu correo primero."
+        redirect_to new_confirmation_path, alert: t("pages.password.alerts.confirm_email")
       end
     else
-      redirect_to root_path, notice: "i18n Si el usuario existe, enviaremos las instrucciones a su correo."
+      redirect_to root_path, notice: t("pages.password.notices.if_user_exists")
     end
   end
 
   def edit
     @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
     if @user.present? && @user.unconfirmed?
-      redirect_to new_confirmation_path, alert: "i18n Tienes que confirmar tu correo antes de iniciar sesión."
+      redirect_to new_confirmation_path, alert: t("pages.password.alerts.confirm_email")
     elsif @user.nil?
-      redirect_to new_password_path, alert: "i18n Token inválido o expirado."
+      redirect_to new_password_path, alert: t("pages.password.alerts.invalid_token_or_expired")
     end
   end
 
@@ -31,17 +31,16 @@ class PasswordsController < ApplicationController
     @user = User.find_signed(params[:password_reset_token], purpose: :reset_password)
     if @user
       if @user.unconfirmed?
-        redirect_to new_confirmation_path, alert: "i18n Tienes que confirmar tu correo antes de iniciar sesión."
+        redirect_to new_confirmation_path, alert: t("pages.password.alerts.confirm_email")
       elsif @user.update(password_params)
         @user.active_sessions.destroy_all
         reset_session
-        redirect_to login_path, notice: "i18n Iniciar sesión."
+        redirect_to login_path, notice: t("pages.password.notices.password_updated")
       else
-        flash.now[:alert] = @user.errors.full_messages.to_sentence
         render :edit, status: :unprocessable_entity
       end
     else
-      flash.now[:alert] = "i18n Token inválido o expirado."
+      flash.now[:alert] = t("pages.password.alerts.invalid_token_or_expired")
       render :new, status: :unprocessable_entity
     end
   end

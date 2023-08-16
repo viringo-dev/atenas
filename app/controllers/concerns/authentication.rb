@@ -22,12 +22,12 @@ module Authentication
   end
 
   def redirect_if_authenticated
-    redirect_to root_path, alert: "i18n Ya iniciaste sesión." if user_signed_in?
+    redirect_to root_path if user_signed_in?
   end
 
   def authenticate_user!
     store_location
-    redirect_to login_path, alert: "i18n Necesitas iniciar sesión para acceder." unless user_signed_in?
+    redirect_to login_path, alert: t("pages.account.alerts.sign_in_needed") unless user_signed_in?
   end
 
   def forget(user)

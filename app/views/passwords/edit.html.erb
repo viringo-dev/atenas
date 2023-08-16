@@ -1,14 +1,17 @@
 <div class="m-auto w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
   <%= form_with url: password_path(params[:password_reset_token]), scope: :user, method: :put, class: "p-4 border border-gray-300 rounded-lg" do |form| %>
+    <%= render partial: "shared/form_errors", locals: { object: @user } %>
     <div class="mb-4 text-lg">
-      <%= "i18n Restablecimiento de contraseña" %>
+      <%= t("pages.password.reset.noun") %>
     </div>
-    <div class="mb-4">
-      <%= form.password_field :password, required: true, placeholder: "Nueva contraseña", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
+    <div class="mb-4 relative">
+      <%= form.password_field :password, required: true, placeholder: "", class: input_classes %>
+      <%= form.label :email, t("activerecord.attributes.user.password"), class: label_classes %>
     </div>
-    <div class="mb-4">
-      <%= form.password_field :password_confirmation, required: true, placeholder: "Repetir nueva contraseña", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" %>
+    <div class="mb-4 relative">
+      <%= form.password_field :password_confirmation, required: true, placeholder: "", class: input_classes %>
+      <%= form.label :password_confirmation, t("activerecord.attributes.user.password_confirmation"), class: label_classes %>
     </div>
-    <%= form.submit "Actualizar contraseña", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center" %>
+    <%= form.submit t("pages.password.reset.verb"), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center" %>
   <% end %>
 </div>

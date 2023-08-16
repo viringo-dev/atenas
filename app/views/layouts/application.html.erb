@@ -9,9 +9,15 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.0/flowbite.turbo.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700" rel="stylesheet">
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-msg-me flex flex-col min-h-screen">
+    <%= render partial: "shared/header" %>
+    <main class="flex-1 p-4 md:p-8">
+      <%= render partial: "shared/flash_errors" %>
+      <%= yield %>
+    </main>
+    <%= render partial: "shared/footer" %>
   </body>
 </html>

@@ -10,10 +10,12 @@ class User < ApplicationRecord
   
   validates :name, presence: { allow_blank: false }
   validates :surname, presence: { allow_blank: false }
+  validates :birthdate, presence: { allow_blank: false }
+  validates :gender, presence: { allow_blank: false }
   validates :username, presence: { allow_blank: false }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_]+\Z/ }
   validates :email, presence: { allow_blank: false }, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :phone, presence: { allow_blank: false }, numericality: { only_integer: true }
-  validates :password, presence: { allow_blank: false }, length: { minimum: 8 }, format: { with: /\A^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }
+  validates :password, presence: { allow_blank: false }, length: { minimum: 8 }, format: { with: /\A^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }, if: :password_required?
 
   ## CALLBACKS ##
   before_save :downcase_email
@@ -52,6 +54,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def password_required?
+    new_record? || password.present?
+  end
 
   def downcase_email
     self.email = email.downcase

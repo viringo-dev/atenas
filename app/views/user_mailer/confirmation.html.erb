@@ -1,1 +1,1 @@
-<%= link_to "i18n Clic aquí para confirmar tu correo.", edit_confirmation_url(@confirmation_token) %>
+<%= t("mailers.user_mailer.confirmation.body_html", name: @user.name, app_name: 'Atenas', link: edit_confirmation_url(@confirmation_token)) %>

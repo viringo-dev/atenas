@@ -6,9 +6,9 @@ class ConfirmationsController < ApplicationController
 
     if @user.present? && @user.unconfirmed?
       @user.send_confirmation_email!
-      redirect_to root_path, notice: "i18n Revisa tu correo para las instrucciones de confirmación."
+      redirect_to root_path, notice: t("pages.confirmation.notices.check_email")
     else
-      redirect_to new_confirmation_path, alert: "i18n No encontramos un usuario con ese correo o el correo ya ha sido confirmado."
+      redirect_to new_confirmation_path, alert: t("pages.confirmation.alerts.no_email_or_already_confirmed")
     end
   end
 
@@ -18,9 +18,9 @@ class ConfirmationsController < ApplicationController
     if @user.present? && @user.unconfirmed?
       @user.confirm!
       login @user
-      redirect_to root_path, notice: "i18n Tu cuenta ha sido confirmada."
+      redirect_to root_path, notice: t("pages.confirmation.notices.confirmed")
     else
-      redirect_to new_confirmation_path, alert: "i18n Token inválido."
+      redirect_to new_confirmation_path, alert: t("pages.confirmation.alerts.invalid_token")
     end
   end
 

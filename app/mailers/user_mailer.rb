@@ -5,13 +5,13 @@ class UserMailer < ApplicationMailer
     @user = user
     @confirmation_token = confirmation_token
 
-    mail to: @user.email, subject: "i18n Confirmación de correo"
+    mail to: @user.email, subject: t("mailers.user_mailer.confirmation.subject", app_name: "Atenas")
   end
 
   def password_reset(user, password_reset_token)
     @user = user
     @password_reset_token = password_reset_token
 
-    mail to: @user.email, subject: "i18n Recuperación de contraseña"
+    mail to: @user.email, subject: t("mailers.user_mailer.password_reset.subject", app_name: "Atenas")
   end
 end

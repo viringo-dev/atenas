@@ -1,52 +1,56 @@
 <%= form_with model: user, url: path, method: method, class: "p-4 border border-gray-300 rounded-lg" do |form| %>
   <div class="mb-4 text-lg">
-    <%= "i18n Actualización de datos" %>
+    <% if user.new_record? %>
+      <%= t("pages.account.form.sign_up.noun") %>
+    <% else %>
+      <%= t("pages.account.form.update.noun") %>
+    <% end %>
   </div>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
   <div class="mb-4 relative">
-    <%= form.text_field :name, required: true, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-    <%= form.label :name, "i18n Nombre", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+    <%= form.text_field :name, required: true, class: input_classes, placeholder: "" %>
+    <%= form.label :name, class: label_classes %>
   </div>
   <div class="mb-4 relative">
-    <%= form.text_field :surname, required: true, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-    <%= form.label :surname, "i18n Apellido", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+    <%= form.text_field :surname, required: true, class: input_classes, placeholder: "" %>
+    <%= form.label :surname, class: label_classes %>
   </div>
   <div class="mb-4 relative">
-    <%= form.email_field :email, disabled: user.persisted?, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-    <%= form.label :email, "i18n Correo", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+    <%= form.email_field :email, disabled: user.persisted?, class: input_classes, placeholder: "" %>
+    <%= form.label :email, class: label_classes %>
   </div>
   <div class="mb-4 flex gap-x-2">
     <div class="w-1/2 relative">
-      <%= form.text_field :username, required: true, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-      <%= form.label :username, "i18n Usuario", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+      <%= form.text_field :username, required: true, class: input_classes, placeholder: "" %>
+      <%= form.label :username, class: label_classes %>
     </div>
     <div class="w-1/2 relative">
-      <%= form.text_field :phone, required: true, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-      <%= form.label :phone, "i18n Teléfono", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+      <%= form.text_field :phone, required: true, class: input_classes, placeholder: "" %>
+      <%= form.label :phone, class: label_classes %>
     </div>
   </div>
   <div class="mb-4 flex gap-x-2">
     <div class="w-1/2 relative">
-      <%= form.date_field :birthdate, required: true, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-      <%= form.label :birthdate, "i18n Fecha de nacimiento", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+      <%= form.date_field :birthdate, required: true, class: input_classes, placeholder: "" %>
+      <%= form.label :birthdate, class: label_classes %>
     </div>
     <div class="w-1/2 relative">
-      <%= form.select :gender, [["Masculino", "male"], ["Femenino", "female"], ["Otro", "other"]], {}, { class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-base text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer" } %>
-      <%= form.label :gender, "i18n Género", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+      <%= form.select :gender, [["Masculino", "male"], ["Femenino", "female"], ["Otro", "other"]], {}, { class: select_classes } %>
+      <%= form.label :gender, class: label_classes %>
     </div>
   </div>
   <div class="mb-4 relative">
-    <%= form.password_field :password, required: user.new_record?, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-    <%= form.label :password, "i18n Contraseña", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+    <%= form.password_field :password, required: user.new_record?, class: input_classes, placeholder: "" %>
+    <%= form.label :password, class: label_classes %>
   </div>
   <div class="mb-4 relative">
-    <%= form.password_field :password_confirmation, required: user.new_record?, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-    <%= form.label :password_confirmation, "i18n Confirmar contraseña", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+    <%= form.password_field :password_confirmation, required: user.new_record?, class: input_classes, placeholder: "" %>
+    <%= form.label :password_confirmation, class: label_classes %>
   </div>
   <% if user.persisted? %>
     <div class="mb-4 relative">
-      <%= form.password_field :current_password, required: true, class: "block rounded-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 appearance-nonefocus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: "" %>
-      <%= form.label :current_password, "i18n Contraseña actual", class: "absolute text-sm text-gray-500 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] left-2.5 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4" %>
+      <%= form.password_field :current_password, required: true, class: input_classes, placeholder: "" %>
+      <%= form.label :current_password, t("pages.account.form.current_password"), class: label_classes %>
     </div>
   <% end %>
   <% if user.new_record? %>
@@ -54,8 +58,13 @@
       <div class="flex items-center h-5">
         <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required>
       </div>
-      <label for="remember" class="ml-2 text-sm font-medium text-gray-900"><%= "i18n Acepto " %><%= link_to "terminos y condiciones", sign_up_path, class: "text-blue-700" %></label>
+      <label for="remember" class="ml-2 text-sm font-medium text-gray-900"><%= t("pages.account.form.accept") %><%= link_to t("pages.account.form.terms_and_conditions"), sign_up_path, class: "text-primary" %></label>
     </div>
   <% end %>
-  <%= form.submit user.persisted? ? "i18n Actualizar datos" : "i18n Crear cuenta", class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center", style: "cursor: pointer;" %>
+  <%= form.submit user.new_record? ? t("pages.account.form.sign_up.verb") : t("pages.account.form.update.verb"), class: button_classes(), style: "cursor: pointer;" %>
+  <% if user.new_record? %>
+    <div class="text-sm text-center mt-4">
+      <%= t("pages.account.form.already_have_account") %><%= link_to t("pages.account.form.sign_in.verb"), login_path, class: "text-primary font-semibold" %>
+    </div>
+  <% end %>
 <% end %>

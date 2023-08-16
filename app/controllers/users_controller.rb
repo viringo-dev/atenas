@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(create_user_params)
     if @user.save
       @user.send_confirmation_email!
-      redirect_to root_path, notice: "i18n Revisa tu correo para la confirmación."
+      redirect_to root_path, notice: t("pages.confirmation.notices.check_email")
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,15 +29,15 @@ class UsersController < ApplicationController
       if @user.update(update_user_params)
         if update_user_params[:unconfirmed_email].present?
           @user.send_confirmation_email!
-          redirect_to root_path, notice: "i18n Revisa tu correo para la confirmación."
+          redirect_to root_path, notice: ""
         else
-          redirect_to root_path, notice: "i18n Cuenta actualizada."
+          redirect_to account_path, notice: t("pages.account.notices.data_updated")
         end
       else
         render :edit, status: :unprocessable_entity
       end
     else
-      flash.now[:error] = "i18n Contraseña incorrecta."
+      flash.now[:error] = t("pages.account.alerts.wrong_current_password")
       render :edit, status: :unprocessable_entity
     end
   end

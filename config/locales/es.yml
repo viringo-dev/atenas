@@ -1,0 +1,105 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+es:
+  activerecord:
+    attributes:
+      user:
+        name: "Nombre"
+        surname: "Apellido"
+        email: "Correo electrónico"
+        username: "Usuario"
+        phone: "Teléfono"
+        birthdate: "Nacimiento"
+        gender: "Género"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+    errors:
+      models:
+        user:
+          attributes:
+            username:
+              invalid: "debe contener letras, números y guiones bajos"
+            phone:
+              not_a_number: "debe ser numérico"
+            password:
+              invalid: "debe contener letras y números"
+  pages:
+    account:
+      form:
+        current_password: "Contraseña actual"
+        sign_up:
+          noun: "Registro"
+          verb: "Registrarse"
+        sign_in:
+          noun: "Inicio de sesión"
+          verb: "Iniciar sesión"
+        remember_me: "Recuérdame"
+        forgot_password: "¿Olvidaste tu contraseña?"
+        already_have_account: "¿Ya tienes una cuenta? "
+        accept: "Acepto los "
+        terms_and_conditions: "términos y condiciones"
+        update:
+          noun: "Actualización de datos"
+          verb: "Actualizar"
+      alerts:
+        sign_in_needed: "Inicia sesión para acceder"
+        wrong_current_password: "Contraseña actual incorrecta"
+      notices:
+        data_updated: "Datos actualizados"
+    sign_in:
+      alerts:
+        invalid: "Usuario o contraseña incorrectos"
+        unconfirmed: "Tu cuenta no está confirmada"
+      notices:
+        signed_in: "Has iniciado sesión correctamente"
+        signed_out: "Has cerrado sesión correctamente"
+    confirmation:
+      noun: "Confirmación de correo"
+      verb: "Confirmar"
+      alerts:
+        no_email_or_already_confirmed: "No se ha encontrado el correo electrónico o ya está confirmado"
+        invalid_token: "Token inválido"
+      notices:
+        check_email: "Revisa tu correo electrónico para confirmar tu cuenta"
+        confirmed: "Tu correo ha sido confirmado"
+    password:
+      noun: "Recuperación de contraseña"
+      verb: "Recuperar"
+      alerts:
+        confirm_email: "Confirma tu correo electrónico para recuperar la contraseña"
+        invalid_token_or_expired: "Token inválido o expirado"
+      notices:
+        if_user_exists: "Si el usuario existe, se enviará un correo con instrucciones para recuperar la contraseña"
+        password_updated: "Contraseña actualizada"
+      reset:
+        noun: "Restablecimiento de contraseña"
+        verb: "Restablecer contraseña"

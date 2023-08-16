@@ -1,0 +1,31 @@
+es:
+  mailers:
+    user_mailer:
+      confirmation:
+        subject: "Confirma tu correo electrónico en %{app_name}"
+        body_html: |
+          <p>Hola %{name},</p>
+
+          <p>Gracias por registrarte en %{app_name}.</p>
+
+          <p>Para completar el registro, haz clic en el siguiente enlace:</p>
+
+          <a href="%{link}">Confirmar correo electrónico</a>
+
+          <p>Si no has sido tú quien ha solicitado el registro, ignora este correo.</p>
+
+          <p>Saludos,</p>
+          <p>El equipo de %{app_name}</p>
+      password_reset:
+        subject: "Restablece tu contraseña de %{app_name}"
+        body_html: |
+          <p>Hola %{name},</p>
+
+          <p>Para restablecer tu contraseña, haz clic en el siguiente enlace:</p>
+
+          <a href="%{link}">Restablecer contraseña</a>
+
+          <p>Si no has sido tú quien ha solicitado el restablecimiento de contraseña, ignora este correo.</p>
+
+          <p>Saludos,</p>
+          <p>El equipo de %{app_name}</p>
