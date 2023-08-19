@@ -75,6 +75,7 @@ es:
         wrong_current_password: "Contraseña actual incorrecta"
       notices:
         data_updated: "Datos actualizados"
+      sign_out: "Cerrar sesión"
     sign_in:
       alerts:
         invalid: "Usuario o contraseña incorrectos"

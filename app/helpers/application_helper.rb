@@ -1,6 +1,6 @@
 module ApplicationHelper
   def button_classes(classes = nil)
-    "#{classes} text-white bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer"
+    "#{classes} text-white bg-primary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer whitespace-nowrap transition-transform transform hover:scale-105"
   end
 
   def input_classes(classes = nil)
