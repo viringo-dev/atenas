@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   ## ASSOCIATIONS ##
   has_many :active_sessions, dependent: :destroy
+  has_many :tasks, foreign_key: "owner_id", dependent: :destroy
+  has_many :assigned_tasks, class_name: "Task", foreign_key: "assignee_id", dependent: :destroy
   
   validates :name, presence: { allow_blank: false }
   validates :surname, presence: { allow_blank: false }
