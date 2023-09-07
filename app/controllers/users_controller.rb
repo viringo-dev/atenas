@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    sleep 5
     @user = current_user
     if @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
@@ -49,11 +50,11 @@ class UsersController < ApplicationController
   private
 
   def create_user_params
-    params.require(:user).permit(:name, :surname, :username, :phone, :birthdate, :gender, :email, :password, :password_confirmation)
+    params.require(:user).permit(:avatar, :name, :surname, :username, :phone, :birthdate, :gender, :email, :password, :password_confirmation)
   end
 
   def update_user_params
-    params.require(:user).permit(:name, :surname, :username, :phone, :birthdate, :gender, :password, :password_confirmation)
+    params.require(:user).permit(:avatar, :name, :surname, :username, :phone, :birthdate, :gender, :password, :password_confirmation)
   end
 
   def check_password_params
