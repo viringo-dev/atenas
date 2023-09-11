@@ -15,7 +15,7 @@
       <%= form.check_box :remember_me, class: checkbox_classes %>
       <%= form.label t("pages.account.form.remember_me"), class: "text-sm" %>
     </div>
-    <%= form.submit t("pages.account.form.sign_in.verb"), class: button_classes("hover:bg-primary-hover") %>
+    <%= form.submit t("pages.account.form.sign_in.verb"), class: button_classes %>
     <div class="mb-4 mt-4 text-sm text-center text-secondary">
       <%= link_to t("pages.account.form.forgot_password"), new_password_path, class: "text-sm" %>
     </div>
