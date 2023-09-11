@@ -42,6 +42,11 @@ es:
         gender: "Género"
         password: "Contraseña"
         password_confirmation: "Confirmar contraseña"
+      task:
+        name: "Nombre"
+        description: "Descripción"
+        reward: "Recompensa"
+        deadline: "Fecha límite"
     errors:
       models:
         user:
@@ -49,9 +54,17 @@ es:
             username:
               invalid: "debe contener letras, números y guiones bajos"
             phone:
-              not_a_number: "debe ser numérico"
+              invalid: "debe tener el formato +51 987654321"
             password:
               invalid: "debe contener letras y números"
+    models:
+      user:
+        one: "Usuario"
+        enums:
+          gender:
+            male: "Masculino"
+            female: "Femenino"
+            other: "Otro"
   pages:
     account:
       form:
@@ -104,3 +117,14 @@ es:
       reset:
         noun: "Restablecimiento de contraseña"
         verb: "Restablecer contraseña"
+    header:
+      tasks: "Tareas"
+      publications: "Publicaciones"
+    common:
+      save: "Guardar"
+      cancel: "Cancelar"
+      delete: "Eliminar"
+      edit: "Editar"
+    tasks:
+      new_task: "Nueva tarea"
+      created: "Tarea creada"

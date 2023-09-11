@@ -1,5 +1,5 @@
 <%= form_with model: user, url: path, method: method, class: "p-4 border border-gray-300 rounded-lg" do |form| %>
-  <div class="mb-4 text-lg font-semibold">
+  <div class="mb-2 text-lg font-semibold">
     <% if user.new_record? %>
       <%= t("pages.account.form.sign_up.noun") %>
     <% else %>
@@ -7,7 +7,7 @@
     <% end %>
   </div>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
-  <div class="mb-4 flex justify-center" data-controller="previews">
+  <div class="mb-2 flex justify-center" data-controller="previews">
     <%= form.label :avatar do %>
       <%= image_tag form.object.avatar.attached? ? form.object.avatar : "/default-avatar.png",
                     data: { previews_target: "preview" },
@@ -18,54 +18,54 @@
                         accept: 'image/png,image/jpeg,image/jpg',
                         class: "hidden" %>
   </div>
-  <div class="mb-4 relative">
-    <%= form.text_field :name, required: true, class: input_classes, placeholder: "" %>
+  <div class="mb-2">
     <%= form.label :name, class: label_classes %>
+    <%= form.text_field :name, required: true, class: input_classes, placeholder: "Elon" %>
   </div>
-  <div class="mb-4 relative">
-    <%= form.text_field :surname, required: true, class: input_classes, placeholder: "" %>
+  <div class="mb-2">
     <%= form.label :surname, class: label_classes %>
+    <%= form.text_field :surname, required: true, class: input_classes, placeholder: "Musk" %>
   </div>
-  <div class="mb-4 relative">
-    <%= form.email_field :email, disabled: user.persisted?, class: input_classes, placeholder: "" %>
+  <div class="mb-2">
     <%= form.label :email, class: label_classes %>
+    <%= form.email_field :email, disabled: user.persisted?, class: input_classes, placeholder: "elon@example.com" %>
   </div>
-  <div class="mb-4 flex gap-x-2">
-    <div class="w-1/2 relative">
-      <%= form.text_field :username, required: true, class: input_classes, placeholder: "" %>
+  <div class="mb-2 flex gap-x-2">
+    <div class="w-1/2">
       <%= form.label :username, class: label_classes %>
+      <%= form.text_field :username, required: true, class: input_classes, placeholder: "elonmusk" %>
     </div>
-    <div class="w-1/2 relative">
-      <%= form.text_field :phone, required: true, class: input_classes, placeholder: "" %>
+    <div class="w-1/2">
       <%= form.label :phone, class: label_classes %>
+      <%= form.telephone_field :phone, required: true, class: input_classes, placeholder: "+51 987654321" %>
     </div>
   </div>
-  <div class="mb-4 flex gap-x-2">
-    <div class="w-1/2 relative">
-      <%= form.date_field :birthdate, required: true, class: input_classes, placeholder: "" %>
-      <%= form.label :birthdate, class: label_classes %>
-    </div>
-    <div class="w-1/2 relative">
-      <%= form.select :gender, [["Masculino", "male"], ["Femenino", "female"], ["Otro", "other"]], {}, { class: select_classes } %>
+  <div class="mb-2 flex gap-x-2">
+    <div class="w-1/2">
       <%= form.label :gender, class: label_classes %>
+      <%= form.select :gender, User.genders.keys { |k| [t("activerecord.models.user.enums.gender.#{k}"), k] }, {}, { class: select_classes } %>
+    </div>
+    <div class="w-1/2">
+      <%= form.label :birthdate, class: label_classes %>
+      <%= form.date_field :birthdate, required: true, class: date_classes, placeholder: "" %>
     </div>
   </div>
-  <div class="mb-4 relative">
-    <%= form.password_field :password, required: user.new_record?, class: input_classes, placeholder: "" %>
+  <div class="mb-2">
     <%= form.label :password, class: label_classes %>
+    <%= form.password_field :password, required: user.new_record?, class: input_classes, placeholder: "" %>
   </div>
-  <div class="mb-4 relative">
-    <%= form.password_field :password_confirmation, required: user.new_record?, class: input_classes, placeholder: "" %>
+  <div class="mb-2">
     <%= form.label :password_confirmation, class: label_classes %>
+    <%= form.password_field :password_confirmation, required: user.new_record?, class: input_classes, placeholder: "" %>
   </div>
   <% if user.persisted? %>
-    <div class="mb-4 relative">
-      <%= form.password_field :current_password, required: true, class: input_classes, placeholder: "" %>
+    <div class="mb-2">
       <%= form.label :current_password, t("pages.account.form.current_password"), class: label_classes %>
+      <%= form.password_field :current_password, required: true, class: input_classes, placeholder: "" %>
     </div>
   <% end %>
   <% if user.new_record? %>
-    <div class="flex items-start mb-4">
+    <div class="flex items-start mb-2">
       <div class="flex items-center h-5">
         <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required>
       </div>

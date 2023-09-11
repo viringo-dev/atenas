@@ -6,12 +6,8 @@
       </a>
       <div class="flex items-center md:order-2">
         <% if current_user %>
-          <button type="button" class="flex mr-3 text-sm rounded-full md:mr-0 ring-4 ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-            <div class="w-10 h-10 rounded-full">
-              <svg width="" height="" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM15 9C15 10.6569 13.6569 12 12 12C10.3431 12 9 10.6569 9 9C9 7.34315 10.3431 6 12 6C13.6569 6 15 7.34315 15 9ZM12 20.5C13.784 20.5 15.4397 19.9504 16.8069 19.0112C17.4108 18.5964 17.6688 17.8062 17.3178 17.1632C16.59 15.8303 15.0902 15 11.9999 15C8.90969 15 7.40997 15.8302 6.68214 17.1632C6.33105 17.8062 6.5891 18.5963 7.19296 19.0111C8.56018 19.9503 10.2159 20.5 12 20.5Z" fill="#FFF"/>
-              </svg>
-            </div>
+          <button type="button" class="flex mr-3 text-sm rounded-full md:mr-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+            <%= avatar(current_user) %>
           </button>
           <!-- Dropdown menu -->
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
@@ -44,20 +40,13 @@
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
         <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
           <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" aria-current="page">Home</a>
+            <%= link_to t("pages.header.tasks"), tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
           </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white">About</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white">Services</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white">Pricing</a>
-          </li>
-          <li>
-            <a href="#" class="block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white">Contact</a>
-          </li>
+          <% if current_user %>
+            <li>
+              <%= link_to t("pages.header.publications"), my_tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </div>

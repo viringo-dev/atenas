@@ -4,7 +4,7 @@
       <%= t("pages.account.form.sign_in.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.email_field :email, required: true, class: input_classes, placeholder: "" %>
+      <%= form.email_field :email, autofocus: true, required: true, class: input_classes, placeholder: "" %>
       <%= form.label :email, t("activerecord.attributes.user.email"), class: label_classes %>
     </div>
     <div class="mb-4 relative">

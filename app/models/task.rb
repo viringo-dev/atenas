@@ -14,4 +14,6 @@ class Task < ApplicationRecord
   enum currency: { pen: 0, usd: 1 }
   enum status: { bided: 0, accepted: 1, paused: 2, finished: 3, unfinished: 4 }
 
+  ## SCOPES ##
+  scope :ordered, -> { order(created_at: :desc) }
 end

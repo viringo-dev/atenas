@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :gender, presence: { allow_blank: false }
   validates :username, presence: { allow_blank: false }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_]+\Z/ }
   validates :email, presence: { allow_blank: false }, uniqueness: { case_sensitive: false }, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :phone, presence: { allow_blank: false }, numericality: { only_integer: true }
+  validates :phone, presence: { allow_blank: false }, format: { with: /\A\+\d{1,3} \d{1,15}+\z/ }
   validates :password, presence: { allow_blank: false }, length: { minimum: 8 }, format: { with: /\A^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }, if: :password_required?
 
   ## CALLBACKS ##

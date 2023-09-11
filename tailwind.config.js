@@ -16,6 +16,8 @@ module.exports = {
         'third-hover': '#02B47A',
         'dark': '#303543',
         'light': '#303543',
+        'negative': '#F6635C',
+        'negative-hover': '#F4443B'
       },
       fontFamily: {
         sans: ['Montserrat']

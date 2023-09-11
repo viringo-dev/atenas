@@ -1,8 +1,11 @@
-<div class="md:mx-auto w-full md:w-2/3 p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow">
+<div class="w-full p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow">
   <div class="mb-2 text-xl font-semibold line-clamp-1"><%= task.name %></div>
   <div class="mb-2 text-xl font-semibold text-third line-clamp-1">S/ <%= task.reward %></div>
   <div class="mb-3 text-base font-normal"><%= task.description %></div>
-  <div class="text-sm font-medium text-primary flex justify-end">
-    @<%= task.owner.username %>
+  <div class="flex justify-end items-center gap-x-2">
+    <div class="text-sm font-medium text-primary">
+      @<%= task.owner.username %>
+    </div>
+    <%= avatar(task.owner) %>
   </div>
 </div>

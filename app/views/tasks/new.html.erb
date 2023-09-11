@@ -1,0 +1,9 @@
+<div class="">
+  <div class="mb-2 text-lg font-semibold"><%= t("pages.tasks.new_task") %></div>
+
+  <%= turbo_frame_tag @task do %>
+    <div class="mb-4 p-4 border border-gray-300 rounded-lg">
+      <%= render "form", task: @task %>
+    </div>
+  <% end %>
+</div>
