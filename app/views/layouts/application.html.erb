@@ -15,7 +15,9 @@
   <body class="bg-msg-me flex flex-col min-h-screen text-dark">
     <%= render partial: "shared/header" %>
     <main class="flex-1 p-4 md:px-24 lg:px-48 xl:px-72 2xl:px-96">
-      <%= render partial: "shared/flash_errors" %>
+      <div id="flash">
+        <%= render partial: "shared/flash" %>
+      </div>
       <%= yield %>
     </main>
     <%= render partial: "shared/footer" %>

@@ -85,7 +85,7 @@ es:
           verb: "Actualizar"
       alerts:
         sign_in_needed: "Inicia sesión para acceder"
-        wrong_current_password: "Contraseña actual incorrecta"
+        wrong_current_password: "Contraseña incorrecta"
       notices:
         data_updated: "Datos actualizados"
       sign_out: "Cerrar sesión"

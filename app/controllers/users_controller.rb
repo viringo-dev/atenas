@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    sleep 5
     @user = current_user
     if @user.authenticate(params[:user][:current_password])
       if @user.update(update_user_params)
