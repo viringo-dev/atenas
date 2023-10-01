@@ -6,7 +6,7 @@
   </div>
   <div class="mb-2">
     <%= form.label :description, class: label_classes %>
-    <%= form.text_area :description, required: true, class: input_classes, placeholder: "" %>
+    <%= form.text_area :description, required: true, class: input_classes %>
   </div>
   <div class="mb-4 flex gap-x-2">
     <div class="w-1/2">
@@ -20,8 +20,21 @@
     </div>
     <div class="w-1/2">
       <%= form.label :deadline, class: label_classes %>
-      <%= form.datetime_local_field :deadline, required: true, class: date_classes, placeholder: "" %>
+      <%= form.datetime_local_field :deadline, required: true, class: date_classes %>
     </div>
+  </div>
+  <div class="mb-2">
+    <div class="flex items-center gap-x-1">
+      <%= form.label :files, class: label_classes %>
+      <p class="text-sm text-gray-500 mb-1">(5 máx.)</p>
+    </div>
+    <% @task.files.each do |file| %>
+      <%= form.hidden_field :files, multiple: true, value: file.signed_id %>
+    <% end %>
+    <%= form.file_field :files,
+                        multiple: true,
+                        data: { controller: "files", files_target: "input", action: "change->files#checkFiles" },
+                        class: input_classes %>
   </div>
   <div class="flex justify-center">
     <%= form.button class: button_classes("mb-1 w-full"), style: "cursor: pointer;" do %>

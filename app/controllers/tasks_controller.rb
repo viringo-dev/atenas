@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
 
   def index
     @tasks = Task.ordered
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
     if @task.save
       respond_to do |format|
-        format.html { redirect_to quotes_path, notice: t("pages.tasks.created") }
+        format.html { redirect_to tasks_path, notice: t("pages.tasks.created") }
         format.turbo_stream { flash.now[:notice] = t("pages.tasks.created") }
       end
     else
@@ -26,26 +26,42 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @task = Task.find(params[:id])
-    @task.build_project unless @task.project
   end
 
   def update
-    @task = Task.find(params[:id])
-    if @task.update_attributes(task_params)
-      redirect_to tasks_path, notice: 'Task was successfully updated.'
+    if @task.update(task_params)
+      respond_to do |format|
+        format.html { redirect_to tasks_path, notice: t("pages.tasks.updated") }
+        format.turbo_stream { flash.now[:notice] = t("pages.tasks.updated") }
+      end
     else
-      render action: 'edit'
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @task.destroy
+    respond_to do |format|
+      format.html { redirect_to tasks_path, notice: t("pages.tasks.deleted") }
+      format.turbo_stream { flash.now[:notice] = t("pages.tasks.deleted") }
     end
   end
 
   private
 
   def task_params
-    params.require(:task).permit(:name, :description, :reward, :deadline)
+    params.require(:task).permit(:name, :description, :reward, :deadline, files: [])
   end
 
   def set_task
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      if turbo_frame_request?
+        flash[:alert] = t("pages.tasks.alerts.not_found")
+        render turbo_stream: turbo_stream.action(:redirect, tasks_url)
+      else
+        redirect_to tasks_path, alert: t("pages.tasks.alerts.not_found")
+      end
+    end
   end
 end

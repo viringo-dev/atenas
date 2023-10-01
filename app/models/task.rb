@@ -3,6 +3,7 @@ class Task < ApplicationRecord
   ## ASSOCIATIONS ##
   belongs_to :owner, class_name: "User", foreign_key: "owner_id"
   belongs_to :assignee, class_name: "User", foreign_key: "assignee_id", optional: true
+  has_many_attached :files
 
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false, message: :blank }

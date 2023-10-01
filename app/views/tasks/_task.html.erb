@@ -1,38 +1,62 @@
-<div class="w-full p-6 mb-4 bg-white border border-gray-200 rounded-lg shadow">
-  <div class="flex justify-between items-center gap-x-2">
-    <div class="mb-2 text-xl font-semibold line-clamp-1">
-      <%= task.name %>
-    </div>
-    <% if task.owner == current_user %>
-      <div class="flex items-center gap-x-1">
-        <%= link_to edit_task_path(task),
-                    class: button_classes("bg-third hover:bg-third-hover px-[10px] w-auto"),
-                    data: { "tooltip-target": "tooltip-edit-task" } do %>
-          <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="edit"> <g> <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path> <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon> </g> </g> </g> </g></svg>
-          <div id="tooltip-edit-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-              <%= t("pages.common.edit") %>
-              <div class="tooltip-arrow" data-popper-arrow></div>
-          </div>
-        <% end %>
-        <%= button_to task_path(task),
-                      method: :delete,
-                      class: button_classes("block bg-negative hover:bg-negative-hover px-[10px]"),
-                      data: { "tooltip-target": "tooltip-delete-task" } do %>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#FFF"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 12V17" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 12V17" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-          <div id="tooltip-delete-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-              <%= t("pages.common.delete") %>
-              <div class="tooltip-arrow" data-popper-arrow></div>
-          </div>
-        <% end %>
+<%= turbo_frame_tag task do %>
+  <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow">
+    <div class="flex justify-between items-center gap-x-2">
+      <div class="text-xl font-semibold line-clamp-1">
+        <%= task.name %>
       </div>
-    <% end %>
-  </div>
-  <div class="mb-2 text-xl font-semibold text-third line-clamp-1">S/ <%= task.reward %></div>
-  <div class="mb-3 text-base font-normal"><%= task.description %></div>
-  <div class="flex justify-end items-center gap-x-2">
-    <div class="text-sm font-medium text-primary">
-      @<%= task.owner.username %>
+      <% if task.owner == current_user %>
+        <div class="flex items-center gap-x-1">
+          <%= link_to edit_task_path(task),
+                      class: button_classes("bg-third hover:bg-third-hover px-[10px] w-auto"),
+                      data: { "tooltip-target": "tooltip-edit-task" } do %>
+            <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title></title> <g id="Complete"> <g id="edit"> <g> <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path> <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8" stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></polygon> </g> </g> </g> </g></svg>
+            <div id="tooltip-edit-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                <%= t("pages.common.edit") %>
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          <% end %>
+          <%= button_to task_path(task),
+                        method: :delete,
+                        form: { data: { turbo_confirm: t("pages.common.sure") } },
+                        class: button_classes("block bg-negative hover:bg-negative-hover px-[10px]"),
+                        data: { "tooltip-target": "tooltip-delete-task" } do %>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#FFF"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 12V17" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M14 12V17" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M4 7H20" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 10V18C6 19.6569 7.34315 21 9 21H15C16.6569 21 18 19.6569 18 18V10" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            <div id="tooltip-delete-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                <%= t("pages.common.delete") %>
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-    <%= avatar(task.owner) %>
+    <div class="mb-2 text-xl font-semibold text-third line-clamp-1">S/ <%= task.reward %></div>
+    <div class="mb-3 text-base font-normal"><%= task.description %></div>
+    <div class="flex justify-between items-center gap-x-2">
+      <div class="">
+        <%= button_tag data: { dropdown_toggle: "files-dropdown-#{task.id}" }, class: "#{"hidden" if task.files.empty?} text-white bg-primary hover:bg-primary-hover font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" do %>
+          <%= t("activerecord.attributes.task.files") %>
+          <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+          </svg>
+        <% end %>
+        <div id="files-dropdown-<%= task.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+          <ul class="text-sm text-gray-700" aria-labelledby="">
+            <% task.files.each do |file| %>
+              <li>
+                <%= link_to file.filename, file, target: "_blank", class: "block px-4 py-2 hover:bg-gray-100" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="flex items-center">
+        <div class="text-sm font-medium text-primary mr-2">
+          @<%= task.owner.username %>
+        </div>
+        <div class="">
+          <%= avatar(task.owner) %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+<% end %>
