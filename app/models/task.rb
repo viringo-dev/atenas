@@ -17,4 +17,5 @@ class Task < ApplicationRecord
 
   ## SCOPES ##
   scope :ordered, -> { order(created_at: :desc) }
+  scope :paginated, ->(params={}) { page(params[:page]).per(params[:per_page]) }
 end

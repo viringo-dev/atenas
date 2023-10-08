@@ -8,7 +8,7 @@ export default class extends Controller {
     this.menuTarget.classList.toggle("hidden")
   }
 
-  hide(event) {
+  hide() {
     this.menuTarget.classList.add("hidden")
   }
 }
