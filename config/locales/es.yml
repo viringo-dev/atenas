@@ -53,11 +53,19 @@ es:
         user:
           attributes:
             username:
+              blank: "no puede estar en blanco"
               invalid: "debe contener letras, números y guiones bajos"
             phone:
               invalid: "debe tener el formato +51 987654321"
             password:
               invalid: "debe contener letras y números"
+              blank: "no puede estar en blanco"
+            name:
+              blank: "no puede estar en blanco"
+            surname:
+              blank: "no puede estar en blanco"
+            email:
+              blank: "no puede estar en blanco"
     models:
       user:
         one: "Usuario"
