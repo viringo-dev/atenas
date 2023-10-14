@@ -27,7 +27,14 @@ module Authentication
 
   def authenticate_user!
     store_location
-    redirect_to login_path, alert: t("pages.account.alerts.sign_in_needed") unless user_signed_in?
+    unless user_signed_in?
+      if turbo_frame_request?
+        flash[:alert] = t("pages.account.alerts.sign_in_needed")
+        render turbo_stream: turbo_stream.action(:redirect, login_url)
+      else
+        redirect_to login_path, alert: t("pages.account.alerts.sign_in_needed")
+      end
+    end
   end
 
   def forget(user)

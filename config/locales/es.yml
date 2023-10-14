@@ -95,7 +95,7 @@ es:
           noun: "Actualización de datos"
           verb: "Actualizar"
       alerts:
-        sign_in_needed: "Inicia sesión para acceder"
+        sign_in_needed: "Inicia sesión para continuar"
         wrong_current_password: "Contraseña incorrecta"
       notices:
         data_updated: "Datos actualizados"
