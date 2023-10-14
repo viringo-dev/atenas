@@ -1,6 +1,6 @@
 <header>
   <nav class="bg-primary">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
       <a href="/" class="flex items-center">
         <span class="text-white self-center text-2xl font-semibold whitespace-nowrap">ATENAS</span>
       </a>
@@ -27,8 +27,8 @@
           </div>
         <% else %>
           <div class="flex gap-x-2">
-            <%= link_to "Sign in", login_path, class: button_classes("bg-secondary rounded-lg hover:bg-secondary-hover") %>
-            <%= link_to "Sign up", sign_up_path, class: button_classes("bg-third rounded-lg hover:bg-third-hover") %>
+            <%= link_to t("pages.header.sign_in"), login_path, class: button_classes("bg-secondary rounded-lg hover:bg-secondary-hover") %>
+            <%= link_to t("pages.header.sign_up"), sign_up_path, class: button_classes("bg-third rounded-lg hover:bg-third-hover") %>
           </div>
         <% end %>
           <button data-collapse-toggle="navbar-user" type="button" class="ml-2 inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-user" aria-expanded="false">

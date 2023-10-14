@@ -131,6 +131,8 @@ es:
     header:
       tasks: "Tareas"
       publications: "Publicaciones"
+      sign_in: "Iniciar sesión"
+      sign_up: "Registrarse"
     common:
       save: "Guardar"
       cancel: "Cancelar"
@@ -142,5 +144,6 @@ es:
       created: "Tarea creada"
       updated: "Tarea actualizada"
       deleted: "Tarea eliminada"
+      create_task: "Crear tarea"
       alerts:
         not_found: "Tarea no encontrada"

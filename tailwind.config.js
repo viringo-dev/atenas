@@ -20,7 +20,7 @@ module.exports = {
         'negative-hover': '#F4443B'
       },
       fontFamily: {
-        sans: ['Montserrat']
+        sans: ['Roboto']
       },
     },
   },
