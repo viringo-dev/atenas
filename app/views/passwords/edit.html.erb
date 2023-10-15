@@ -5,12 +5,12 @@
       <%= t("pages.password.reset.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.password_field :password, required: true, placeholder: "", class: input_classes %>
-      <%= form.label :email, t("activerecord.attributes.user.password"), class: label_classes %>
+      <%= form.password_field :password, required: true, placeholder: "", class: "input" %>
+      <%= form.label :email, t("activerecord.attributes.user.password"), class: "label" %>
     </div>
     <div class="mb-4 relative">
-      <%= form.password_field :password_confirmation, required: true, placeholder: "", class: input_classes %>
-      <%= form.label :password_confirmation, t("activerecord.attributes.user.password_confirmation"), class: label_classes %>
+      <%= form.password_field :password_confirmation, required: true, placeholder: "", class: "input" %>
+      <%= form.label :password_confirmation, t("activerecord.attributes.user.password_confirmation"), class: "label" %>
     </div>
     <%= form.submit t("pages.password.reset.verb"), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center" %>
   <% end %>

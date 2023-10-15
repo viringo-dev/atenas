@@ -4,9 +4,9 @@
       <%= t("pages.password.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.email_field :email, required: true, class: input_classes, placeholder: "" %>
-      <%= form.label :email, t("activerecord.attributes.user.email"), class: label_classes %>
+      <%= form.email_field :email, required: true, class: "input", placeholder: "" %>
+      <%= form.label :email, t("activerecord.attributes.user.email"), class: "label" %>
     </div>
-    <%= form.submit t("pages.password.verb"), class: button_classes %>
+    <%= form.submit t("pages.password.verb"), class: "btn bg-primary hover:bg-primary-dark" %>
   <% end %>
 </div>

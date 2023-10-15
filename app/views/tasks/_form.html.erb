@@ -1,31 +1,31 @@
 <%= form_for @task do |form| %>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
   <div class="mb-2">
-    <%= form.label :name, class: label_classes %>
-    <%= form.text_field :name, required: true, class: input_classes, placeholder: "Factorización" %>
+    <%= form.label :name, class: "label" %>
+    <%= form.text_field :name, required: true, class: "input", placeholder: "Factorización" %>
   </div>
   <div class="mb-2">
-    <%= form.label :description, class: label_classes %>
-    <%= form.text_area :description, required: true, class: input_classes %>
+    <%= form.label :description, class: "label" %>
+    <%= form.text_area :description, required: true, class: "input" %>
   </div>
   <div class="mb-4 flex gap-x-2">
     <div class="w-1/2">
-      <%= form.label :reward, class: label_classes %>
+      <%= form.label :reward, class: "label" %>
       <div class="flex">
         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md">
           S/. 
         </span>
-        <%= form.text_field :reward, required: true, class: input_classes("flex-1 min-w-0 rounded-l-none"), placeholder: "10" %>
+        <%= form.text_field :reward, required: true, class: "input flex-1 min-w-0 rounded-l-none", placeholder: "10" %>
       </div>
     </div>
     <div class="w-1/2">
-      <%= form.label :deadline, class: label_classes %>
-      <%= form.datetime_local_field :deadline, required: true, class: date_classes %>
+      <%= form.label :deadline, class: "label" %>
+      <%= form.datetime_local_field :deadline, required: true, class: "date-input" %>
     </div>
   </div>
   <div class="mb-2">
     <div class="flex items-center gap-x-1">
-      <%= form.label :files, class: label_classes %>
+      <%= form.label :files, class: "label" %>
       <p class="text-sm text-gray-500 mb-1">(5 máx.)</p>
     </div>
     <% @task.files.each do |file| %>
@@ -34,10 +34,10 @@
     <%= form.file_field :files,
                         multiple: true,
                         data: { controller: "files", files_target: "input", action: "change->files#checkFiles" },
-                        class: input_classes %>
+                        class: "input" %>
   </div>
   <div class="flex justify-center">
-    <%= form.button class: button_classes("mb-1 w-full"), style: "cursor: pointer;" do %>
+    <%= form.button class: "btn bg-primary hover:bg-primary-dark mb-1", style: "cursor: pointer;" do %>
       <span class="show-when-enabled"><%= t("pages.common.save") %></span>
       <span class="show-when-disabled">
         <div class="text-center">
@@ -53,7 +53,7 @@
   </div>
   <div class="flex justify-center">
     <div class="w-full">
-      <%= link_to t("pages.common.cancel"), tasks_path, class: button_classes("block bg-negative hover:bg-negative-hover") %>
+      <%= link_to t("pages.common.cancel"), tasks_path, class: "btn bg-negative hover:bg-negative-dark" %>
     </div>
   </div>
 <% end %>

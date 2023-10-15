@@ -4,23 +4,23 @@
       <%= t("pages.account.form.sign_in.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.label :email, t("activerecord.attributes.user.email"), class: label_classes %>
-      <%= form.email_field :email, autofocus: true, required: true, class: input_classes, placeholder: "" %>
+      <%= form.label :email, t("activerecord.attributes.user.email"), class: "label" %>
+      <%= form.email_field :email, autofocus: true, required: true, class: "input", placeholder: "" %>
     </div>
     <div class="mb-4 relative">
-      <%= form.label :password, t("activerecord.attributes.user.password"), class: label_classes %>
-      <%= form.password_field :password, required: true, class: input_classes, placeholder: "" %>
+      <%= form.label :password, t("activerecord.attributes.user.password"), class: "label" %>
+      <%= form.password_field :password, required: true, class: "input", placeholder: "" %>
     </div>
     <div class="mb-4 flex items-center">
-      <%= form.check_box :remember_me, class: checkbox_classes %>
+      <%= form.check_box :remember_me, class: "checkbox" %>
       <%= form.label t("pages.account.form.remember_me"), class: "text-sm" %>
     </div>
-    <%= form.submit t("pages.account.form.sign_in.verb"), class: button_classes %>
+    <%= form.submit t("pages.account.form.sign_in.verb"), class: "btn bg-primary hover:bg-primary-dark" %>
     <div class="mb-4 mt-4 text-sm text-center text-secondary">
       <%= link_to t("pages.account.form.forgot_password"), new_password_path, class: "text-sm" %>
     </div>
     <div class="">
-      <%= link_to t("pages.account.form.sign_up.verb"), sign_up_path, class: button_classes("bg-secondary hover:bg-secondary-hover block") %>
+      <%= link_to t("pages.account.form.sign_up.verb"), sign_up_path, class: "btn bg-secondary hover:bg-secondary-dark" %>
     </div>
   <% end %>
 </div>

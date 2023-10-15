@@ -3,7 +3,7 @@
     <div class="">
       <%= link_to t("pages.tasks.create_task"),
                   new_task_path,
-                  class: button_classes("block bg-third rounded-lg hover:bg-third-hover"),
+                  class: "btn bg-third hover:bg-third-dark",
                   data: { turbo_frame: dom_id(Task.new) } %>
     </div>
   </div>

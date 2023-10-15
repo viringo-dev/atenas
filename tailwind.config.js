@@ -9,15 +9,15 @@ module.exports = {
     extend: {
       colors: {
         'primary': '#19A7CE',
-        'primary-hover': '#1696B9',
+        'primary-dark': '#1696B9',
         'secondary': '#146C94',
-        'secondary-hover': '#116185',
+        'secondary-dark': '#116185',
         'third': '#03C988',
-        'third-hover': '#02B47A',
+        'third-dark': '#02B47A',
         'dark': '#303543',
         'light': '#303543',
-        'negative': '#F6635C',
-        'negative-hover': '#F4443B'
+        'negative': '#E63946',
+        'negative-dark': '#E21F2E'
       },
       fontFamily: {
         sans: ['Roboto']

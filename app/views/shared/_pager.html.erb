@@ -3,7 +3,7 @@
     <% if resource.next_page.present? %>
       <%= link_to "Ver más",
                   tasks_path(page: resource.next_page),
-                  class: button_classes("block bg-third rounded-lg hover:bg-third-hover"),
+                  class: "btn bg-third hover:bg-third-dark",
                   data: { turbo_stream: "" } %>
     <% end %>
   </div>

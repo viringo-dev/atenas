@@ -19,49 +19,49 @@
                         class: "hidden" %>
   </div>
   <div class="mb-2">
-    <%= form.label :name, class: label_classes %>
-    <%= form.text_field :name, required: true, class: input_classes, placeholder: "Elon" %>
+    <%= form.label :name, class: "label" %>
+    <%= form.text_field :name, required: true, class: "input", placeholder: "Elon" %>
   </div>
   <div class="mb-2">
-    <%= form.label :surname, class: label_classes %>
-    <%= form.text_field :surname, required: true, class: input_classes, placeholder: "Musk" %>
+    <%= form.label :surname, class: "label" %>
+    <%= form.text_field :surname, required: true, class: "input", placeholder: "Musk" %>
   </div>
   <div class="mb-2">
-    <%= form.label :email, class: label_classes %>
-    <%= form.email_field :email, disabled: user.persisted?, class: input_classes, placeholder: "elon@example.com" %>
+    <%= form.label :email, class: "label" %>
+    <%= form.email_field :email, disabled: user.persisted?, class: "input", placeholder: "elon@example.com" %>
   </div>
   <div class="mb-2 flex gap-x-2">
     <div class="w-1/2">
-      <%= form.label :username, class: label_classes %>
-      <%= form.text_field :username, required: true, class: input_classes, placeholder: "elonmusk" %>
+      <%= form.label :username, class: "label" %>
+      <%= form.text_field :username, required: true, class: "input", placeholder: "elonmusk" %>
     </div>
     <div class="w-1/2">
-      <%= form.label :phone, class: label_classes %>
-      <%= form.telephone_field :phone, required: true, class: input_classes, placeholder: "+51 987654321" %>
+      <%= form.label :phone, class: "label" %>
+      <%= form.telephone_field :phone, required: true, class: "input", placeholder: "+51 987654321" %>
     </div>
   </div>
   <div class="mb-2 flex gap-x-2">
     <div class="w-1/2">
-      <%= form.label :gender, class: label_classes %>
-      <%= form.select :gender, User.genders.keys { |k| [t("activerecord.models.user.enums.gender.#{k}"), k] }, {}, { class: select_classes } %>
+      <%= form.label :gender, class: "label" %>
+      <%= form.select :gender, User.genders.keys.map { |k| [t("activerecord.models.user.enums.gender.#{k}"), k] }, {}, { class: "select" } %>
     </div>
     <div class="w-1/2">
-      <%= form.label :birthdate, class: label_classes %>
-      <%= form.date_field :birthdate, required: true, class: date_classes, placeholder: "" %>
+      <%= form.label :birthdate, class: "label" %>
+      <%= form.date_field :birthdate, required: true, class: "date-input", placeholder: "" %>
     </div>
   </div>
   <div class="mb-2">
-    <%= form.label :password, class: label_classes %>
-    <%= form.password_field :password, required: user.new_record?, class: input_classes, placeholder: "" %>
+    <%= form.label :password, class: "label" %>
+    <%= form.password_field :password, required: user.new_record?, class: "input", placeholder: "" %>
   </div>
   <div class="mb-2">
-    <%= form.label :password_confirmation, class: label_classes %>
-    <%= form.password_field :password_confirmation, required: user.new_record?, class: input_classes, placeholder: "" %>
+    <%= form.label :password_confirmation, class: "label" %>
+    <%= form.password_field :password_confirmation, required: user.new_record?, class: "input", placeholder: "" %>
   </div>
   <% if user.persisted? %>
     <div class="mb-2">
-      <%= form.label :current_password, t("pages.account.form.current_password"), class: label_classes %>
-      <%= form.password_field :current_password, required: true, class: input_classes, placeholder: "" %>
+      <%= form.label :current_password, t("pages.account.form.current_password"), class: "label" %>
+      <%= form.password_field :current_password, required: true, class: "input", placeholder: "" %>
     </div>
   <% end %>
   <% if user.new_record? %>
@@ -72,7 +72,7 @@
       <label for="remember" class="ml-2 text-sm font-medium text-gray-900"><%= t("pages.account.form.accept") %><%= link_to t("pages.account.form.terms_and_conditions"), sign_up_path, class: "text-primary" %></label>
     </div>
   <% end %>
-  <%= form.button class: button_classes, style: "cursor: pointer;" do %>
+  <%= form.button class: "btn bg-primary hover:bg-primary-dark", style: "cursor: pointer;" do %>
     <span class="show-when-enabled"><%= user.new_record? ? t("pages.account.form.sign_up.verb") : t("pages.account.form.update.verb") %></span>
     <span class="show-when-disabled">
       <div class="text-center">
