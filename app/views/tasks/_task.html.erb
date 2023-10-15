@@ -1,7 +1,7 @@
 <%= turbo_frame_tag task do %>
   <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow">
-    <div class="flex justify-between items-center gap-x-2">
-      <div class="text-xl font-semibold line-clamp-1">
+    <div class="flex justify-between items-start gap-x-2">
+      <div class="text-xl font-semibold">
         <%= task.name %>
       </div>
       <% if task.owner == current_user %>
@@ -29,7 +29,7 @@
         </div>
       <% end %>
     </div>
-    <div class="mb-2 text-xl font-semibold text-third line-clamp-1">S/ <%= task.reward %></div>
+    <div class="mb-2 text-xl font-semibold text-third">S/ <%= task.reward %></div>
     <div class="mb-3 text-base font-normal"><%= task.description %></div>
     <div class="flex justify-between items-center gap-x-2">
       <div data-controller="dropdown" class="relative">

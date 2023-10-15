@@ -4,12 +4,12 @@
       <%= t("pages.account.form.sign_in.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.email_field :email, autofocus: true, required: true, class: input_classes, placeholder: "" %>
       <%= form.label :email, t("activerecord.attributes.user.email"), class: label_classes %>
+      <%= form.email_field :email, autofocus: true, required: true, class: input_classes, placeholder: "" %>
     </div>
     <div class="mb-4 relative">
-      <%= form.password_field :password, required: true, class: input_classes, placeholder: "" %>
       <%= form.label :password, t("activerecord.attributes.user.password"), class: label_classes %>
+      <%= form.password_field :password, required: true, class: input_classes, placeholder: "" %>
     </div>
     <div class="mb-4 flex items-center">
       <%= form.check_box :remember_me, class: checkbox_classes %>
