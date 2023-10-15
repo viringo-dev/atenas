@@ -20,11 +20,11 @@ button[disabled] .show-when-enabled {
 
 @layer components {
   .btn {
-    @apply text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer whitespace-nowrap block
+    @apply text-white font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center cursor-pointer whitespace-nowrap block
   }
 
   .input {
-    @apply block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 md:text-xs focus:ring-blue-500 focus:border-blue-500
+    @apply block w-full p-2 text-gray-900 border rounded-lg bg-gray-50 md:text-xs !outline-none border-gray-300 focus:border-gray-400
   }
 
   .label {
@@ -32,14 +32,14 @@ button[disabled] .show-when-enabled {
   }
 
   .select {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 md:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2
+    @apply bg-gray-50 border text-gray-900 md:text-xs rounded-lg !outline-none border-gray-300 focus:border-gray-400 block w-full p-2
   }
 
   .date-input {
-    @apply bg-gray-50 border border-gray-300 text-gray-900 md:text-xs rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5 md:p-2
+    @apply bg-gray-50 border text-gray-900 md:text-xs rounded-lg !outline-none border-gray-300 focus:border-gray-400 block w-full p-1.5 md:p-2
   }
 
   .checkbox {
-    @apply w-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5
+    @apply w-5 bg-gray-50 border text-gray-900 text-sm rounded-lg !outline-none border-gray-300 hover:border-gray-400 p-2.5
   }
 }

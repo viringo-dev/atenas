@@ -24,7 +24,7 @@
           </ul>
         </div>
       </div>
-      <% if task.owner == current_user %>
+      <% if task.user == current_user %>
         <div class="flex items-center gap-x-1">
           <%= link_to edit_task_path(task),
                       class: "btn bg-third hover:bg-third-dark px-[10px] w-auto",
@@ -50,15 +50,21 @@
       <% end %>
     </div>
     <div class="flex justify-between items-center gap-x-2">
-      <button class="btn bg-third w-auto px-3 py-1.5">
-        S/ <%= task.reward %>
-      </button>
+      <div class="btn cursor-default border-dotted border-2 text-sm text-black w-auto px-3 py-1.5 bg-gray-50">
+        Ganancia: <%= number_to_currency(task.reward.round, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %>
+      </div>
+      <div class="border-dotted border-2 rounded-lg">
+        <%= form_with url: task_bids_path(task), method: :post, class: "flex gap-x-2" do |form| %>
+          <%= form.text_field :bid, class: "input", placeholder: "Monto" %>
+          <%= form.button "Ofertar", class: "btn bg-primary hover:bg-primary-dark py-2" %>
+        <% end %>
+      </div>
       <div class="flex items-center">
         <div class="text-sm font-medium text-primary mr-2">
-          @<%= task.owner.username %>
+          @<%= task.user.username %>
         </div>
         <div class="">
-          <%= avatar(task.owner) %>
+          <%= avatar(task.user) %>
         </div>
       </div>
     </div>

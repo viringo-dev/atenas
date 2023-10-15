@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_07_153058) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_15_170948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -54,6 +54,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_153058) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bids", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "user_id", null: false
+    t.float "amount", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_bids_on_task_id"
+    t.index ["user_id"], name: "index_bids_on_user_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
@@ -62,12 +72,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_153058) do
     t.integer "currency", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "deadline", null: false
-    t.bigint "owner_id", null: false
-    t.bigint "assignee_id"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["assignee_id"], name: "index_tasks_on_assignee_id"
-    t.index ["owner_id"], name: "index_tasks_on_owner_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
     t.index ["uuid"], name: "index_tasks_on_uuid", unique: true
   end
 
@@ -98,6 +106,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_07_153058) do
   add_foreign_key "active_sessions", "users", on_delete: :cascade
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "tasks", "users", column: "assignee_id"
-  add_foreign_key "tasks", "users", column: "owner_id"
 end

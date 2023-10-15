@@ -8,8 +8,7 @@ class CreateTasks < ActiveRecord::Migration[7.0]
       t.integer :currency, null: false, default: 0
       t.integer :status, null: false, default: 0
       t.datetime :deadline, null: false
-      t.references :owner, index: true, foreign_key: { to_table: :users }, null: false
-      t.references :assignee, index: true, foreign_key: { to_table: :users }
+      t.references :user, index: true, null: false
 
       t.timestamps
     end
