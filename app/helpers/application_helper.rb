@@ -6,6 +6,6 @@ module ApplicationHelper
   def avatar(user)
     image_tag user.avatar.attached? ? user.avatar : "/default-avatar.png",
               data: { previews_target: "preview" },
-              class: "w-10 h-10 rounded-full cursor-pointer"
+              class: "w-7 h-7 rounded-full cursor-pointer"
   end
 end
