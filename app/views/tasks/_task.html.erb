@@ -53,7 +53,7 @@
       <div class="btn cursor-default border-dotted border-2 text-sm text-black w-auto px-3 py-1.5 bg-gray-50">
         Pago: <%= number_to_currency(task.reward.round, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %>
       </div>
-      <div class="border-dotted border-2 rounded-lg">
+      <div class="border-dotted border-2 rounded-lg p-[2px]">
         <%= form_with url: task_bids_path(task), method: :post, class: "flex gap-x-2" do |form| %>
           <%= form.text_field :bid, class: "input", placeholder: "Monto" %>
           <%= form.button "Ofertar", class: "btn bg-primary border-primary hover:text-primary py-2" %>
