@@ -37,7 +37,7 @@
                         class: "input" %>
   </div>
   <div class="flex justify-center">
-    <%= form.button class: "btn bg-primary hover:bg-primary-dark mb-1", style: "cursor: pointer;" do %>
+    <%= form.button class: "btn bg-primary hover:bg-primary-light mb-1", style: "cursor: pointer;" do %>
       <span class="show-when-enabled"><%= t("pages.common.save") %></span>
       <span class="show-when-disabled">
         <div class="text-center">
@@ -53,7 +53,7 @@
   </div>
   <div class="flex justify-center">
     <div class="w-full">
-      <%= link_to t("pages.common.cancel"), tasks_path, class: "btn bg-negative hover:bg-negative-dark" %>
+      <%= link_to t("pages.common.cancel"), tasks_path, class: "btn bg-negative hover:bg-negative-light" %>
     </div>
   </div>
 <% end %>

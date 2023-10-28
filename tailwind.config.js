@@ -9,15 +9,15 @@ module.exports = {
     extend: {
       colors: {
         'primary': '#19A7CE',
-        'primary-dark': '#1696B9',
+        'primary-light': '#1FB9E3',
         'secondary': '#146C94',
-        'secondary-dark': '#116185',
+        'secondary-light': '#1881B2',
         'third': '#03C988',
-        'third-dark': '#02B47A',
+        'third-light': '#03E79C',
         'dark': '#303543',
         'light': '#303543',
         'negative': '#E63946',
-        'negative-dark': '#E21F2E'
+        'negative-light': '#E84C58'
       },
       fontFamily: {
         sans: ['Roboto']

@@ -72,7 +72,7 @@
       <label for="remember" class="ml-2 text-sm font-medium text-gray-900"><%= t("pages.account.form.accept") %><%= link_to t("pages.account.form.terms_and_conditions"), sign_up_path, class: "text-primary" %></label>
     </div>
   <% end %>
-  <%= form.button class: "btn bg-primary hover:bg-primary-dark", style: "cursor: pointer;" do %>
+  <%= form.button class: "btn bg-primary hover:bg-primary-light", style: "cursor: pointer;" do %>
     <span class="show-when-enabled"><%= user.new_record? ? t("pages.account.form.sign_up.verb") : t("pages.account.form.update.verb") %></span>
     <span class="show-when-disabled">
       <div class="text-center">

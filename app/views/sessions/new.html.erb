@@ -15,12 +15,12 @@
       <%= form.check_box :remember_me, class: "checkbox" %>
       <%= form.label t("pages.account.form.remember_me"), class: "text-sm" %>
     </div>
-    <%= form.submit t("pages.account.form.sign_in.verb"), class: "btn bg-primary hover:bg-primary-dark" %>
+    <%= form.submit t("pages.account.form.sign_in.verb"), class: "btn bg-primary hover:bg-primary-light" %>
     <div class="mb-4 mt-4 text-sm text-center text-secondary">
       <%= link_to t("pages.account.form.forgot_password"), new_password_path, class: "text-sm" %>
     </div>
     <div class="">
-      <%= link_to t("pages.account.form.sign_up.verb"), sign_up_path, class: "btn bg-secondary border-secondary hover:text-secondary" %>
+      <%= link_to t("pages.account.form.sign_up.verb"), sign_up_path, class: "btn bg-secondary hover:bg-secondary-light" %>
     </div>
   <% end %>
 </div>

@@ -20,7 +20,7 @@ button[disabled] .show-when-enabled {
 
 @layer components {
   .btn {
-    @apply text-white font-medium rounded-lg text-sm w-full px-5 py-2 text-center cursor-pointer whitespace-nowrap block hover:bg-white border-[3px] border-transparent
+    @apply text-white font-medium rounded-lg text-sm w-full px-5 py-2 text-center cursor-pointer whitespace-nowrap block
   }
 
   .input {
