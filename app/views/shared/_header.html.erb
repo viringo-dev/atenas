@@ -6,7 +6,7 @@
       </a>
       <div class="flex items-center md:order-2">
         <% if current_user %>
-          <button type="button" class="flex mr-3 text-sm rounded-full md:mr-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+          <button type="button" class="w-10 h-10 flex mr-3 text-sm rounded-full md:mr-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
             <%= avatar(current_user) %>
           </button>
           <!-- Dropdown menu -->
@@ -40,6 +40,9 @@
           <% if current_user %>
             <li>
               <%= link_to t("pages.header.publications"), my_tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
+            </li>
+            <li>
+              <%= link_to t("pages.header.bids"), my_tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
             </li>
           <% end %>
           <li>

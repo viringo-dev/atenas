@@ -3,6 +3,7 @@ class AddBidsTable < ActiveRecord::Migration[7.0]
     create_table :bids do |t|
       t.references :task, :user, index: true, null: false
       t.float :amount, null: false
+      t.text :description
 
       t.timestamps
     end

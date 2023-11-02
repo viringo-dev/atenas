@@ -1,0 +1,17 @@
+<%= form_with model: [@task, bid], class: "p-1 w-full mb-2 border-dotted border-2 rounded-lg", data: { turbo: turbo_frame_request? } do |form| %>
+  <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+  <div class="flex flex-col sm:flex-row gap-2">
+    <div class="w-full">
+      <%= form.text_area :description, rows: 2, maxlength: 200, autofocus: true, class: "input text-sm resize-none", placeholder: "Nota" %>
+    </div>
+    <div class="flex flex-col gap-2 sm:gap-1">
+      <div class="flex">
+        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-100 border border-r-0 border-gray-300 rounded-l-md">
+          S/.
+        </span>
+        <%= form.number_field :amount, class: "input rounded-none rounded-r-lg", placeholder: "0.00", required: true %>
+      </div>
+      <%= form.button "Guardar", class: "btn bg-third hover:bg-third-light" %>
+    </div>
+  </div>
+<% end %>

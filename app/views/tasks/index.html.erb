@@ -1,21 +1,19 @@
-<div class="w-full flex justify-center">
-  <div class="flex flex-col max-w-4xl">
-    <div class="flex justify-end mb-2">
-      <div class="w-full md:w-auto">
-        <%= link_to t("pages.tasks.create_task"),
-                    new_task_path,
-                    class: "btn bg-primary hover:bg-primary-light",
-                    data: { turbo_frame: dom_id(Task.new) } %>
-      </div>
+<div class="flex flex-col">
+  <div class="flex justify-end mb-2">
+    <div class="w-full md:w-auto">
+      <%= link_to t("pages.tasks.create_task"),
+                  new_task_path,
+                  class: "btn bg-primary hover:bg-primary-light",
+                  data: { turbo_frame: dom_id(Task.new) } %>
     </div>
-
-    <%= turbo_frame_tag Task.new %>
-    
-    <%= turbo_frame_tag "tasks" do %>
-      <%= render @tasks %>
-    <% end %>
-
-    
-    <%= render "shared/pager", resource: @tasks %>
   </div>
+
+  <%= turbo_frame_tag Task.new %>
+  
+  <%= turbo_frame_tag "tasks" do %>
+    <%= render @tasks %>
+  <% end %>
+
+  
+  <%= render "shared/pager", resource: @tasks %>
 </div>

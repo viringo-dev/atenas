@@ -47,7 +47,7 @@ es:
         description: "Descripción"
         reward: "Recompensa"
         deadline: "Fecha límite"
-        files: "Archivos adjuntos"
+        files: "Adjuntos"
     errors:
       models:
         user:

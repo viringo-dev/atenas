@@ -3,6 +3,7 @@ class Task < ApplicationRecord
   ## ASSOCIATIONS ##
   belongs_to :user
   has_many_attached :files
+  has_many :bids, dependent: :destroy
 
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false, message: :blank }
@@ -17,4 +18,8 @@ class Task < ApplicationRecord
   ## SCOPES ##
   scope :ordered, -> { order(created_at: :desc) }
   scope :paginated, ->(params={}) { page(params[:page]).per(params[:per_page]) }
+
+  def bid_by_user(user)
+    bids.find { |bid| bid.user_id == user.id }
+  end
 end

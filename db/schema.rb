@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_170948) do
     t.bigint "task_id", null: false
     t.bigint "user_id", null: false
     t.float "amount", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_bids_on_task_id"

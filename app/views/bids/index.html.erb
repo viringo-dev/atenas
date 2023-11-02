@@ -1,0 +1,13 @@
+<div class="flex flex-col">
+  <%= render partial: "tasks/task", locals: { task: @task } %>
+
+  <% if @task.user == current_user %>
+    <%= turbo_frame_tag "bids" do %>
+      <%= render @bids %>
+    <% end %>
+  <% else %>
+
+  <% end %>
+
+  <%= render "shared/pager", resource: @bids %>
+</div>
