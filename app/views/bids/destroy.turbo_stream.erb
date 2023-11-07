@@ -1,5 +1,11 @@
-<%= turbo_stream.update dom_id(@task) do %>
-  <%= render "tasks/task", task: @task %>
+<%= turbo_stream.remove nested_dom_id(@task, @bid) %>
+
+<%= turbo_stream.append nested_dom_id(@task, "bids") do %>
+  <%= turbo_frame_tag nested_dom_id(@task, Bid.new) do %>
+    <%= render "bids/form",
+                task: @task,
+                bid: Bid.new %>
+  <% end %>
 <% end %>
 
 <%= render_turbo_stream_flash_messages %>

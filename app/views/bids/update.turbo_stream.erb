@@ -1,5 +1,5 @@
-<%= turbo_stream.update dom_id(@task) do %>
-  <%= render "tasks/task", task: @task %>
+<%= turbo_stream.replace nested_dom_id(@task, @bid) do %>
+  <%= render @bid, task: @task %>
 <% end %>
 
 <%= render_turbo_stream_flash_messages %>

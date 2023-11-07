@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_15_170948) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["task_id", "user_id"], name: "index_bids_on_task_id_and_user_id", unique: true
     t.index ["task_id"], name: "index_bids_on_task_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
   end

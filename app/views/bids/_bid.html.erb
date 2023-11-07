@@ -1,26 +1,51 @@
-<div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow flex gap-3 flex-col-reverse sm:flex-row">
-  <div class="flex flex-row-reverse sm:flex-col items-center gap-2 justify-between">
-    <div class="flex flex-row-reverse sm:flex-col items-center gap-2">
-      <div class="w-7 h-7 sm:w-14 sm:h-14">
-        <%= avatar(current_user) %>
+<%= turbo_frame_tag nested_dom_id(task, bid) do %>
+  <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow flex gap-3 flex-col-reverse sm:flex-row">
+    <div class="flex flex-row-reverse sm:flex-col items-center gap-2 justify-between">
+      <div class="flex flex-row-reverse sm:flex-col items-center gap-2">
+        <div class="w-7 h-7 sm:w-14 sm:h-14">
+          <%= avatar(bid.user) %>
+        </div>
+        <p class="text-sm sm:text-base font-medium text-primary">@<%= bid.user.username %></p>
       </div>
-      <p class="text-sm sm:text-base font-medium text-primary">@<%= current_user.username %></p>
+      <% if bid.user == current_user %>
+        <div class="flex justify-end gap-1">
+          <%= link_to [:edit, task, bid],
+                      class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
+                      data: { "tooltip-target": "tooltip-edit-task", turbo_frame: nested_dom_id(task, bid) } do %>
+            <%= render 'icons/edit' %>
+            <div id="tooltip-edit-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                <%= t("pages.common.edit") %>
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          <% end %>
+          <%= button_to [task, bid],
+                        method: :delete,
+                        form: { data: { turbo_confirm: t("pages.common.sure") } },
+                        class: "btn bg-negative hover:bg-negative-light px-[10px]",
+                        data: { "tooltip-target": "tooltip-delete-task" } do %>
+            <%= render 'icons/delete' %>
+            <div id="tooltip-delete-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                <%= t("pages.common.delete") %>
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <%= link_to "Aceptar", "#", class: "btn bg-third hover:bg-third-light w-auto" %>
+      <% end %>
     </div>
-    <% if bid.user == current_user %>
-      <%= link_to "Editar", "#", class: "btn bg-third hover:bg-third-light w-auto" %>
-    <% else %>
-      <%= link_to "Aceptar", "#", class: "btn bg-third hover:bg-third-light w-auto" %>
-    <% end %>
-  </div>
-  <div class="w-full">
-    <div class="flex justify-between items-center">
-      <p class="text-lg font-medium"><%= number_to_currency(bid.amount, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %></p>
-      <p class="text-sm text-gray-400"><%= time_ago_in_words(bid.created_at) %></p>
+    <div class="w-full">
+      <div class="flex justify-between items-center">
+        <p class="text-lg font-medium"><%= number_to_currency(bid.amount, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %></p>
+        <p class="text-sm text-gray-400"><%= time_ago_in_words(bid.created_at) %></p>
+      </div>
+      <div class="">
+        <% if bid.description.present? %>
+          <p class="text-gray-500"><%= bid.description %></p>
+        <% else %>
+          <p class=""><%= "No description" %></p>
+        <% end %>
+      </div>
     </div>
-    <% if bid.description.present? %>
-      <p class="text-gray-500"><%= bid.description %></p>
-    <% else %>
-      <p class=""><%= "No description" %></p>
-    <% end %>
   </div>
-</div>
+<% end %>

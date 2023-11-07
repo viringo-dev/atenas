@@ -21,7 +21,7 @@
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
               </li>
               <li>
-                <%= link_to t("pages.account.sign_out"), logout_path, data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro?" }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <%= button_to t("pages.account.sign_out"), logout_path, method: :delete, data: { turbo: false }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left" %>
               </li>
             </ul>
           </div>

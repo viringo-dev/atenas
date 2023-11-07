@@ -48,34 +48,6 @@
               </div>
             <% end %>
           </div>
-        <% else %>
-          <% if current_user && bid = @task.bid_by_user(current_user) %>
-            <div class="border-dotted border-2 rounded-lg p-[2px]">
-                <div class="flex items-center gap-x-1">
-                  <p class="px-2 whitespace-nowrap"><%= number_to_currency(bid.amount.round, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %></p>
-                  <%= link_to [:edit, @task, bid],
-                              class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
-                              data: { "tooltip-target": "tooltip-edit-task", turbo_frame: nested_dom_id(@task, bid) } do %>
-                    <%= render 'icons/edit' %>
-                    <div id="tooltip-edit-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        <%= t("pages.common.edit") %>
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                  <% end %>
-                  <%= button_to [@task, bid],
-                                method: :delete,
-                                form: { data: { turbo_confirm: t("pages.common.sure") } },
-                                class: "btn bg-negative hover:bg-negative-light px-[10px]",
-                                data: { "tooltip-target": "tooltip-delete-task" } do %>
-                    <%= render 'icons/delete' %>
-                    <div id="tooltip-delete-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        <%= t("pages.common.delete") %>
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                  <% end %>
-                </div>
-            </div>
-          <% end %>
         <% end %>
       </div>
     </div>
@@ -97,7 +69,7 @@
   </div>
 <% end %>
 
-<%= turbo_frame_tag "bids" do %>
+<%= turbo_frame_tag nested_dom_id(@task, "bids") do %>
   <% unless @bids.exists? %>
     <%= turbo_frame_tag nested_dom_id(@task, Bid.new) do %>
       <%= render "bids/form",
@@ -105,5 +77,5 @@
                  bid: Bid.new %>
     <% end %>
   <% end %>
-  <%= render @bids %>
+  <%= render @bids, task: @task %>
 <% end %>
