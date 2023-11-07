@@ -5,7 +5,7 @@
         <%= task.name %>
       </div>
     </div>
-    <div class="mb-2 text-base font-normal"><%= truncate(task.description, length: 100) { link_to "Ver más", task_path(task), data: { turbo: false }, class: "text-primary whitespace-nowrap" } %></div>
+    <div class="mb-2 text-base font-normal"><%= truncate(task.description, length: 250) { link_to "Ver más", task_path(task), data: { turbo_frame: "_top" }, class: "text-primary whitespace-nowrap" } %></div>
     <div class="flex items-start sm:items-center justify-between flex-col sm:flex-row mb-3 gap-3">
       <div class="flex items-center justify-between w-full">
         <div data-controller="dropdown" class="relative">

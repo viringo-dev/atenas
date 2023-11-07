@@ -20,7 +20,7 @@ module.exports = {
         'negative-light': '#E84C58'
       },
       fontFamily: {
-        sans: ['Roboto']
+        sans: ['Open Sans']
       },
     },
   },
