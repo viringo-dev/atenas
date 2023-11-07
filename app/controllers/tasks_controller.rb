@@ -8,7 +8,8 @@ class TasksController < ApplicationController
   end
 
   def my_tasks
-    @tasks = current_user.tasks.ordered
+    @tasks = current_user.tasks.ordered.paginated(params)
+    render :index
   end
   
   def new
