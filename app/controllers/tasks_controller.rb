@@ -16,6 +16,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @bids = @task.user == current_user ? @task.bids : @task.bids.by_user(current_user)
   end
 
   def create

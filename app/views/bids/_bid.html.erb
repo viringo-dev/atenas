@@ -12,7 +12,7 @@
       <%= link_to "Aceptar", "#", class: "btn bg-third hover:bg-third-light w-auto" %>
     <% end %>
   </div>
-  <div class="">
+  <div class="w-full">
     <div class="flex justify-between items-center">
       <p class="text-lg font-medium"><%= number_to_currency(bid.amount, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %></p>
       <p class="text-sm text-gray-400"><%= time_ago_in_words(bid.created_at) %></p>

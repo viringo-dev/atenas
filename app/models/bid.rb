@@ -13,4 +13,5 @@ class Bid < ApplicationRecord
   ## SCOPES ##
   scope :ordered, -> { order(created_at: :desc) }
   scope :paginated, ->(params={}) { page(params[:page]).per(params[:per_page]) }
+  scope :by_user, ->(user) { user.present? ? where(user: user) : none }
 end
