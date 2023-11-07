@@ -24,4 +24,5 @@ Rails.application.routes.draw do
   end
 
   get "my-tasks", to: "tasks#my_tasks"
+  get "my-bids", to: "tasks#my_bids"
 end

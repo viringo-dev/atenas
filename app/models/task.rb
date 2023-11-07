@@ -18,6 +18,7 @@ class Task < ApplicationRecord
   ## SCOPES ##
   scope :ordered, -> { order(created_at: :desc) }
   scope :paginated, ->(params={}) { page(params[:page]).per(params[:per_page]) }
+  scope :with_bids_by, ->(user) { includes(:bids).where(bids: { user: user }) }
 
   def bid_by_user(user)
     bids.find { |bid| bid.user_id == user.id }

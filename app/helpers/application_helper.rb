@@ -16,4 +16,13 @@ module ApplicationHelper
   def turbo_frame_request?
     request.headers["Turbo-Frame"].present?
   end
+
+  def active_link_to(text = nil, path = nil, **options, &)
+    path ||= text
+
+    options[:class] = class_names(options[:class], "border-white") if current_page?(path)
+    return link_to(path, options, &) if block_given?
+
+    link_to text, path, options
+  end
 end

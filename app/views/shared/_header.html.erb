@@ -35,18 +35,18 @@
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
         <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
           <li>
-            <%= link_to t("pages.header.tasks"), tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
+            <%= active_link_to t("pages.header.tasks"), root_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
           </li>
           <% if current_user %>
             <li>
-              <%= link_to t("pages.header.publications"), my_tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
+              <%= active_link_to t("pages.header.publications"), my_tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
             </li>
             <li>
-              <%= link_to t("pages.header.bids"), my_tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
+              <%= active_link_to t("pages.header.bids"), my_bids_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
             </li>
           <% end %>
           <li>
-            <%= link_to t("pages.header.how_it_works"), tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
+            <%= active_link_to t("pages.header.how_it_works"), tasks_path, class: "block py-2 pl-3 pr-4 text-white md:p-0 border-primary border-l-2 md:border-l-0 md:border-b-2 hover:border-white" %>
           </li>
         </ul>
       </div>
