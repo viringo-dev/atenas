@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_my_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:show]
   before_action :authenticate_user!, only: [:new]
 
   def index
@@ -12,6 +13,9 @@ class TasksController < ApplicationController
   
   def new
     @task = Task.new(deadline: Date.current + 1.week)
+  end
+
+  def show
   end
 
   def create
@@ -54,8 +58,20 @@ class TasksController < ApplicationController
     params.require(:task).permit(:name, :description, :reward, :deadline, files: [])
   end
 
-  def set_task
+  def set_my_task
     @task = current_user.tasks.find_by(id: params[:id])
+    unless @task
+      if turbo_frame_request?
+        flash[:alert] = t("pages.tasks.alerts.not_found")
+        render turbo_stream: turbo_stream.action(:redirect, tasks_url)
+      else
+        redirect_to tasks_path, alert: t("pages.tasks.alerts.not_found")
+      end
+    end
+  end
+
+  def set_task
+    @task = Task.find_by(id: params[:id])
     unless @task
       if turbo_frame_request?
         flash[:alert] = t("pages.tasks.alerts.not_found")
