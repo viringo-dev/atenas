@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Atenas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -15,7 +15,7 @@
 
   <body class="flex flex-col min-h-screen text-dark">
     <%= render partial: "shared/header" %>
-    <main class="flex-1 p-4 md:px-24 lg:px-48 xl:px-72 2xl:px-96 mb-16 md:mb-0 bg-gray-50 flex justify-center">
+    <main class="flex-1 p-4 md:px-24 lg:px-48 xl:px-72 2xl:px-96 bg-gray-50 flex justify-center">
       <div id="flash" class="fixed z-10 left-1/2 -translate-x-1/2 top-10 mx-4 flex flex-col items-center gap-2">
         <%= render partial: "shared/flash" %>
       </div>
