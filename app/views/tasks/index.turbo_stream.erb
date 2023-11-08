@@ -3,5 +3,5 @@
 <% end %>
 
 <%= turbo_stream.replace "pager" do %>
-  <%= render partial: "shared/pager", locals: { resource: @tasks } %>
+  <%= render partial: "shared/pager", locals: { resource: @tasks, path: "tasks_path" } %>
 <% end %>

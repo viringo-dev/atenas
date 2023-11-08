@@ -9,12 +9,10 @@ class TasksController < ApplicationController
 
   def my_tasks
     @tasks = current_user.tasks.ordered.paginated(params)
-    render :index
   end
 
   def my_bids
     @tasks = Task.ordered.with_bids_by(current_user).paginated(params)
-    render :index
   end
   
   def new

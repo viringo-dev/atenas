@@ -1,0 +1,7 @@
+<%= turbo_stream.append "my_bids" do %>
+  <%= render partial: "task", :collection => @tasks, as: :task %>
+<% end %>
+
+<%= turbo_stream.replace "pager" do %>
+  <%= render partial: "shared/pager", locals: { resource: @tasks, path: "my_bids_path" } %>
+<% end %>

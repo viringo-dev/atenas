@@ -10,9 +10,9 @@
 
   <%= turbo_frame_tag Task.new %>
   
-  <%= turbo_frame_tag "tasks" do %>
+  <%= turbo_frame_tag "my_bids" do %>
     <%= render @tasks %>
   <% end %>
-
-  <%= render partial: "shared/pager", locals: { resource: @tasks, path: "tasks_path" } %>
+  
+  <%= render "shared/pager", resource: @tasks, path: "my_bids_path" %>
 </div>
