@@ -70,7 +70,7 @@
 <% end %>
 
 <%= turbo_frame_tag nested_dom_id(@task, "bids") do %>
-  <% unless @bids.exists? %>
+  <% if !@bids.exists? && @task.user != current_user %>
     <%= turbo_frame_tag nested_dom_id(@task, Bid.new) do %>
       <%= render "bids/form",
                  task: @task,
