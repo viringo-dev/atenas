@@ -20,8 +20,14 @@ Rails.application.routes.draw do
   delete "account", to: "users#destroy"
 
   resources :tasks do
-    resources :bids, only: [:index, :new, :create, :edit, :update, :destroy]
+    resources :bids, only: [:index, :new, :create, :edit, :update, :destroy] do
+      member do
+        post :accept
+      end
+    end
   end
+
+  resources :payments, only: [:new, :create]
 
   get "my-tasks", to: "tasks#my_tasks"
   get "my-bids", to: "tasks#my_bids"

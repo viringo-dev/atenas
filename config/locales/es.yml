@@ -51,6 +51,9 @@ es:
       bid:
         amount: "Monto"
         description: "Descripción"
+      payment:
+        payer: "Titular de la transacción"
+        attachment: "Comprobante de pago"
     errors:
       models:
         user:
@@ -149,6 +152,9 @@ es:
       delete: "Eliminar"
       edit: "Editar"
       sure: "¿Estás seguro?"
+      send: "Enviar"
+      alerts:
+        not_allowed_action: "Acción no permitida"
     tasks:
       new_task: "Nueva tarea"
       created: "Tarea creada"
@@ -157,3 +163,9 @@ es:
       create_task: "Crear tarea"
       alerts:
         not_found: "Tarea no encontrada"
+    bids:
+      payment_process: "Proceso de pago"
+      deposit_step: "1) Deposita %{amount} por Yape/Plin"
+      fill_form_step: "2) Rellena el siguiente formulario"
+      alerts:
+        not_found: "Oferta no encontrada"

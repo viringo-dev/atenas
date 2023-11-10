@@ -1,8 +1,9 @@
 class BidsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_my_task, only: [:index]
-  before_action :set_bid, only: [:edit, :update, :destroy]
+  before_action :set_my_task, only: [:index, :accept]
+  before_action :set_my_bid, only: [:edit, :update, :destroy]
+  before_action :set_bid, only: [:accept, :payment]
 
   def index
     @bids = @task.bids.ordered.paginated(params)
@@ -46,6 +47,16 @@ class BidsController < ApplicationController
     end
   end
 
+  def accept
+    if @task.bided?
+      @task.assigned!
+      @bid.accepted!
+      redirect_to new_payment_path(bid_id: @bid.id)
+    else
+      redirect_to task_path(@task), alert: t("pages.common.alerts.not_allowed_action")
+    end
+  end
+
   private
 
   def set_task
@@ -77,6 +88,18 @@ class BidsController < ApplicationController
   end
 
   def set_bid
+    @bid = Bid.find_by(id: params[:id])
+    unless @bid
+      if turbo_frame_request?
+        flash[:alert] = t("pages.bids.alerts.not_found")
+        render turbo_stream: turbo_stream.action(:redirect, tasks_url)
+      else
+        redirect_to tasks_path, alert: t("pages.bids.alerts.not_found")
+      end
+    end
+  end
+
+  def set_my_bid
     @bid = @task.bids.find_by(id: params[:id], user: current_user)
     unless @bid
       if turbo_frame_request?

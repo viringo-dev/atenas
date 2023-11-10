@@ -1,0 +1,27 @@
+<div class="w-full bg-white rounded-md p-4 md:px-8 border-gray-200 shadow">
+  <div class="mb-4">
+    <p class="text-xl text-primary mb-4 font-semibold"><%= t("pages.bids.payment_process") %></p>
+    <p class=""><%= t("pages.bids.deposit_step", amount: number_to_currency(@bid.amount, precision: 2, unit: "S/.", format: "%u %n", separator: ".")) %></p>
+    <p class=""><%= t("pages.bids.fill_form_step") %></p>
+  </div>
+
+  <%= form_with model: @payment, class: "p-2 w-full mb-2 border-dotted border-2 rounded-lg" do |form| %>
+    <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+    <div class="flex flex-col gap-2">
+      <%= form.hidden_field :bid_id, value: @bid.id %>
+      <div class="">
+        <%= form.label :payer, class: "label" %>
+        <%= form.text_field :payer, required: true, class: "input", placeholder: "John Doe" %>
+      </div>
+      <div class="">
+        <%= form.label :attachment, class: "label" %>
+        <%= form.file_field :attachment, required: true, class: "input" %>
+      </div>
+      <div class="flex items-end">
+        <%= form.button class: "btn bg-primary hover:bg-primary-light" do %>
+          <%= render partial: "shared/spinner", locals: { text: t("pages.common.send") } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

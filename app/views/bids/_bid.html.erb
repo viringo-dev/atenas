@@ -31,7 +31,9 @@
           <% end %>
         </div>
       <% else %>
-        <%= link_to "Aceptar", "#", class: "btn bg-third hover:bg-third-light w-auto" %>
+        <%= button_to "Aceptar", accept_task_bid_path(task, bid), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" if bid.offered? %>
+        <%= link_to "Depositar", new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" if bid.accepted? %>
+        <%= button_to "Chatear", "#", disabled: true, class: "btn bg-third hover:bg-third-light w-auto" if bid.paid? %>
       <% end %>
     </div>
     <div class="w-full">
