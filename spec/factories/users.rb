@@ -9,5 +9,9 @@ FactoryBot.define do
     birthdate { Date.current - 20.years }
     gender { User.genders[:male] }
     password { "p4$$w0rd" }
+
+    factory :confirmed_user do
+      confirmed_at { Time.current }
+    end
   end
 end

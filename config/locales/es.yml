@@ -153,6 +153,7 @@ es:
       edit: "Editar"
       sure: "¿Estás seguro?"
       send: "Enviar"
+      see_more: "Ver más"
       alerts:
         not_allowed_action: "Acción no permitida"
     tasks:
