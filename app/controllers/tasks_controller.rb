@@ -4,7 +4,9 @@ class TasksController < ApplicationController
   before_action :authenticate_user!, only: [:new]
 
   def index
-    @tasks = Task.ordered.paginated(params)
+    @tasks = Task.bided
+                 .ordered
+                 .paginated(params)
   end
 
   def my_tasks
