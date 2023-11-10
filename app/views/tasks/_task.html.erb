@@ -8,18 +8,18 @@
     <div class="mb-2 text-base font-normal"><%= truncate(task.description, length: 250) { link_to "Ver más", task_path(task), data: { turbo_frame: "_top" }, class: "text-primary whitespace-nowrap" } %></div>
     <div class="flex items-start sm:items-center justify-between flex-col sm:flex-row mb-3 gap-3">
       <div class="flex items-center justify-between w-full">
-        <div data-controller="dropdown" class="relative">
-          <%= button_tag data: { action: "dropdown#toggle click@window->dropdown#hide" }, class: "#{"hidden" if task.files.empty?} text-white bg-primary hover:bg-primary-light font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center" do %>
+        <div class="">
+          <%= button_tag data: { dropdown_toggle: "files-dropdown-#{task.id}" }, class: "#{"hidden" if task.files.empty?} text-white bg-primary hover:bg-primary-light font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center" do %>
             <%= t("activerecord.attributes.task.files") %>
             <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
             </svg>
           <% end %>
-          <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow absolute w-full" data-dropdown-target="menu">
-            <ul class="text-sm text-gray-700">
+          <div id="files-dropdown-<%= task.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow">
+            <ul class="text-sm text-gray-700" aria-labelledby="">
               <% task.files.each do |file| %>
                 <li>
-                  <%= link_to file.filename, file, target: "_blank", data: { action: "dropdown#toggle" }, class: "block px-4 py-2 hover:bg-gray-100" %>
+                  <%= link_to truncate(file.filename.to_s, length: 20), file, target: "_blank", class: "block px-4 py-2 hover:bg-gray-100" %>
                 </li>
               <% end %>
             </ul>
