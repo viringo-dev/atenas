@@ -35,6 +35,16 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+module AuthenticationHelper
+  def login_as(user)
+    visit login_path
+    fill_in "user_email", with: user.email
+    fill_in "user_password", with: user.password
+    click_button I18n.t("pages.account.form.sign_in.verb")
+  end
+end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -66,4 +76,5 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include AuthenticationHelper
 end
