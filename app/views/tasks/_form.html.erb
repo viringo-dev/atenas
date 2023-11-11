@@ -36,8 +36,8 @@
                         data: { controller: "files", files_target: "input", action: "change->files#checkFiles" },
                         class: "input" %>
   </div>
-  <div class="flex justify-center">
-    <%= form.button class: "btn bg-primary hover:bg-primary-light mb-1", style: "cursor: pointer;" do %>
+  <div class="flex gap-2 flex-col md:flex-row">
+    <%= form.button class: "btn bg-primary hover:bg-primary-light", style: "cursor: pointer;" do %>
       <span class="show-when-enabled"><%= t("pages.common.save") %></span>
       <span class="show-when-disabled">
         <div class="text-center">
@@ -50,10 +50,6 @@
         </div>
       </span>
     <% end %>
-  </div>
-  <div class="flex justify-center">
-    <div class="w-full">
-      <%= link_to t("pages.common.cancel"), tasks_path, class: "btn bg-negative hover:bg-negative-light" %>
-    </div>
+    <%= link_to t("pages.common.cancel"), tasks_path, class: "btn bg-negative hover:bg-negative-light" %>
   </div>
 <% end %>

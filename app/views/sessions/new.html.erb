@@ -1,4 +1,4 @@
-<div class="m-auto w-full md:w-1/2 lg:w-2/5">
+<div class="m-auto max-w-sm">
   <%= form_with url: login_path, scope: :user, class: "p-4 border border-gray-300 rounded-lg", data: { turbo: false } do |form| %>
     <div class="mb-4 text-lg font-medium">
       <%= t("pages.account.form.sign_in.noun") %>
