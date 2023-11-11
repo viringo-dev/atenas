@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   before_action :set_my_task, only: [:edit, :update, :destroy]
   before_action :set_task, only: [:show]
   before_action :authenticate_user!, only: [:new]
+  before_action :set_back_hash, only: [:new, :show, :edit, :create, :update]
 
   def index
     @tasks = Task.bided
@@ -87,5 +88,9 @@ class TasksController < ApplicationController
         redirect_to tasks_path, alert: t("pages.tasks.alerts.not_found")
       end
     end
+  end
+
+  def set_back_hash
+    @back_hash = { name: Task.model_name.human.pluralize, path: tasks_path }
   end
 end

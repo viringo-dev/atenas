@@ -8,7 +8,7 @@ class Task < ApplicationRecord
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false, message: :blank }
   validates :description, presence: { allow_blank: false, message: :blank }
-  validates :reward, presence: { allow_blank: false, message: :blank }, numericality: { only_float: true }
+  validates :reward, presence: { allow_blank: false, message: :blank }, numericality: { only_float: true, greater_than: 0 }
   validates :deadline, presence: { allow_blank: false, message: :blank }
 
   ## ENUMS ##

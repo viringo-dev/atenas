@@ -1,8 +1,4 @@
 <div class="">
-  <div class="mb-4">
-    <%= link_to sanitize("< ") + Task.model_name.human.pluralize, tasks_path, class: "text-primary font-medium" %>
-  </div>
-
   <div class="mb-2 text-lg font-semibold"><%= t("pages.tasks.new_task") %></div>
 
   <%= turbo_frame_tag @task do %>
