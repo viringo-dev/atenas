@@ -1,4 +1,4 @@
-<%= form_for @task do |form| %>
+<%= form_for @task, data: { turbo: turbo_frame_request? } do |form| %>
   <%= render partial: "shared/form_errors", locals: { object: form.object } %>
   <div class="mb-2">
     <%= form.label :name, class: "label" %>
