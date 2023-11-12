@@ -7,7 +7,7 @@ RSpec.describe 'Tasks index', type: :feature do
   let!(:task_4) { create(:task, name: "Task 4") }
   let!(:task_5) { create(:task, name: "Task 5") }
   let!(:task_6) { create(:task, name: "Task 6") }
-  let!(:task_7) { create(:task, name: "Task 7", status: Task.statuses[:assigned]) }
+  let!(:task_7) { create(:task, name: "Task 7", status: Task.statuses[:unpaid]) }
 
   it 'shows all bided tasks' do
     visit tasks_path

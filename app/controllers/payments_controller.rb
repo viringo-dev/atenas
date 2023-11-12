@@ -4,6 +4,7 @@ class PaymentsController < ApplicationController
   # before_action :set_my_task, only: [:index, :accept]
   # before_action :set_my_bid, only: [:edit, :update, :destroy]
   before_action :set_bid, only: [:new, :create]
+  before_action :set_back_hash, only: [:new, :create]
 
   def new
     @payment = @bid.build_payment
@@ -49,5 +50,9 @@ class PaymentsController < ApplicationController
         redirect_to tasks_path, alert: t("pages.bids.alerts.not_found")
       end
     end
+  end
+
+  def set_back_hash
+    @back_hash = { name: Task.model_name.human, path: task_path(@bid.task) }
   end
 end

@@ -165,7 +165,7 @@ es:
       alerts:
         not_found: "Tarea no encontrada"
     bids:
-      payment_process: "Proceso de pago"
+      payment_process: "Proceso de depósito"
       deposit_step: "1) Deposita %{amount} por Yape/Plin"
       fill_form_step: "2) Rellena el siguiente formulario"
       alerts:

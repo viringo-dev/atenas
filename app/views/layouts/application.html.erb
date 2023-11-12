@@ -22,7 +22,7 @@
       <div class="max-w-3xl w-full">
         <% if @back_hash %>
           <div class="w-full mb-4">
-            <%= link_to sanitize("&larr; ") + @back_hash[:name], @back_hash[:path], class: "text-primary font-medium border-b border-transparent hover:border-primary" %>
+            <%= link_to sanitize("&larr; ") + @back_hash[:name], @back_hash[:path], class: "text-primary font-medium border-b-2 border-transparent hover:border-primary" %>
           </div>
         <% end %>
         <%= yield %>
