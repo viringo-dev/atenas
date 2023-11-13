@@ -15,7 +15,7 @@ class PaymentsController < ApplicationController
     if @payment.save
       @bid.paid!
       respond_to do |format|
-        format.html { redirect_to tasks_path, notice: t("pages.payments.created") }
+        format.html { redirect_to root_path, notice: t("pages.payments.created") }
         format.turbo_stream { flash.now[:notice] = t("pages.payments.created") }
       end
     else
@@ -25,7 +25,7 @@ class PaymentsController < ApplicationController
     # @bid = @task.bids.build(bid_params.merge(user: current_user))
     # if @bid.save
     #   respond_to do |format|
-    #     format.html { redirect_to tasks_path, notice: t("pages.bids.created") }
+    #     format.html { redirect_to root_path, notice: t("pages.bids.created") }
     #     format.turbo_stream { flash.now[:notice] = t("pages.bids.created") }
     #   end
     # else
@@ -47,7 +47,7 @@ class PaymentsController < ApplicationController
         flash[:alert] = t("pages.bids.alerts.not_found")
         render turbo_stream: turbo_stream.action(:redirect, tasks_url)
       else
-        redirect_to tasks_path, alert: t("pages.bids.alerts.not_found")
+        redirect_to root_path, alert: t("pages.bids.alerts.not_found")
       end
     end
   end

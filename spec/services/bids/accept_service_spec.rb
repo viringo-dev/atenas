@@ -13,7 +13,7 @@ RSpec.describe Bids::AcceptService, type: :service do
   end
 
   context 'when the task is not bided' do
-    let!(:task) { create(:task, user: user, status: :unpaid) }
+    let(:task) { create(:task, user: user, status: :unpaid) }
 
     it 'does not accept the bid' do
       expect { subject }.not_to change { bid.reload.accepted? }
@@ -22,7 +22,7 @@ RSpec.describe Bids::AcceptService, type: :service do
   end
 
   context 'when the task is not owned by the user' do
-    let!(:task) { create(:task) }
+    let(:task) { create(:task) }
 
     it 'does not accept the bid' do
       expect { subject }.not_to change { bid.reload.accepted? }
@@ -31,7 +31,7 @@ RSpec.describe Bids::AcceptService, type: :service do
   end
 
   context 'when the bid is not offered' do
-    let!(:bid) { create(:bid, task: task, status: :accepted) }
+    let(:bid) { create(:bid, task: task, status: :accepted) }
 
     it 'does not accept the bid' do
       expect { subject }.not_to change { bid.reload.accepted? }
@@ -40,7 +40,7 @@ RSpec.describe Bids::AcceptService, type: :service do
   end
 
   context 'when the bid is not for the task' do
-    let!(:bid) { create(:bid) }
+    let(:bid) { create(:bid) }
 
     it 'does not accept the bid' do
       expect { subject }.not_to change { bid.reload.accepted? }

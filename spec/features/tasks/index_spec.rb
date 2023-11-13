@@ -10,7 +10,7 @@ RSpec.describe 'Tasks index', type: :feature do
   let!(:task_7) { create(:task, name: "Task 7", status: Task.statuses[:unpaid]) }
 
   it 'shows all bided tasks' do
-    visit tasks_path
+    visit root_path
     expect(page).to have_content('Task 2')
     expect(page).to have_content('Task 3')
     expect(page).to have_content('Task 4')
@@ -21,27 +21,27 @@ RSpec.describe 'Tasks index', type: :feature do
   end
 
   it 'paginates bided tasks' do
-    visit tasks_path
+    visit root_path
     
     click_link I18n.t("pages.common.see_more")
     expect(page).to have_content('Task 1')
   end
 
   it 'shows sign in and sign up links' do
-    visit tasks_path
+    visit root_path
     expect(page).to have_content(I18n.t("pages.header.sign_in"))
     expect(page).to have_content(I18n.t("pages.header.sign_up"))
   end
 
   it 'shows the new task button' do
-    visit tasks_path
+    visit root_path
     expect(page).to have_content(I18n.t("pages.tasks.create_task"))
   end
 
   context 'when user clicks on the new task button' do
     context 'when user is not signed in' do
       it 'redirects to the sign in page' do
-        visit tasks_path
+        visit root_path
         click_link I18n.t("pages.tasks.create_task")
         expect(page).to have_content(I18n.t("pages.account.form.sign_in.noun"))
       end
@@ -52,7 +52,7 @@ RSpec.describe 'Tasks index', type: :feature do
       before { login_as(user) }
 
       it 'shows new task form', js: true do
-        visit tasks_path
+        visit root_path
         click_link I18n.t("pages.tasks.create_task")
         expect(page).to_not have_content(I18n.t("pages.tasks.new_task"))
         expect(page).to have_content(I18n.t("activerecord.attributes.task.name"))
@@ -64,7 +64,7 @@ RSpec.describe 'Tasks index', type: :feature do
 
       context 'when user submits the form' do
         it 'creates a new task', js: true do
-          visit tasks_path
+          visit root_path
           click_link I18n.t("pages.tasks.create_task")
           fill_in "task_name", with: "Task x"
           fill_in "task_description", with: "Description x"

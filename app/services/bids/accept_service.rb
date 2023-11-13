@@ -11,6 +11,7 @@ class Bids::AcceptService < ApplicationService
 
     task.unpaid!
     bid.accepted!
+    task.bids.offered.destroy_all
     Success.new(nil)
   end
 

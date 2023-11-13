@@ -3,6 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show]
   before_action :authenticate_user!, only: [:new]
   before_action :set_back_hash, only: [:new, :show, :edit, :create, :update]
+  before_action :can_edit_task?, only: [:edit, :update, :destroy]
 
   def index
     @tasks = Task.bided
@@ -30,7 +31,7 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
     if @task.save
       respond_to do |format|
-        format.html { redirect_to tasks_path, notice: t("pages.tasks.created") }
+        format.html { redirect_to root_path, notice: t("pages.tasks.created") }
         format.turbo_stream { flash.now[:notice] = t("pages.tasks.created") }
       end
     else
@@ -44,7 +45,7 @@ class TasksController < ApplicationController
   def update
     if @task.update(task_params)
       respond_to do |format|
-        format.html { redirect_to tasks_path, notice: t("pages.tasks.updated") }
+        format.html { redirect_to root_path, notice: t("pages.tasks.updated") }
         format.turbo_stream { flash.now[:notice] = t("pages.tasks.updated") }
       end
     else
@@ -55,7 +56,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_path, notice: t("pages.tasks.deleted") }
+      format.html { redirect_to root_path, notice: t("pages.tasks.deleted") }
       format.turbo_stream { flash.now[:notice] = t("pages.tasks.deleted") }
     end
   end
@@ -73,7 +74,7 @@ class TasksController < ApplicationController
         flash[:alert] = t("pages.tasks.alerts.not_found")
         render turbo_stream: turbo_stream.action(:redirect, tasks_url)
       else
-        redirect_to tasks_path, alert: t("pages.tasks.alerts.not_found")
+        redirect_to root_path, alert: t("pages.tasks.alerts.not_found")
       end
     end
   end
@@ -85,12 +86,23 @@ class TasksController < ApplicationController
         flash[:alert] = t("pages.tasks.alerts.not_found")
         render turbo_stream: turbo_stream.action(:redirect, tasks_url)
       else
-        redirect_to tasks_path, alert: t("pages.tasks.alerts.not_found")
+        redirect_to root_path, alert: t("pages.tasks.alerts.not_found")
       end
     end
   end
 
   def set_back_hash
-    @back_hash = { name: Task.model_name.human.pluralize, path: tasks_path }
+    @back_hash = { name: Task.model_name.human.pluralize, path: root_path }
+  end
+
+  def can_edit_task?
+    unless Tasks::EditPolicy.new(user: current_user, task: @task).allowed?
+      if turbo_frame_request?
+        flash[:alert] = t("pages.common.alerts.not_allowed_action")
+        render turbo_stream: turbo_stream.action(:redirect, task_url(@task))
+      else
+        redirect_to task_url(@task), alert: t("pages.common.alerts.not_allowed_action")
+      end
+    end
   end
 end

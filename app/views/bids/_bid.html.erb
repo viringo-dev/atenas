@@ -7,7 +7,7 @@
         </div>
         <p class="text-sm sm:text-base font-medium text-primary">@<%= bid.user.username %></p>
       </div>
-      <% if bid.user == current_user %>
+      <% if Bids::EditPolicy.new(user: current_user, bid: bid).allowed? %>
         <div class="flex justify-end gap-1">
           <%= link_to [:edit, task, bid],
                       class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
@@ -31,6 +31,12 @@
           <% end %>
         </div>
       <% else %>
+        <% if current_user == task.user %>
+          
+        <% else %>
+          
+        <% end %>
+
         <%= button_to "Aceptar", accept_task_bid_path(task, bid), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" if bid.offered? %>
         <%= link_to "Depositar", new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" if bid.accepted? %>
         <%= button_to "Chatear", "#", disabled: true, class: "btn bg-third hover:bg-third-light w-auto" if bid.paid? %>

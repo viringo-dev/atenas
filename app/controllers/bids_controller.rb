@@ -4,6 +4,7 @@ class BidsController < ApplicationController
   before_action :set_my_task, only: [:index, :accept]
   before_action :set_my_bid, only: [:edit, :update, :destroy]
   before_action :set_bid, only: [:accept, :payment]
+  before_action :can_edit_bid?, only: [:edit, :update, :destroy]
 
   def index
     @bids = @task.bids.ordered.paginated(params)
@@ -20,8 +21,8 @@ class BidsController < ApplicationController
     @bid = @task.bids.build(bid_params.merge(user: current_user))
     if @bid.save
       respond_to do |format|
-        format.html { redirect_to tasks_path, notice: t("pages.bids.created") }
-        format.turbo_stream { flash.now[:notice] = t("pages.bids.created") }
+        format.html { redirect_to root_path }
+        format.turbo_stream { }
       end
     else
       render :new, status: :unprocessable_entity
@@ -31,8 +32,8 @@ class BidsController < ApplicationController
   def update
     if @bid.update(bid_params)
       respond_to do |format|
-        format.html { redirect_to tasks_path, notice: t("pages.bids.updated") }
-        format.turbo_stream { flash.now[:notice] = t("pages.bids.updated") }
+        format.html { redirect_to root_path }
+        format.turbo_stream { }
       end
     else
       render :edit, status: :unprocessable_entity
@@ -42,8 +43,8 @@ class BidsController < ApplicationController
   def destroy
     @bid.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_path, notice: t("pages.bids.deleted") }
-      format.turbo_stream { flash.now[:notice] = t("pages.bids.deleted") }
+      format.html { redirect_to root_path }
+      format.turbo_stream { }
     end
   end
 
@@ -66,7 +67,7 @@ class BidsController < ApplicationController
         flash[:alert] = t("pages.tasks.alerts.not_found")
         render turbo_stream: turbo_stream.action(:redirect, tasks_url)
       else
-        redirect_to tasks_path, alert: t("pages.tasks.alerts.not_found")
+        redirect_to root_path, alert: t("pages.tasks.alerts.not_found")
       end
     end
   end
@@ -78,7 +79,7 @@ class BidsController < ApplicationController
         flash[:alert] = t("pages.tasks.alerts.not_found")
         render turbo_stream: turbo_stream.action(:redirect, tasks_url)
       else
-        redirect_to tasks_path, alert: t("pages.tasks.alerts.not_found")
+        redirect_to root_path, alert: t("pages.tasks.alerts.not_found")
       end
     end
   end
@@ -94,7 +95,7 @@ class BidsController < ApplicationController
         flash[:alert] = t("pages.bids.alerts.not_found")
         render turbo_stream: turbo_stream.action(:redirect, tasks_url)
       else
-        redirect_to tasks_path, alert: t("pages.bids.alerts.not_found")
+        redirect_to root_path, alert: t("pages.bids.alerts.not_found")
       end
     end
   end
@@ -106,7 +107,18 @@ class BidsController < ApplicationController
         flash[:alert] = t("pages.bids.alerts.not_found")
         render turbo_stream: turbo_stream.action(:redirect, tasks_url)
       else
-        redirect_to tasks_path, alert: t("pages.bids.alerts.not_found")
+        redirect_to root_path, alert: t("pages.bids.alerts.not_found")
+      end
+    end
+  end
+
+  def can_edit_bid?
+    unless Bids::EditPolicy.new(user: current_user, bid: @bid).allowed?
+      if turbo_frame_request?
+        flash[:alert] = t("pages.common.alerts.not_allowed_action")
+        render turbo_stream: turbo_stream.action(:redirect, task_url(@bid.task))
+      else
+        redirect_to task_path(@bid.task), alert: t("pages.common.alerts.not_allowed_action")
       end
     end
   end

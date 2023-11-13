@@ -25,7 +25,7 @@
             </ul>
           </div>
         </div>
-        <% if @task.user == current_user %>
+        <% if Tasks::EditPolicy.new(user: current_user, task: @task).allowed? %>
           <div class="flex items-center gap-x-1">
             <%= link_to edit_task_path(@task),
                         class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
@@ -70,7 +70,7 @@
 <% end %>
 
 <%= turbo_frame_tag nested_dom_id(@task, "bids") do %>
-  <% if !@bids.exists? && @task.user != current_user %>
+  <% if Bids::CreatePolicy.new(user: current_user, task: @task).allowed? %>
     <%= turbo_frame_tag nested_dom_id(@task, Bid.new) do %>
       <%= render "bids/form",
                  task: @task,
