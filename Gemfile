@@ -70,6 +70,7 @@ group :development do
   gem "web-console"
   gem "letter_opener"
   gem "awesome_print"
+  gem "bullet"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
