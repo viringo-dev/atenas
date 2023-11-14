@@ -5,7 +5,7 @@
     <p class=""><%= t("pages.bids.fill_form_step") %></p>
   </div>
 
-  <%= form_with model: @payment, class: "p-2 w-full mb-2 border-dotted border-2 rounded-lg" do |form| %>
+  <%= form_with model: @payment, class: "p-2 w-full mb-2 border-dotted border-2 rounded-lg", data: { turbo: turbo_frame_request? } do |form| %>
     <%= render partial: "shared/form_errors", locals: { object: form.object } %>
     <div class="flex flex-col gap-2">
       <%= form.hidden_field :bid_id, value: @bid.id %>

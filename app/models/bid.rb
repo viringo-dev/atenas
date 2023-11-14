@@ -13,7 +13,7 @@ class Bid < ApplicationRecord
   before_save :set_earning
 
   ## ENUMS ##
-  enum status: { offered: 0, accepted: 1, paid: 2, transferred: 3 }
+  enum status: { offered: 0, accepted: 1, paid: 2 }
 
   ## SCOPES ##
   scope :ordered, -> { order(created_at: :desc) }

@@ -49,7 +49,6 @@ class BidsController < ApplicationController
   end
 
   def accept
-    binding.pry
     result = Bids::AcceptService.new(user: current_user, task: @task, bid: @bid).call
     if result.success?
       redirect_to new_payment_path(bid_id: @bid.id)
