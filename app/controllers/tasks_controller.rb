@@ -9,6 +9,7 @@ class TasksController < ApplicationController
     @tasks = Task.bided
                  .ordered
                  .paginated(params)
+                 .includes(:files_attachments, :bids, user: :avatar_attachment)
   end
 
   def my_tasks
@@ -25,6 +26,7 @@ class TasksController < ApplicationController
 
   def show
     @bids = @task.user == current_user ? @task.bids : @task.bids.by_user(current_user)
+    @bids = @bids.includes(user: :avatar_attachment)
   end
 
   def create
