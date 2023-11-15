@@ -9,4 +9,8 @@ class Payment < ApplicationRecord
 
   ## ENUMS ##
   enum status: { pending: 0, validated: 1, rejected: 2 }
+
+  def validate!
+    Payments::ValidateService.new(payment: self).call
+  end
 end
