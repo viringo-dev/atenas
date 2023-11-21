@@ -5,7 +5,9 @@ export default class extends Controller {
   static targets = ["sidebar", "form", "messages"]
 
   connect() {
-    this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
+    if (this.hasMessagesTarget) {
+      this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
+    }
   }
 
   toggleSidebar() {
