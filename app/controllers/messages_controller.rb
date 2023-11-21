@@ -10,20 +10,20 @@ class MessagesController < ApplicationController
       channel_user = current_user.channel_users.find_by(channel: @channel)
       channel_user.touch(:last_read_at) if channel_user.present?
     end
-    @channels = current_user.channels
+    @channels = Channel.with_unread_messages_count_by(current_user)
   end
 
   def create
     @message = Message.new(message_params)
     unless @message.save
-      render turbo_stream: turbo_stream.action(:redirect, channels_url(uuid: @channel.uuid))
+      render turbo_stream: turbo_stream.action(:redirect, messages_url(uuid: @channel.uuid))
     end
   end
 
   private
 
   def set_channel
-    @channel = current_user.channels.find_by(uuid: params[:uuid])
+    @channel = current_user.channels.find_by(uuid: params[:uuid]) || current_user.channels.find_by(id: params.dig(:message, :channel_id))
   end
 
   def message_params
