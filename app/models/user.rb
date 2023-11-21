@@ -9,7 +9,10 @@ class User < ApplicationRecord
   has_many :active_sessions, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_one_attached :avatar
-  
+  has_many :channel_users, dependent: :nullify
+  has_many :channels, through: :channel_users
+
+  ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false }
   validates :surname, presence: { allow_blank: false }
   validates :birthdate, presence: { allow_blank: false }

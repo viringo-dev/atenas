@@ -4,6 +4,7 @@ class Task < ApplicationRecord
   belongs_to :user
   has_many_attached :files
   has_many :bids, dependent: :destroy
+  has_one :channel, dependent: :nullify
 
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false, message: :blank }
