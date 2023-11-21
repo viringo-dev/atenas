@@ -7,7 +7,7 @@ class Message < ApplicationRecord
   validates :content, presence: { allow_blank: false, message: :blank }
 
   ## CALLBACKS ##
-  after_create_commit -> { broadcast_prepend_later_to channel.uuid, partial: "messages/message", target: channel.uuid }
+  after_create_commit -> { broadcast_prepend_later_to channel.uuid, partial: "messages/message", target: "#{channel.uuid}-messages" }
 
   ## SCOPES ##
   scope :ordered, ->(order = :asc) { order(created_at: order) }

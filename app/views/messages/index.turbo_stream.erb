@@ -1,9 +1,9 @@
-<%= turbo_stream.append @channel.uuid do %>
+<%= turbo_stream.append "#{@channel.uuid}-messages" do %>
   <%= render @messages %>
 <% end %>
 
 <%= turbo_stream.update "pager", "" %>
 
-<%= turbo_stream.append @channel.uuid do %>
+<%= turbo_stream.append "#{@channel.uuid}-messages" do %>
   <%= render partial: "shared/pager", locals: { resource: @messages, path: messages_path, parameters: { uuid: @channel.uuid } } %>
 <% end %>
