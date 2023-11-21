@@ -1,5 +1,12 @@
 class MessagesController < ApplicationController
-  before_action :set_channel, only: [:create]
+  before_action :set_channel, only: [:index, :create]
+
+  def index
+    @channels = current_user.channels
+    @messages = @channel&.messages
+                        &.ordered(:desc)
+                        &.paginated(params.merge(per_page: 10))
+  end
 
   def create
     @message = Message.new(message_params)
@@ -11,15 +18,7 @@ class MessagesController < ApplicationController
   private
 
   def set_channel
-    @channel = Channel.find_by(id: message_params[:channel_id])
-    unless @channel.present?
-      if turbo_frame_request?
-        flash[:alert] = t("pages.channels.alerts.not_found")
-        render turbo_stream: turbo_stream.action(:redirect, channels_url)
-      else
-        redirect_to root_path, alert: t("pages.channels.alerts.not_found")
-      end
-    end
+    @channel = current_user.channels.find_by(uuid: params[:uuid])
   end
 
   def message_params
