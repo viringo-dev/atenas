@@ -22,20 +22,18 @@
   <div class="flex-1 relative border-2 border-primary rounded-md">
     <aside data-channels-target="sidebar" id="default-sidebar" class="rounded border-2 border-primary absolute z-9 w-64 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
       <div class="h-full p-2 overflow-y-auto rounded-sm bg-primary flex flex-col gap-2">
-        <%= render @channels %>
+        <%= render partial: "messages/channel", collection: @channels %>
       </div>
     </aside>
 
     <div class="rounded-lg sm:ml-64 flex flex-col h-full" data-action="click->channels#hideSidebar">
       <% if @channel %>
         <div class="flex-1">
-          <%= turbo_stream_from @channel %>
-          <div id="<%= dom_id(@channel) %>" class="flex flex-col gap-3 overflow-y-auto h-[calc(100dvh-17rem)] md:h-[calc(100dvh-14.1rem)] p-2" data-channels-target="messages">
-            <%= render partial: "channels/message", collection: @messages %>
-          </div>
-
-          <%= link_to "moree", channels_path(page: @messages.next_page, uuid: @channel.uuid, format: :turbo_stream) %>
-          
+          <%= turbo_stream_from @channel.uuid %>
+          <%= turbo_frame_tag @channel.uuid, class: "flex flex-col-reverse gap-3 overflow-y-auto h-[calc(100dvh-17rem)] md:h-[calc(100dvh-14.1rem)] p-2", data: { "channels-target": "messages" } do %>
+            <%= render @messages %>
+            <%= render partial: "shared/pager", locals: { resource: @messages, path: messages_path, parameters: { uuid: @channel.uuid } } %>
+          <% end %>
         </div>
         <%= form_with model: Message.new, data: { "channels-target": "form", action: "turbo:submit-end->channels#resetForm" } do |form| %>
           <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50">

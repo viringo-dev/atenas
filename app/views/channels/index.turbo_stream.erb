@@ -1,7 +1,0 @@
-<%= turbo_stream.append @channel do %>
-  <%= render partial: "channels/message", :collection => @messages, as: :message %>
-<% end %>
-
-<%= turbo_stream.replace "pager" do %>
-  <%= render partial: "shared/pager", locals: { resource: @messages, path: channels_path(uuid: @channel.uuid, page: @messages.next_page, format: :turbo_stream) } %>
-<% end %>

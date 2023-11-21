@@ -1,8 +1,10 @@
 <div id="pager" class="flex justify-center">
   <div>
     <% if resource.next_page.present? %>
-      <%= link_to t("pages.common.see_more"),
+      <%= button_to t("pages.common.see_more"),
                   path,
+                  method: :get,
+                  params: { page: resource.next_page }.merge(defined?(parameters) ? parameters : {}),
                   class: "btn bg-third hover:bg-third-light",
                   data: { turbo_stream: "" } %>
     <% end %>

@@ -1,4 +1,4 @@
-<%= active_link_to channels_path(uuid: channel.uuid), class: "flex items-center p-2 text-gray-900 rounded-lg bg-white hover:bg-gray-100 group", active_class: "!bg-gray-100" do %>
+<%= active_link_to messages_path(uuid: channel.uuid), class: "flex items-center p-2 text-gray-900 rounded-lg bg-white hover:bg-gray-100 group", active_class: "!bg-gray-100" do %>
   <span class="flex-1 whitespace-nowrap"><%= channel.name %></span>
   <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full">Pro</span>
 <% end %>

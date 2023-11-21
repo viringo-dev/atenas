@@ -1,0 +1,8 @@
+<%= turbo_frame_tag message do %>
+  <%= tag.div class: "w-full flex flex-col items-start pr-16 cont-#{message.user.id}", data: { controller: "message" } do %>
+    <%= tag.p class: "bg-gray-400 text-white text-sm rounded-md p-2 msg-#{message.user.id}" do %>
+      <%= message.content %>
+    <% end %>
+    <p class="text-[10px] text-gray-500"><%= message.created_at.strftime("%d/%m/%Y %H:%M:%S") %></p>
+  <% end %>
+<% end %>
