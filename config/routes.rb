@@ -29,9 +29,7 @@ Rails.application.routes.draw do
 
   resources :payments, only: [:new, :create]
 
-  resources :channels, only: [:index]
-
-  resources :messages, only: [:create]
+  resources :messages, only: [:index, :create]
 
   get "my-tasks", to: "tasks#my_tasks"
   get "my-bids", to: "tasks#my_bids"
