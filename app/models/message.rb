@@ -8,6 +8,7 @@ class Message < ApplicationRecord
 
   ## CALLBACKS ##
   after_create_commit -> { broadcast_prepend_later_to channel.uuid, partial: "messages/message", target: "#{channel.uuid}-messages" }
+  after_create_commit -> { broadcast_update_later_to channel.uuid, partial: "messages/channel_notification", target: channel.uuid, locals: { channel: channel } }
 
   ## SCOPES ##
   scope :ordered, ->(order = :asc) { order(created_at: order) }

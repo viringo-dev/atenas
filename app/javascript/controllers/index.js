@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChannelNotificationController from "./channel_notification_controller"
+application.register("channel-notification", ChannelNotificationController)
+
 import ChannelsController from "./channels_controller"
 application.register("channels", ChannelsController)
 

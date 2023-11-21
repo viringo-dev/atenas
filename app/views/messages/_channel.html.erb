@@ -1,7 +1,9 @@
-<%= turbo_stream_from @channel.uuid %>
+<%= turbo_stream_from channel.uuid %>
 <%= active_link_to messages_path(uuid: channel.uuid), class: "flex items-center p-2 text-gray-900 rounded-lg bg-white hover:bg-gray-100 group", active_class: "!bg-gray-200" do %>
   <span class="flex-1 whitespace-nowrap"><%= channel.name %></span>
-  <% if !current_page?(messages_path(uuid: channel.uuid)) && channel.unread_messages_count.positive? %>
-    <span class="inline-flex items-center justify-center px-2 ms-3 text-sm font-medium text-gray-800 bg-red-100 rounded-full">Pro</span>
+  <%= tag.div id: channel.uuid do %>
+    <% if !current_page?(messages_path(uuid: channel.uuid)) && channel.unread_messages_count.positive? %>
+      <div class="channel-notification"></div>
+    <% end %>
   <% end %>
 <% end %>
