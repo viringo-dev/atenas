@@ -1,1 +1,4 @@
-<%= tag.div data: { controller: "channel-notification", path: messages_path(uuid: channel.uuid) } %>
+<%= tag.div data: { controller: "channel-notification",
+                    "channel-notification-path-value": messages_path(uuid: channel.uuid),
+                    "channel-notification-channel-value": channel.uuid,
+                  } %>
