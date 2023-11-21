@@ -2,10 +2,15 @@ class MessagesController < ApplicationController
   before_action :set_channel, only: [:index, :create]
 
   def index
+    if @channel.present?
+      @messages = @channel.messages
+                          .ordered(:desc)
+                          .paginated(params.merge(per_page: 20))
+                          .includes(:user)
+      channel_user = current_user.channel_users.find_by(channel: @channel)
+      channel_user.touch(:last_read_at) if channel_user.present?
+    end
     @channels = current_user.channels
-    @messages = @channel&.messages
-                        &.ordered(:desc)
-                        &.paginated(params.merge(per_page: 10))
   end
 
   def create
