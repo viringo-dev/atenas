@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChannelsController from "./channels_controller"
+application.register("channels", ChannelsController)
+
 import FilesController from "./files_controller"
 application.register("files", FilesController)
 
@@ -12,6 +15,9 @@ application.register("flash", FlashController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import MessageController from "./message_controller"
+application.register("message", MessageController)
 
 import PreviewsController from "./previews_controller"
 application.register("previews", PreviewsController)
