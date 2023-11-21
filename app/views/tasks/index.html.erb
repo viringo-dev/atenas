@@ -14,5 +14,5 @@
     <%= render @tasks %>
   <% end %>
 
-  <%= render partial: "shared/pager", locals: { resource: @tasks, path: "root_path" } %>
+  <%= render partial: "shared/pager", locals: { resource: @tasks, path: root_path(page: @tasks.next_page) } %>
 </div>

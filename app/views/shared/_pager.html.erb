@@ -2,7 +2,7 @@
   <div>
     <% if resource.next_page.present? %>
       <%= link_to t("pages.common.see_more"),
-                  send(path, page: resource.next_page),
+                  path,
                   class: "btn bg-third hover:bg-third-light",
                   data: { turbo_stream: "" } %>
     <% end %>
