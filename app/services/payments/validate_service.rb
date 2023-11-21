@@ -7,8 +7,15 @@ class Payments::ValidateService < ApplicationService
   def call
     return Failure.new(nil) unless allowed?
 
-    payment.validated!
-    task.assigned!
+    ActiveRecord::Base.transaction do
+      payment.validated!
+      task.assigned!
+      channel = Channel.create(task: task, name: task.name)
+      channel.channel_users.create(user: task.user)
+      channel.channel_users.create(user: bid.user)
+    rescue ActiveRecord::Rollback
+      return Failure.new(nil)
+    end
     Success.new(nil)
   end
 
