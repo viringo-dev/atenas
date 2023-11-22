@@ -6,6 +6,9 @@
       </a>
       <div class="flex items-center md:order-2">
         <% if current_user %>
+          <%= link_to messages_path, class: "w-6 text-white mr-3" do %>
+            <%= render 'icons/channels' %>
+          <% end %>
           <button type="button" class="w-10 h-10 flex mr-3 text-sm rounded-full md:mr-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
             <%= avatar(current_user) %>
           </button>
