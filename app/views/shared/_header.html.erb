@@ -6,8 +6,14 @@
       </a>
       <div class="flex items-center md:order-2">
         <% if current_user %>
-          <%= link_to messages_path, class: "w-6 text-white mr-3" do %>
+          <%= turbo_stream_from current_user %>
+          <%= link_to messages_path, class: "w-6 text-white mr-3 relative" do %>
             <%= render 'icons/channels' %>
+            <%= tag.div id: "message-notification" do %>
+              <% if @channels.select { |channel| channel.unread_messages_count.positive? }.any? %>
+                <div class="message-notification"></div>
+              <% end %>
+            <% end %>
           <% end %>
           <button type="button" class="w-10 h-10 flex mr-3 text-sm rounded-full md:mr-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
             <%= avatar(current_user) %>

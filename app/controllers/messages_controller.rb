@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_channel, only: [:index, :create]
+  skip_before_action :set_channels, only: [:index]
 
   def index
     if @channel.present?

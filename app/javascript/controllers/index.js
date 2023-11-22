@@ -22,5 +22,8 @@ application.register("hello", HelloController)
 import MessageController from "./message_controller"
 application.register("message", MessageController)
 
+import MessageNotificationController from "./message_notification_controller"
+application.register("message-notification", MessageNotificationController)
+
 import PreviewsController from "./previews_controller"
 application.register("previews", PreviewsController)

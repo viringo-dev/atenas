@@ -172,3 +172,5 @@ es:
         not_found: "Oferta no encontrada"
     payments:
       we_going_to_validate: "Vamos a validar tu pago, te notificaremos cuando esté listo"
+    channels:
+      select: "Selecciona un canal"
