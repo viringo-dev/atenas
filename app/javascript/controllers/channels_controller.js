@@ -5,9 +5,7 @@ export default class extends Controller {
   static targets = ["sidebar", "form", "messages"]
 
   connect() {
-    if (this.hasMessagesTarget) {
-      this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
-    }
+    this.scrollToBottom()
   }
 
   toggleSidebar() {
@@ -29,6 +27,12 @@ export default class extends Controller {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault()
       this.formTarget.requestSubmit()
+    }
+  }
+
+  scrollToBottom() {
+    if (this.hasMessagesTarget) {
+      this.messagesTarget.scrollTop = this.messagesTarget.scrollHeight
     }
   }
 }

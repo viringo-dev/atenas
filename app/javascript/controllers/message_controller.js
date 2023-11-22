@@ -4,8 +4,9 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   connect() {
     let parentElement = this.element.parentElement;
-    if (parentElement.scrollTop + parentElement.clientHeight + this.element.clientHeight * 2 >= parentElement.scrollHeight) {
-      parentElement.scrollTop = parentElement.scrollHeight
+    if (this.element.clientHeight * 4 > Math.abs(parentElement.scrollTop)) {
+      parentElement.scrollTop = -1000000
+      parentElement.scrollTop = 0
     }
   }
 }

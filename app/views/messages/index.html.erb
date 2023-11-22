@@ -34,7 +34,7 @@
             <%= render partial: "shared/pager", locals: { resource: @messages, path: messages_path, parameters: { uuid: @channel.uuid } } %>
           <% end %>
         </div>
-        <%= form_with model: Message.new, data: { "channels-target": "form", action: "turbo:submit-end->channels#resetForm" } do |form| %>
+        <%= form_with model: Message.new, data: { "channels-target": "form", action: "turbo:submit-end->channels#resetForm turbo:submit-end->channels#scrollToBottom" } do |form| %>
           <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50">
             <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100">
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
