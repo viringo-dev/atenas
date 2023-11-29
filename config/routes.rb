@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     put :mark_as_read, on: :member
   end
 
+  resources :notifications, only: [:index]
+
   resources :messages, only: [:index, :create]
 
   get "my-tasks", to: "tasks#my_tasks"
