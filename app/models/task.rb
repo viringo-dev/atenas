@@ -1,7 +1,9 @@
 class Task < ApplicationRecord
 
   ## ASSOCIATIONS ##
-  belongs_to :user
+  # belongs_to :user
+  belongs_to :user, touch: true
+  # broadcasts_refreshes
   has_many_attached :files
   has_many :bids, dependent: :destroy
   has_one :channel, dependent: :nullify
