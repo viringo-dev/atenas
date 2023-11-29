@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_17_014629) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_182923) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -292,6 +292,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_014629) do
     t.index ["name"], name: "motor_tags_name_unique_index", unique: true
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "resource_type", null: false
+    t.integer "resource_id", null: false
+    t.integer "type", null: false
+    t.string "path", null: false
+    t.boolean "readed", default: false, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "payments", force: :cascade do |t|
     t.bigint "bid_id", null: false
     t.string "payer", null: false
@@ -349,4 +361,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_17_014629) do
   add_foreign_key "motor_note_tag_tags", "motor_note_tags", column: "tag_id"
   add_foreign_key "motor_note_tag_tags", "motor_notes", column: "note_id"
   add_foreign_key "motor_taggable_tags", "motor_tags", column: "tag_id"
+  add_foreign_key "notifications", "users"
 end
