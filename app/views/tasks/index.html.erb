@@ -1,8 +1,9 @@
 <div class="flex flex-col">
   <div class="flex justify-end mb-2">
     <div class="w-full md:w-auto">
-      <%= link_to t("pages.tasks.create_task"),
+      <%= button_to t("pages.tasks.create_task"),
                   new_task_path,
+                  method: :get,
                   class: "btn bg-primary hover:bg-primary-light",
                   data: { turbo_frame: dom_id(Task.new) } unless current_page?(my_bids_path) %>
     </div>
