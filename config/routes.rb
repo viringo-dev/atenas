@@ -39,4 +39,7 @@ Rails.application.routes.draw do
 
   get "my-tasks", to: "tasks#my_tasks"
   get "my-bids", to: "tasks#my_bids"
+
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 end
