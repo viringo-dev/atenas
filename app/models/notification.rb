@@ -8,8 +8,8 @@ class Notification < ApplicationRecord
   validates :resource, presence: { allow_blank: false }
 
   ## ENUMS ##
-  enum type: { new_bid: 0
-             }
+  enum notification_type: { new_bid: 0
+                          }
 
   ## SCOPES ##
   scope :unreaded, -> { where(readed: false) }

@@ -295,7 +295,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_182923) do
   create_table "notifications", force: :cascade do |t|
     t.string "resource_type", null: false
     t.integer "resource_id", null: false
-    t.integer "type", null: false
+    t.integer "notification_type", null: false
     t.string "path", null: false
     t.boolean "readed", default: false, null: false
     t.bigint "user_id", null: false
