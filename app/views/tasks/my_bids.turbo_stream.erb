@@ -1,7 +1,10 @@
 <%= turbo_stream.append "my_bids" do %>
   <%= render partial: "task", :collection => @tasks, as: :task %>
 <% end %>
-
-<%= turbo_stream.replace "pager" do %>
-  <%= render partial: "shared/pager", locals: { resource: @tasks, path: "my_bids_path" } %>
+<% if @pagy.next.present? %>
+  <%= turbo_stream.replace "tasks-pagination" do %>
+    <%= turbo_frame_tag "tasks-pagination", src: my_bids_path(page: @pagy.next, format: :turbo_stream), loading: :lazy %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.remove "tasks-loader" %>
 <% end %>

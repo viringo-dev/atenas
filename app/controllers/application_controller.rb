@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Authentication
+  include Pagy::Backend
   before_action :authenticate_user!
   before_action :set_channels, if: :user_signed_in?
   before_action :set_notifications, if: :user_signed_in?

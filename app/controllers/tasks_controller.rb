@@ -6,18 +6,22 @@ class TasksController < ApplicationController
   before_action :can_edit_task?, only: [:edit, :update, :destroy]
 
   def index
-    @tasks = Task.bided
-                 .ordered
-                 .paginated(params)
-                 .includes(:files_attachments, :bids, user: :avatar_attachment)
+    @pagy, @tasks = pagy(Task.bided
+                             .ordered
+                             .includes(:files_attachments, :bids, user: :avatar_attachment))
   end
 
   def my_tasks
-    @tasks = current_user.tasks.ordered.paginated(params)
+    @pagy, @tasks = pagy(current_user.tasks
+                                     .bided
+                                     .ordered
+                                     .includes(:files_attachments))
   end
 
   def my_bids
-    @tasks = Task.ordered.with_bids_by(current_user).paginated(params)
+    @pagy, @tasks = pagy(Task.ordered
+                             .with_bids_by(current_user)
+                             .includes(:files_attachments, :bids, user: :avatar_attachment))
   end
   
   def new

@@ -15,5 +15,10 @@
     <%= render @tasks %>
   <% end %>
 
-  <%= render partial: "shared/pager", locals: { resource: @tasks, path: root_path } %>
+  <%= turbo_frame_tag "tasks-pagination", src: root_path(page: @pagy.next, format: :turbo_stream) %>
+  <div id="tasks-loader" class="w-full flex justify-center mt-3 text-primary">
+    <div role="status" class="w-7">
+      <%= render partial: "icons/spinner" %>
+    </div>
+  </div>
 </div>
