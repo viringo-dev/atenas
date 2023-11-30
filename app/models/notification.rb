@@ -7,6 +7,9 @@ class Notification < ApplicationRecord
   validates :user, presence: { allow_blank: false }
   validates :resource, presence: { allow_blank: false }
 
+  ## CALLBACKS ##
+  after_create_commit -> { broadcast_update_later_to self.user, partial: "notifications/new_notification", target: "new-notification" }
+
   ## ENUMS ##
   enum notification_type: { new_bid: 0
                           }

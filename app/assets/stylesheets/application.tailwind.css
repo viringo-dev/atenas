@@ -51,7 +51,7 @@ button[disabled] .show-when-enabled {
     @apply w-3 h-3 bg-primary rounded-[50%]
   }
 
-  .message-notification {
+  .dot-notification {
     @apply w-3 h-3 bg-negative-light absolute top-0 -left-1 rounded-[50%]
   }
 }

@@ -9,9 +9,9 @@
           <%= turbo_stream_from current_user %>
           <%= link_to notifications_path, class: "w-6 text-white mr-3 relative" do %>
             <%= render 'icons/notification' %>
-            <%= tag.div id: "message-notification" do %>
+            <%= tag.div id: "new-notification" do %>
               <% if @notifications.exists? %>
-                <div class=""></div>
+                <div class="dot-notification"></div>
               <% end %>
             <% end %>
           <% end %>
@@ -19,7 +19,7 @@
             <%= render 'icons/channels' %>
             <%= tag.div id: "message-notification" do %>
               <% if @channels.select { |channel| channel.unread_messages_count.positive? }.any? %>
-                <div class=""></div>
+                <div class="dot-notification"></div>
               <% end %>
             <% end %>
           <% end %>
