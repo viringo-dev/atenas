@@ -16,5 +16,6 @@ class Notification < ApplicationRecord
                           }
 
   ## SCOPES ##
+  scope :ordered, -> { order(created_at: :desc) }
   scope :unreaded, -> { where(readed: false) }
 end

@@ -3,7 +3,9 @@ class NotificationsController < ApplicationController
 
   def index
     current_user.notifications.unreaded.touch_all(:readed)
-    @pagy, @notifications = pagy(current_user.notifications.includes(resource: [:user, :task]), items: 10)
+    @pagy, @notifications = pagy(current_user.notifications
+                                             .ordered
+                                             .includes(resource: [:user, :task]), items: 10)
   end
 
   def mark_as_read
