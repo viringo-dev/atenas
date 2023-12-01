@@ -1,13 +1,4 @@
 <div class="flex flex-col mx-auto max-w-3xl">
-  <div class="flex justify-end mb-2">
-    <div class="w-full md:w-auto">
-      <%= link_to t("pages.tasks.create_task"),
-                  new_task_path,
-                  class: "btn bg-primary hover:bg-primary-light",
-                  data: { turbo_frame: dom_id(Task.new) } unless current_page?(my_bids_path) %>
-    </div>
-  </div>
-
   <%= turbo_frame_tag Task.new %>
   
   <%= turbo_frame_tag "my_bids" do %>
