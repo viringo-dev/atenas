@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   before_action :set_my_task, only: [:edit, :update, :destroy]
   before_action :set_task, only: [:show]
-  before_action :authenticate_user!, only: [:new]
   before_action :can_edit_task?, only: [:edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @pagy, @tasks = pagy(Task.bided

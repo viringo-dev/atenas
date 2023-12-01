@@ -33,7 +33,9 @@ Rails.application.routes.draw do
     put :mark_as_read, on: :member
   end
 
-  resources :notifications, only: [:index]
+  resources :notifications, only: [:index] do
+    put :mark_as_read, on: :member
+  end
 
   resources :messages, only: [:index, :create]
 

@@ -4,6 +4,7 @@ class Bid < ApplicationRecord
   belongs_to :user
   belongs_to :task
   has_one :payment, dependent: :nullify
+  has_many :notifications, as: :resource, dependent: :destroy
 
   ## VALIDATIONS ##
   validates :amount, presence: { allow_blank: false, message: :blank }, numericality: { only_float: true, greater_than: 0 }

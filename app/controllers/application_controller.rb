@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   before_action :authenticate_user!
   before_action :set_channels, if: :user_signed_in?
-  before_action :set_notifications, if: :user_signed_in?
+  helper_method :are_there_unreaded_notifications?
 
   private
 
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     @channels = Channel.with_unread_messages_count_by(current_user)
   end
 
-  def set_notifications
-    @notifications = current_user.notifications.unreaded
+  def are_there_unreaded_notifications?
+    current_user.notifications.unreaded.any?
   end
 end

@@ -10,7 +10,7 @@
           <%= link_to notifications_path, class: "w-6 text-white mr-3 relative" do %>
             <%= render 'icons/notification' %>
             <%= tag.div id: "new-notification" do %>
-              <% if @notifications.exists? %>
+              <% if are_there_unreaded_notifications? %>
                 <div class="dot-notification"></div>
               <% end %>
             <% end %>
