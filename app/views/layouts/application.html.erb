@@ -15,18 +15,11 @@
 
   <body class="flex flex-col text-dark h-[calc(100dvh)]">
     <%= render partial: "shared/header" %>
-    <main class="flex-1 p-4 md:px-24 lg:px-48 xl:px-72 2xl:px-96 bg-gray-50 flex justify-center">
+    <main class="flex-1 p-4 bg-gray-50">
       <div id="flash" class="fixed z-10 left-1/2 -translate-x-1/2 top-10 mx-4 flex flex-col items-center gap-2">
         <%= render partial: "shared/flash" %>
       </div>
-      <div class="max-w-4xl w-full">
-        <% if @back_hash %>
-          <div class="w-full mb-4">
-            <%= link_to sanitize("&larr; ") + @back_hash[:name], @back_hash[:path], class: "text-primary font-medium border-b-2 border-transparent hover:border-primary" %>
-          </div>
-        <% end %>
-        <%= yield %>
-      </div>
+      <%= yield %>
     </main>
     <%= render partial: "shared/footer" %>
   </body>

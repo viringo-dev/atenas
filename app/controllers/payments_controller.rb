@@ -2,7 +2,6 @@ class PaymentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_bid, only: [:new, :create]
   before_action :can_create_payment?, only: [:new, :create]
-  before_action :set_back_hash, only: [:new, :create]
 
   def new
     @payment = @bid.build_payment
@@ -48,9 +47,5 @@ class PaymentsController < ApplicationController
         redirect_to root_path, alert: t("pages.common.alerts.not_allowed_action")
       end
     end
-  end
-
-  def set_back_hash
-    @back_hash = { name: Task.model_name.human, path: task_path(@bid.task) }
   end
 end

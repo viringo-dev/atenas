@@ -87,6 +87,7 @@ es:
             other: "Otro"
       task:
         one: "Tarea"
+        other: "Tareas"
   pages:
     account:
       form:
