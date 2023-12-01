@@ -9,7 +9,7 @@
   }
 </style>
 
-<div class="flex flex-col h-full" data-controller="channels">
+<div class="flex flex-col mx-auto max-w-4xl h-full" data-controller="channels">
   <div class="">
     <button data-action="click->channels#toggleSidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 mb-2 text-sm text-primary rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
       <span class="sr-only">Open sidebar</span>
@@ -31,7 +31,12 @@
         <div class="flex-1">
           <%= turbo_frame_tag "#{@channel.uuid}-messages", class: "flex flex-col-reverse gap-3 overflow-y-auto h-[calc(100dvh-17rem)] md:h-[calc(100dvh-14.1rem)] p-2", data: { "channels-target": "messages" } do %>
             <%= render @messages %>
-            <%= render partial: "shared/pager", locals: { resource: @messages, path: messages_path, parameters: { uuid: @channel.uuid } } %>
+            <%= turbo_frame_tag "#{@channel.uuid}-messages-pagination", src: messages_path(uuid: @channel.uuid, page: @pagy.next, format: :turbo_stream) %>
+            <div id=<%= "#{@channel.uuid}-messages-loader" %> class="w-full flex justify-center mt-3 text-primary">
+              <div role="status" class="w-7">
+                <%= render partial: "icons/spinner" %>
+              </div>
+            </div>
           <% end %>
         </div>
         <%= form_with model: Message.new, data: { "channels-target": "form", action: "turbo:submit-end->channels#resetForm turbo:submit-end->channels#scrollToBottom" } do |form| %>

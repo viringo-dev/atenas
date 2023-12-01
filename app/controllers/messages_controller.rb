@@ -4,10 +4,9 @@ class MessagesController < ApplicationController
 
   def index
     if @channel.present?
-      @messages = @channel.messages
-                          .ordered(:desc)
-                          .paginated(params.merge(per_page: 20))
-                          .includes(:user)
+      @pagy, @messages = pagy(@channel.messages
+                                      .ordered(:desc)
+                                      .includes(:user), items: 20)
       channel_user = current_user.channel_users.find_by(channel: @channel)
       channel_user.touch(:last_read_at) if channel_user.present?
     end

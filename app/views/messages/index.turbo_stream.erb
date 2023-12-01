@@ -1,9 +1,10 @@
 <%= turbo_stream.append "#{@channel.uuid}-messages" do %>
-  <%= render @messages %>
+  <%= render partial: "message", :collection => @messages, as: :message %>
 <% end %>
-
-<%= turbo_stream.update "pager", "" %>
-
-<%= turbo_stream.append "#{@channel.uuid}-messages" do %>
-  <%= render partial: "shared/pager", locals: { resource: @messages, path: messages_path, parameters: { uuid: @channel.uuid } } %>
+<% if @pagy.next.present? %>
+  <%= turbo_stream.replace "#{@channel.uuid}-messages-pagination" do %>
+    <%= turbo_frame_tag "#{@channel.uuid}-messages-pagination", src: messages_path(uuid: @channel.uuid, page: @pagy.next, format: :turbo_stream), loading: :lazy %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.remove "#{@channel.uuid}-messages-loader" %>
 <% end %>
