@@ -1,5 +1,4 @@
-class NotificationJob
-  include Sidekiq::Job
+class NotificationJob < ApplicationJob
   include Rails.application.routes.url_helpers
 
   def perform(resource_id, notification_type)

@@ -12,7 +12,7 @@ class Bid < ApplicationRecord
 
   ## CALLBACKS ##
   before_save :set_earning
-  after_create_commit { NotificationJob.perform_async(self.id, Notification.notification_types[:new_bid]) }
+  after_create_commit { NotificationJob.perform_later(self.id, Notification.notification_types[:new_bid]) }
 
   ## ENUMS ##
   enum status: { offered: 0, accepted: 1, paid: 2 }

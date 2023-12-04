@@ -21,5 +21,7 @@ module Atenas
 
     config.i18n.default_locale = :es
     config.active_model.i18n_customize_full_message = true
+
+    config.active_job.queue_adapter = :sidekiq
   end
 end
