@@ -9,9 +9,10 @@
       </div>
       <% if Bids::EditPolicy.new(user: current_user, bid: bid).allowed? %>
         <div class="flex justify-end gap-1">
-          <%= link_to [:edit, task, bid],
-                      class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
-                      data: { "tooltip-target": "tooltip-edit-task", turbo_frame: nested_dom_id(task, bid) } do %>
+          <%= button_to [:edit, task, bid],
+                        method: :get,
+                        class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
+                        data: { "tooltip-target": "tooltip-edit-task", turbo_frame: nested_dom_id(task, bid) } do %>
             <%= render 'icons/edit' %>
             <div id="tooltip-edit-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                 <%= t("pages.common.edit") %>

@@ -24,7 +24,7 @@ class TasksController < ApplicationController
   end
   
   def new
-    @task = Task.new(deadline: Date.current + 1.week)
+    @task = Task.new
   end
 
   def show

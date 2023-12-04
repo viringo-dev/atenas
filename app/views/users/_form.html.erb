@@ -47,7 +47,17 @@
     </div>
     <div class="w-1/2">
       <%= form.label :birthdate, class: "label" %>
-      <%= form.date_field :birthdate, required: true, class: "date-input", placeholder: "" %>
+      <%= form.text_field :birthdate,
+                          required: true,
+                          class: "input",
+                          data: { controller: "flatpickr",
+                                  "flatpickr-params-value": {
+                                    dateFormat: "d-m-Y",
+                                    defaultDate: form.object.birthdate.present? ? form.object.birthdate.strftime("%d-%m-%Y") : Date.today.strftime("%d-%m-%Y"),
+                                    maxDate: Date.today.strftime("%d-%m-%Y"),
+                                    minDate: (Date.today - 100.years).strftime("%d-%m-%Y")
+                                  }
+                                } %>
     </div>
   </div>
   <div class="mb-2">

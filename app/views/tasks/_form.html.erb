@@ -20,7 +20,18 @@
     </div>
     <div class="w-1/2">
       <%= form.label :deadline, class: "label" %>
-      <%= form.datetime_local_field :deadline, required: true, class: "date-input" %>
+      <%= form.text_field :deadline,
+                          required: true,
+                          class: "input",
+                          data: { controller: "flatpickr",
+                                  "flatpickr-params-value": { 
+                                    dateFormat: "d-m-Y H:i",
+                                    enableTime: true,
+                                    defaultDate: form.object.deadline.present? ? form.object.deadline.strftime("%d-%m-%Y %H:%M") : (Time.now + 1.hour).strftime("%d/%m/%Y %H:%M"),
+                                    minDate: Time.now.strftime("%d-%m-%Y %H:%M"),
+                                    maxDate: (Time.now + 1.month).strftime("%d-%m-%Y %H:%M")
+                                  }
+                                } %>
     </div>
   </div>
   <div class="mb-2">
