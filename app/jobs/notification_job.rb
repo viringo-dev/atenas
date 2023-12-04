@@ -8,7 +8,12 @@ class NotificationJob < ApplicationJob
     case notification_type
     when Notification.notification_types[:new_bid]
       bid = Bid.find_by(id: resource_id)
-      Notification.create(resource: bid, user: bid.task.user, notification_type: notification_type, path: task_path(bid.task_id)) if bid
+      if bid
+        notification = Notification.new(resource: bid, user: bid.task.user, notification_type: notification_type, path: task_url(bid.task_id))
+        if notification.save
+          NotificationMailer.new_bid(notification.id).deliver_later
+        end
+      end
     else
     end
   end

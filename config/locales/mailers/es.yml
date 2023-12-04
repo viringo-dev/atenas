@@ -29,3 +29,17 @@ es:
 
           <p>Saludos,</p>
           <p>El equipo de %{app_name}</p>
+    notification_mailer:
+      new_bid:
+        subject: "Tienes una nueva oferta en %{app_name}"
+        body_html: |
+          <p>Hola %{name},</p>
+
+          <p><b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>.</p>
+
+          <p>Para ver la oferta, haz clic en el siguiente enlace:</p>
+
+          <a href="%{link}">Ver oferta</a>
+
+          <p>Saludos,</p>
+          <p>El equipo de %{app_name}</p>
