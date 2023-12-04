@@ -39,7 +39,7 @@ es:
 
           <p>Para ver la oferta, haz clic en el siguiente enlace:</p>
 
-          <a href="%{link}">Ver oferta</a>
+          <a href="%{link}" style="color: #19A7CE;">Ver oferta</a>
 
           <p>Saludos,</p>
           <p>El equipo de %{app_name}</p>
