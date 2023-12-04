@@ -175,5 +175,6 @@ es:
       we_going_to_validate: "Vamos a validar tu pago, te notificaremos cuando esté listo"
     channels:
       select: "Selecciona un canal"
+      empty: "Aún no tienes canales"
     notifications:
       new_bid_html: "<b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>"

@@ -61,7 +61,11 @@
         <% end %>
       <% else %>
         <div class="h-full flex justify-center items-center">
-          <p class="text-gray-500"><%= t("pages.channels.select") %></p>
+          <% if @channels.exists? %>
+            <p class="text-gray-500"><%= t("pages.channels.select") %></p>
+          <% else %>
+            <p class="text-gray-500"><%= t("pages.channels.empty") %></p>
+          <% end %>
         </div>
       <% end %>
     </div>
