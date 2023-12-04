@@ -34,7 +34,13 @@
       <% else %>
         <% if current_user == task.user %>
           <%= button_to "Aceptar", accept_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: t("pages.common.sure") }, class: "btn bg-third hover:bg-third-light w-auto" if task.bided? %>
-          <%= link_to "Depositar", new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" if task.unpaid? %>
+          <% if task.unpaid? %>
+            <% if bid.has_payment? %>
+              <%= link_to "Validando pago", "#", class: "btn bg-third w-auto" %>
+            <% else %>
+              <%= link_to "Depositar", new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
+            <% end %>
+          <% end %>
         <% else %>
           <% if task.unpaid? %>
             <div class="btn bg-third w-auto cursor-default">Pendiente</div>

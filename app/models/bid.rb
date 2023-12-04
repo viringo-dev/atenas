@@ -22,6 +22,10 @@ class Bid < ApplicationRecord
   scope :paginated, ->(params={}) { page(params[:page]).per(params[:per_page]) }
   scope :by_user, ->(user) { user.present? ? where(user: user) : none }
 
+  def has_payment?
+    payment.present?
+  end
+
   private
 
   def set_earning
