@@ -1,4 +1,5 @@
 class BidsController < ApplicationController
+  before_action :redirect_to_root_if_not_turbo_frame_request, only: [:new, :edit]
   before_action :authenticate_user!
   before_action :set_task, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_my_task, only: [:index, :accept]

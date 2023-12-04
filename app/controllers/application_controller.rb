@@ -14,4 +14,8 @@ class ApplicationController < ActionController::Base
   def are_there_unreaded_notifications?
     current_user.notifications.unreaded.any?
   end
+
+  def redirect_to_root_if_not_turbo_frame_request
+    redirect_to root_path unless turbo_frame_request?
+  end
 end
