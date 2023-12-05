@@ -13,7 +13,6 @@ class TasksController < ApplicationController
 
   def my_tasks
     @pagy, @tasks = pagy(current_user.tasks
-                                     .bided
                                      .ordered
                                      .includes(:files_attachments))
   end
