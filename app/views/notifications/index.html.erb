@@ -3,6 +3,12 @@
     <%= render @notifications %>
   <% end %>
 
+  <div class="h-full flex justify-center items-center">
+    <% unless @notifications.exists? %>
+      <p class="text-gray-500"><%= t("pages.notifications.empty") %></p>
+    <% end %>
+  </div>
+
   <%= turbo_frame_tag "notifications-pagination", src: notifications_path(page: @pagy.next, format: :turbo_stream) %>
   <div id="notifications-loader" class="w-full flex justify-center mt-3 text-primary">
     <div role="status" class="w-7">

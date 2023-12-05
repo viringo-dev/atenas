@@ -178,3 +178,4 @@ es:
       empty: "Aún no tienes canales"
     notifications:
       new_bid_html: "<b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>"
+      empty: "No tienes notificaciones"
