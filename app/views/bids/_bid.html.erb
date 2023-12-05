@@ -36,7 +36,9 @@
           <%= button_to "Aceptar", accept_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: t("pages.common.sure") }, class: "btn bg-third hover:bg-third-light w-auto" if task.bided? %>
           <% if task.unpaid? %>
             <% if bid.has_payment? %>
-              <%= link_to "Validando pago", "#", class: "btn bg-third w-auto" %>
+              <div class="btn bg-third w-auto cursor-default">
+                Validando pago
+              </div>
             <% else %>
               <%= link_to "Depositar", new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
             <% end %>
