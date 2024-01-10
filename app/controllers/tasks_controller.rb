@@ -4,6 +4,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show]
   before_action :can_edit_task?, only: [:edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index]
+  before_action :mark_bid_notifications_as_read, only: [:show]
 
   def index
     @pagy, @tasks = pagy(Task.bided
@@ -105,5 +106,10 @@ class TasksController < ApplicationController
         redirect_to task_url(@task), alert: t("pages.common.alerts.not_allowed_action")
       end
     end
+  end
+
+  def mark_bid_notifications_as_read
+    notifications = current_user.notifications.unread.where(notification_type: Notification.notification_types[:new_bid])
+    notifications.touch_all(:readed)
   end
 end
