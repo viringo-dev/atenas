@@ -10,17 +10,17 @@ class Avo::Resources::User < Avo::BaseResource
     field :surname, as: :text
     field :username, as: :text
     field :email, as: :text
-    field :phone, as: :text
-    field :phone_code, as: :text
+    # field :phone, as: :text
+    # field :phone_code, as: :text
     field :gender, as: :select, enum: ::User.genders
     field :birthdate, as: :date
-    field :locale, as: :text
-    field :country, as: :country
+    # field :locale, as: :text
+    # field :country, as: :country
     field :city, as: :text
     field :deleted_at, as: :date_time
-    field :rgpd_accepted_at, as: :date_time
+    # field :rgpd_accepted_at, as: :date_time
     field :confirmed_at, as: :date_time
-    field :avatar, as: :file
+    # field :avatar, as: :file
     field :active_sessions, as: :has_many
     field :tasks, as: :has_many
     field :channel_users, as: :has_many
