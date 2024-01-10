@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   before_action :authenticate_user!
   before_action :set_channels, if: :user_signed_in?
-  helper_method :are_there_unreaded_notifications?
+  helper_method :are_there_unread_notifications?
 
   private
 
@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
     @channels = Channel.with_unread_messages_count_by(current_user)
   end
 
-  def are_there_unreaded_notifications?
-    current_user.notifications.unreaded.any?
+  def are_there_unread_notifications?
+    current_user.notifications.unread.any?
   end
 
   def redirect_to_root_if_not_turbo_frame_request
