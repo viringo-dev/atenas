@@ -35,7 +35,7 @@ es:
         body_html: |
           <p>Hola %{name},</p>
 
-          <p><b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>.</p>
+          <p><b>@%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>.</p>
 
           <p>Para ver la oferta, haz clic en el siguiente enlace:</p>
 
