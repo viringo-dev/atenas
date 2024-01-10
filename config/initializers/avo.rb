@@ -22,7 +22,10 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  # config.current_user_method = {}
+  config.current_user_method do
+    Current.user
+  end
+
   config.authenticate_with do
     redirect_to '/' unless Authentication.current_user_admin?(session, cookies)
   end
