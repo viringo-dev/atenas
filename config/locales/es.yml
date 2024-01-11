@@ -77,6 +77,11 @@ es:
             user:
               format: "%{message}"
               already_bidded: "Ya se ha realizado una oferta"
+        payment:
+          attributes:
+            attachment:
+              format: "%{message}"
+              too_big: "El comprobante debe pesar máximo %{max_size}MB"
     models:
       user:
         one: "Usuario"
