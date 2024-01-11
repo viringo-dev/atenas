@@ -21,10 +21,10 @@ class Avo::Resources::User < Avo::BaseResource
     # field :rgpd_accepted_at, as: :date_time
     field :confirmed_at, as: :date_time
     # field :avatar, as: :file
-    field :active_sessions, as: :has_many
-    field :tasks, as: :has_many
-    field :channel_users, as: :has_many
-    field :channels, as: :has_many, through: :channel_users
-    field :notifications, as: :has_many
+    # field :active_sessions, as: :has_many
+    # field :tasks, as: :has_many
+    # field :channel_users, as: :has_many
+    # field :channels, as: :has_many, through: :channel_users
+    # field :notifications, as: :has_many
   end
 end
