@@ -124,6 +124,10 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     dry-initializer (3.1.1)
     erubi (1.12.0)
     factory_bot (6.2.1)
@@ -337,6 +341,7 @@ DEPENDENCIES
   cssbundling-rails
   database_cleaner
   debug
+  dotenv-rails
   factory_bot_rails
   hotwire-livereload
   image_processing (~> 1.2)
