@@ -12,4 +12,8 @@ class Avo::Resources::Payment < Avo::BaseResource
     field :attachment, as: :file
     field :created_at, as: :date_time
   end
+
+  def actions
+    action Avo::Actions::ValidatePayment
+  end
 end
