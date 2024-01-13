@@ -12,7 +12,8 @@ class Notification < ApplicationRecord
   after_create_commit -> { broadcast_prepend_later_to self.user, partial: "notifications/notification", target: "notifications" }
 
   ## ENUMS ##
-  enum notification_type: { new_bid: 0
+  enum notification_type: { new_bid: 0,
+                            accepted_bid: 1
                           }
 
   ## SCOPES ##
