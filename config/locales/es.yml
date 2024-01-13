@@ -183,4 +183,7 @@ es:
       empty: "Aún no tienes canales"
     notifications:
       new_bid_html: "<b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>"
+      accepted_bid_html: "Tu oferta por la tarea <b>%{task_name}</b> ha sido aceptada"
       empty: "No tienes notificaciones"
+      alerts:
+        not_found: "Notificación no encontrada"
