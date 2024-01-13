@@ -14,6 +14,15 @@ class NotificationJob < ApplicationJob
           NotificationMailer.new_bid(notification.id).deliver_later
         end
       end
+    when Notification.notification_types[:accepted_bid]
+      bid = Bid.find_by(id: resource_id)
+      if bid
+        channel = bid.task.channel
+        notification = Notification.new(resource: bid, user: bid.user, notification_type: notification_type, path: messages_path(uuid: channel.uuid))
+        if notification.save
+          NotificationMailer.accepted_bid(notification.id).deliver_later
+        end
+      end
     else
     end
   end
