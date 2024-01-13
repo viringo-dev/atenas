@@ -10,9 +10,11 @@ class Payments::ValidateService < ApplicationService
     ActiveRecord::Base.transaction do
       payment.validated!
       task.assigned!
+      bid.accepted!
       channel = Channel.create(task: task, name: task.name)
       channel.channel_users.create(user: task.user)
       channel.channel_users.create(user: bid.user)
+      NotificationJob.perform_later(bid.id, Notification.notification_types[:accepted_bid])
     rescue ActiveRecord::Rollback
       return Failure.new(nil)
     end
