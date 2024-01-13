@@ -43,3 +43,16 @@ es:
 
           <p>Saludos,</p>
           <p>El equipo de %{app_name}</p>
+      accepted_bid:
+        subject: "Tu oferta ha sido aceptada en %{app_name}"
+        body_html: |
+          <p>Hola %{name},</p>
+
+          <p>Enhorabuena, tu oferta por la tarea <b>%{task_name}</b> ha sido aceptada.</p>
+
+          <p>Puedes comenzar a chatear con el creador de la tarea haciendo clic en el siguiente enlace:</p>
+
+          <a href="%{link}" style="color: #19A7CE;">Enviar mensaje</a>
+
+          <p>Saludos,</p>
+          <p>El equipo de %{app_name}</p>
