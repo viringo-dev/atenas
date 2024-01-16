@@ -33,22 +33,35 @@
         </div>
       <% else %>
         <% if current_user == task.user %>
-          <%= button_to "Aceptar", accept_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: t("pages.common.sure") }, class: "btn bg-third hover:bg-third-light w-auto" if task.bided? %>
+          <%= button_to t("pages.task.accept"), accept_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: t("pages.common.sure") }, class: "btn bg-third hover:bg-third-light w-auto" if task.bided? %>
           <% if task.unpaid? %>
             <% if bid.has_payment? %>
               <div class="btn bg-third w-auto cursor-default">
-                Validando pago
+                <%= t("pages.task.validating") %>
               </div>
             <% else %>
-              <%= link_to "Depositar", new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
+              <%= link_to t("pages.task.deposit"), new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
             <% end %>
           <% end %>
         <% else %>
           <% if task.unpaid? %>
-            <div class="btn bg-third w-auto cursor-default">Pendiente</div>
+            <div class="btn bg-third w-auto cursor-default"><%= t("pages.task.pending") %></div>
           <% end %>
         <% end %>
-        <%= button_to "Chatear", "#", disabled: true, class: "btn bg-third hover:bg-third-light w-auto" if task.assigned? %>
+        <div class="flex gap-1">
+          <% if task.assigned? %>
+            <%= button_to t("pages.task.finish"), "#", disabled: true, class: "btn bg-primary hover:bg-primary-light w-auto" %>
+            <%= link_to messages_path(uuid: task.channel.uuid),
+                        class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
+                        data: { "tooltip-target": "tooltip-chat", turbo_frame: "_top" } do %>
+              <%= render 'icons/chat' %>
+              <div id="tooltip-chat" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                  <%= t("pages.task.chat") %>
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       <% end %>
     </div>
     <div class="w-full">
