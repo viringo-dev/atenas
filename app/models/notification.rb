@@ -13,7 +13,8 @@ class Notification < ApplicationRecord
 
   ## ENUMS ##
   enum notification_type: { new_bid: 0,
-                            accepted_bid: 1
+                            accepted_bid: 1,
+                            payment_validated: 2
                           }
 
   ## SCOPES ##
