@@ -25,4 +25,18 @@ module ApplicationHelper
 
     link_to text, path, options
   end
+
+  def notification_message(notification)
+    case notification.notification_type.to_sym
+    when :new_bid
+      params = { bidder_name: notification.resource.user.name, task_name: notification.resource.task.name }
+    when :accepted_bid
+      params = { task_name: notification.resource.task.name }
+    when :payment_validated
+      params = { task_name: notification.resource.name }
+    else
+      params = {}
+    end
+    t("pages.notifications.#{notification.notification_type}_html", **params)
+  end
 end
