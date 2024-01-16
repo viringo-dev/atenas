@@ -20,4 +20,14 @@ class NotificationMailer < ApplicationMailer
     @task = @bid.task
     mail to: @bid.user.email, subject: t("mailers.notification_mailer.accepted_bid.subject", app_name: "Atenas")
   end
+
+  def payment_validated(notification_id)
+    @notification = Notification.find_by(id: notification_id)
+    return unless @notification
+
+    @task = @notification.resource
+    return unless @task
+
+    mail to: @task.user.email, subject: t("mailers.notification_mailer.payment_validated.subject", app_name: "Atenas")
+  end
 end
