@@ -170,6 +170,13 @@ es:
       create_task: "Crear tarea"
       alerts:
         not_found: "Tarea no encontrada"
+    task:
+      pending: "Pendiente"
+      accept: "Aceptar"
+      chat: "Chatear"
+      deposit: "Depositar"
+      validating: "Validando"
+      finish: "Finalizar"
     bids:
       payment_process: "Proceso de depósito"
       deposit_step: "1) Deposita %{amount} por Yape/Plin"
