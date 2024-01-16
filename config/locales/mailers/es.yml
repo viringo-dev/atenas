@@ -56,3 +56,16 @@ es:
 
           <p>Saludos,</p>
           <p>El equipo de %{app_name}</p>
+      payment_validated:
+        subject: "Tu pago ha sido validado en %{app_name}"
+        body_html: |
+          <p>Hola %{name},</p>
+
+          <p>Enhorabuena, tu pago por la tarea <b>%{task_name}</b> ha sido validado.</p>
+
+          <p>Puedes comenzar a chatear haciendo clic en el siguiente enlace:</p>
+
+          <a href="%{link}" style="color: #19A7CE;">Enviar mensaje</a>
+
+          <p>Saludos,</p>
+          <p>El equipo de %{app_name}</p>
