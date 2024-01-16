@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :bids, only: [:index, :new, :create, :edit, :update, :destroy] do
       member do
         post :accept
+        post :finish
       end
     end
   end
