@@ -50,7 +50,7 @@
         <% end %>
         <div class="flex gap-1">
           <% if task.assigned? %>
-            <%= button_to t("pages.task.finish"), "#", disabled: true, class: "btn bg-primary hover:bg-primary-light w-auto" %>
+            <%= button_to t("pages.task.finish"), finish_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: task.owner?(current_user) ? t("pages.task.finish_owner_message") : t("pages.task.finish_bidder_message") }, class: "btn bg-primary hover:bg-primary-light w-auto" %>
             <%= link_to messages_path(uuid: task.channel.uuid),
                         class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
                         data: { "tooltip-target": "tooltip-chat", turbo_frame: "_top" } do %>
