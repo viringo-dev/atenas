@@ -184,6 +184,7 @@ es:
     notifications:
       new_bid_html: "<b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>"
       accepted_bid_html: "Tu oferta por la tarea <b>%{task_name}</b> ha sido aceptada"
+      payment_validated_html: "Tu pago por la tarea <b>%{task_name}</b> ha sido validado"
       empty: "No tienes notificaciones"
       alerts:
         not_found: "Notificación no encontrada"
