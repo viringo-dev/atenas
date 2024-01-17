@@ -1,4 +1,6 @@
 class Bid < ApplicationRecord
+  include Ownerable
+
   TAX = 0.08
   ## ASSOCIATIONS ##
   belongs_to :user
@@ -15,7 +17,7 @@ class Bid < ApplicationRecord
   after_create_commit { NotificationJob.perform_later(self.id, Notification.notification_types[:new_bid]) }
 
   ## ENUMS ##
-  enum status: { offered: 0, accepted: 1, paid: 2 }
+  enum status: { offered: 0, accepted: 1, finished: 2, paid: 3 }
 
   ## SCOPES ##
   scope :ordered, -> { order(created_at: :desc) }
