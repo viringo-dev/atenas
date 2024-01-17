@@ -4,7 +4,7 @@ class BidsController < ApplicationController
   before_action :set_task, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_my_task, only: [:index, :accept]
   before_action :set_my_bid, only: [:edit, :update, :destroy]
-  before_action :set_bid, only: [:accept, :payment]
+  before_action :set_bid, only: [:accept, :payment, :finish]
   before_action :can_edit_bid?, only: [:edit, :update, :destroy]
 
   def index
@@ -55,6 +55,15 @@ class BidsController < ApplicationController
       redirect_to new_payment_path(bid_id: @bid.id)
     else
       redirect_to task_path(@task), alert: t("pages.common.alerts.not_allowed_action")
+    end
+  end
+
+  def finish
+    result = Bids::FinishService.new(user: current_user, bid: @bid).call
+    if result.success?
+      redirect_to task_path(@bid.task)
+    else
+      redirect_to task_path(@bid.task), alert: t("pages.common.alerts.not_allowed_action")
     end
   end
 
