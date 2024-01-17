@@ -49,7 +49,7 @@
           <% end %>
         <% end %>
         <div class="flex gap-1">
-          <% if task.assigned? %>
+          <% if (task.assigned? && task.owner?(current_user) || (bid.accepted? && bid.owner?(current_user))) %>
             <%= button_to t("pages.task.finish"), finish_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: task.owner?(current_user) ? t("pages.task.finish_owner_message") : t("pages.task.finish_bidder_message") }, class: "btn bg-primary hover:bg-primary-light w-auto" %>
             <%= link_to messages_path(uuid: task.channel.uuid),
                         class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
@@ -61,6 +61,8 @@
               </div>
             <% end %>
           <% end %>
+          <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-negative w-auto" if task.owner?(current_user) && task.finished? %>
+          <%= link_to t("pages.task.cashout"), new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" if bid.owner?(current_user) && bid.finished? %>
         </div>
       <% end %>
     </div>
