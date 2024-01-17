@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  include Ownerable
 
   ## ASSOCIATIONS ##
   belongs_to :user
