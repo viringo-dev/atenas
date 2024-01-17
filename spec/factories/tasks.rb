@@ -9,5 +9,9 @@ FactoryBot.define do
     factory :unpaid_task do
       status { Task.statuses[:unpaid] }
     end
+
+    factory :assigned_task do
+      status { Task.statuses[:assigned] }
+    end
   end
 end
