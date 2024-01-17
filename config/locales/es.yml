@@ -173,12 +173,13 @@ es:
     task:
       pending: "Pendiente"
       accept: "Aceptar"
-      chat: "Chatear"
+      chat: "Chat"
       deposit: "Depositar"
       validating: "Validando"
       finish: "Finalizar"
       finish_owner_message: "¿Estás seguro de finalizar la tarea? Al hacerlo, se liberará el pago"
       finish_bidder_message: "¿Estás seguro de finalizar la tarea? Asegúrate que la tarea esté completa"
+      cashout: "Cobrar"
     bids:
       payment_process: "Proceso de depósito"
       deposit_step: "1) Deposita %{amount} por Yape/Plin"
