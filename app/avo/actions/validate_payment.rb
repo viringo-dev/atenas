@@ -10,7 +10,12 @@ class Avo::Actions::ValidatePayment < Avo::BaseAction
 
   def handle(query:, fields:, current_user:, resource:, **args)
     query.each do |record|
-      record.validate!
+      result = Payments::ValidateService.new(payment: record).call
+      if result.success?
+        succeed "Payment #{record.id} validated"
+      else
+        error "Payment #{record.id} not validated"
+      end
     end
   end
 end
