@@ -6,6 +6,7 @@ class Task < ApplicationRecord
   has_many_attached :files
   has_many :bids, dependent: :destroy
   has_one :channel, dependent: :nullify
+  has_one :payment, dependent: :nullify
 
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false, message: :blank }
@@ -21,6 +22,10 @@ class Task < ApplicationRecord
   scope :ordered, -> { order(created_at: :desc) }
   scope :paginated, ->(params={}) { page(params[:page]).per(params[:per_page]) }
   scope :with_bids_by, ->(user) { includes(:bids).where(bids: { user: user }) }
+
+  def has_payment?
+    payment.present?
+  end
 
   def bid_by_user(user)
     bids.find { |bid| bid.user_id == user.id }
