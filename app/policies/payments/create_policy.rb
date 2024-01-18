@@ -6,7 +6,7 @@ class Payments::CreatePolicy < ApplicationPolicy
   end
 
   def allowed?
-    task_belongs_to_user? && task.unpaid? && bid.accepted? && not_paid_yet?
+    task_belongs_to_user? && task.unpaid? && bid.offered? && bid_have_no_payment?
   end
 
   private
@@ -19,8 +19,8 @@ class Payments::CreatePolicy < ApplicationPolicy
     task.user == user
   end
 
-  def not_paid_yet?
-    @bid.reload
-    @bid.payment.nil?
+  def bid_have_no_payment?
+    bid.reload
+    bid.payment.nil?
   end
 end

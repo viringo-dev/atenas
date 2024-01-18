@@ -5,14 +5,14 @@ RSpec.describe Payments::CreatePolicy, type: :policy do
 
   let(:user) { create(:confirmed_user) }
   let(:task) { create(:task, user: user, status: :unpaid) }
-  let(:bid) { create(:bid, task: task, status: :accepted) }
+  let(:bid) { create(:bid, task: task) }
 
   it 'allows the user to create a payment' do
     expect(subject).to be_truthy
   end
 
-  context 'when the bid is not accepted' do
-    let(:bid) { create(:bid, task: task, status: :offered) }
+  context 'when the bid is not offered' do
+    let(:bid) { create(:bid, task: task, status: :accepted) }
 
     it 'does not allow the user to create a payment' do
       expect(subject).to be_falsey
