@@ -22,7 +22,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:payer, :attachment, :bid_id)
+    params.require(:payment).permit(:payer, :attachment, :bid_id, :task_id)
   end
 
   def set_bid
