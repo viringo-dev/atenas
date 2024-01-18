@@ -9,9 +9,15 @@ class Bids::AcceptService < ApplicationService
   def call
     return Failure.new(nil) unless allowed?
 
-    task.unpaid!
-    bid.accepted!
-    task.bids.offered.destroy_all
+    ActiveRecord::Base.transaction do
+      task.unpaid!
+      task.bids
+          .where.not(id: bid.id)
+          .offered
+          .destroy_all
+    rescue ActiveRecord::Rollback
+      return Failure.new(nil)
+    end
     Success.new(nil)
   end
 

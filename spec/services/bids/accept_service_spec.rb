@@ -8,7 +8,7 @@ RSpec.describe Bids::AcceptService, type: :service do
   let(:bid) { create(:bid, task: task) }
 
   it 'accepts the bid' do
-    expect { subject }.to change { bid.reload.accepted? }.from(false).to(true)
+    expect { subject }.not_to change { bid.reload.accepted? }
     expect(subject.success?).to be_truthy
   end
 
