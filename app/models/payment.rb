@@ -3,6 +3,7 @@ class Payment < ApplicationRecord
   MAX_ATTACHMENT_SIZE = 3
 
   ## ASSOCIATIONS ##
+  belongs_to :task
   belongs_to :bid
   has_one_attached :attachment
 
