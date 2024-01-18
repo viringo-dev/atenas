@@ -32,7 +32,7 @@ class Payments::ValidateService < ApplicationService
   end
 
   def allowed?
-    !task.bided? && !task.paused? && !bid.offered?
+    task.unpaid? && bid.offered?
   end
 
   Success = Struct.new(:nil) do
