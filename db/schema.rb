@@ -112,12 +112,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_182923) do
   end
 
   create_table "payments", force: :cascade do |t|
+    t.bigint "task_id", null: false
     t.bigint "bid_id", null: false
     t.string "payer", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bid_id"], name: "index_payments_on_bid_id"
+    t.index ["task_id"], name: "index_payments_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
