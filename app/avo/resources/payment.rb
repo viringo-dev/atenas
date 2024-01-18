@@ -9,6 +9,7 @@ class Avo::Resources::Payment < Avo::BaseResource
     field :payer, as: :text
     field :status, as: :select, enum: ::Payment.statuses
     field :bid, as: :belongs_to
+    field :task_id, as: :text
     field :attachment, as: :file
     field :created_at, as: :date_time
   end
