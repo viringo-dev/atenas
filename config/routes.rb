@@ -29,6 +29,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :bids, only: [] do
+    resources :cashouts, only: [:new, :create]
+  end
+
   resources :payments, only: [:new, :create]
 
   resources :channels, only: [] do
