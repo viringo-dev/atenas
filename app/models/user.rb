@@ -28,6 +28,7 @@ class User < ApplicationRecord
 
   ## ENUMS ##
   enum gender: { male: 0, female: 1, other: 2 }
+  enum role: { user: 0, admin: 1 }
 
   def confirm!
     update_columns(confirmed_at: Time.current)

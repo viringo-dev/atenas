@@ -165,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_214118) do
     t.datetime "rgpd_accepted_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.string "password_digest", null: false
     t.datetime "confirmed_at"
+    t.integer "role", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
