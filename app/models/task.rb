@@ -7,6 +7,7 @@ class Task < ApplicationRecord
   has_many :bids, dependent: :destroy
   has_one :channel, dependent: :nullify
   has_one :payment, dependent: :nullify
+  has_one :cashout, dependent: :nullify
 
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false, message: :blank }

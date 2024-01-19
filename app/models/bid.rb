@@ -6,6 +6,7 @@ class Bid < ApplicationRecord
   belongs_to :user
   belongs_to :task
   has_one :payment, dependent: :nullify
+  has_one :cashout, dependent: :nullify
   has_many :notifications, as: :resource, dependent: :destroy
 
   ## VALIDATIONS ##
