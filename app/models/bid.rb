@@ -1,7 +1,7 @@
 class Bid < ApplicationRecord
   include Ownerable
 
-  TAX = 0.08
+  TAX = 0.1
   ## ASSOCIATIONS ##
   belongs_to :user
   belongs_to :task
