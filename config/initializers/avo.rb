@@ -27,7 +27,8 @@ Avo.configure do |config|
   end
 
   config.authenticate_with do
-    redirect_to '/' unless Authentication.current_user_admin?(session, cookies)
+    extend Authentication
+    redirect_to '/' unless current_user && current_user.admin?
   end
 
   config.sign_out_path_name = :logout_path
