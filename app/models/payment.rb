@@ -9,6 +9,7 @@ class Payment < ApplicationRecord
 
   ## VALIDATIONS ##
   validates :payer, presence: { allow_blank: false }
+  validates :task, uniqueness: true
   validates :bid, uniqueness: true
   validate :attachment_size
 
