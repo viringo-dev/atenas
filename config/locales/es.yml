@@ -93,6 +93,12 @@ es:
       task:
         one: "Tarea"
         other: "Tareas"
+      cashout:
+        one: "Retiro"
+        enums:
+          wallet:
+            yape: "Yape"
+            plin: "Plin"
   pages:
     account:
       form:
@@ -199,3 +205,8 @@ es:
       empty: "No tienes notificaciones"
       alerts:
         not_found: "Notificación no encontrada"
+    cashout:
+      cashout: "Retiro"
+      payment_process: "Proceso de depósito"
+      earning_message: "El monto abonado a tu billeterá será %{earning}"
+      notification_message: "Te notificaremos cuando hayamos abonado el pago"
