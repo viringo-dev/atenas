@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_182923) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_18_214118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -66,6 +66,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_182923) do
     t.index ["task_id", "user_id"], name: "index_bids_on_task_id_and_user_id", unique: true
     t.index ["task_id"], name: "index_bids_on_task_id"
     t.index ["user_id"], name: "index_bids_on_user_id"
+  end
+
+  create_table "cashouts", force: :cascade do |t|
+    t.bigint "task_id"
+    t.bigint "bid_id"
+    t.string "phone", null: false
+    t.integer "wallet", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bid_id"], name: "index_cashouts_on_bid_id"
+    t.index ["task_id"], name: "index_cashouts_on_task_id"
   end
 
   create_table "channel_users", force: :cascade do |t|
