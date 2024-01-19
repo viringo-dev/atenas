@@ -61,8 +61,22 @@
               </div>
             <% end %>
           <% end %>
-          <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-negative w-auto" if task.owner?(current_user) && task.finished? %>
-          <%= link_to t("pages.task.cashout"), new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" if bid.owner?(current_user) && bid.finished? %>
+          <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-third w-auto cursor-default" if task.owner?(current_user) && task.finished? %>
+          <% if bid.owner?(current_user) && bid.finished? && task.finished? %>
+            <% if bid.cashout.nil? %>
+              <%= link_to t("pages.task.cashout"),
+                          new_bid_cashout_path(bid_id: bid),
+                          data: { turbo_frame: "_top" },
+                          class: "btn bg-third hover:bg-third-light w-auto" %>
+            <% else %>
+              <%= button_to t("pages.task.pending"), "#", disabled: true, class: "btn bg-orange-400 w-auto cursor-default" %>
+            <% end %>
+          <% end %>
+          <%= button_to t("pages.task.pending"), "#", disabled: true, data: { "tooltip-target": "tooltip-owner-finish-pending" }, class: "btn bg-third w-auto" if bid.owner?(current_user) && bid.finished? && !task.finished? %>
+          <div id="tooltip-owner-finish-pending" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+              <%= t("pages.task.owner_finish_pending") %>
+              <div class="tooltip-arrow" data-popper-arrow></div>
+          </div>
         </div>
       <% end %>
     </div>
