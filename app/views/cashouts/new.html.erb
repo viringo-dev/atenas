@@ -1,0 +1,27 @@
+<div class="flex flex-col mx-auto max-w-md bg-white rounded-md p-4 md:px-8 border-gray-200 shadow">
+  <div class="mb-4">
+    <p class="text-xl text-primary mb-4 font-semibold"><%= t("pages.cashout.cashout") %></p>
+    <p class=""><%= t("pages.cashout.earning_message", earning: number_to_currency(@bid.earning, precision: 2, unit: "S/.", format: "%u %n", separator: ".")) %></p>
+  </div>
+
+  <%= form_with model: @cashout, url: bid_cashouts_path, method: :post, class: "p-2 w-full mb-2 border-dotted border-2 rounded-lg" do |form| %>
+    <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+    <div class="flex flex-col gap-2">
+      <%= form.hidden_field :bid_id, value: @bid.id %>
+      <%= form.hidden_field :task_id, value: @bid.task.id %>
+      <div class="">
+        <%= form.label :phone, class: "label" %>
+        <%= form.text_field :phone, required: true, class: "input", placeholder: "+51 XXXXXXXXX" %>
+      </div>
+      <div class="">
+        <%= form.label :wallet, class: "label" %>
+        <%= form.select :wallet, Cashout.wallets.keys.map { |k| [t("activerecord.models.cashout.enums.wallet.#{k}"), k] }, { required: true }, { class: "select" } %>
+      </div>
+      <div class="flex items-end">
+        <%= form.button class: "btn bg-primary hover:bg-primary-light" do %>
+          <%= render partial: "shared/spinner", locals: { text: t("pages.common.send") } %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
