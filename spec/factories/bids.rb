@@ -10,6 +10,11 @@ FactoryBot.define do
       association :task, factory: :unpaid_task
     end
 
+    factory :finished_bid do
+      status { Bid.statuses[:finished] }
+      association :task, factory: :finished_task
+    end
+
     factory :bid_with_unpaid_task do
       association :task, factory: :unpaid_task
     end

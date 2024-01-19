@@ -13,5 +13,9 @@ FactoryBot.define do
     factory :assigned_task do
       status { Task.statuses[:assigned] }
     end
+
+    factory :finished_task do
+      status { Task.statuses[:finished] }
+    end
   end
 end
