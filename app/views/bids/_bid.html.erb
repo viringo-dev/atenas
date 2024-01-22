@@ -1,88 +1,5 @@
 <%= turbo_frame_tag nested_dom_id(task, bid) do %>
   <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow flex gap-3 flex-col-reverse sm:flex-row">
-    <div class="flex flex-row-reverse sm:flex-col items-center gap-2 justify-between">
-      <div class="flex flex-row-reverse sm:flex-col items-center gap-2">
-        <div class="w-7 h-7 sm:w-14 sm:h-14">
-          <%= avatar(bid.user) %>
-        </div>
-        <p class="text-sm sm:text-base font-medium text-primary">@<%= bid.user.username %></p>
-      </div>
-      <% if Bids::EditPolicy.new(user: current_user, bid: bid).allowed? %>
-        <div class="flex justify-end gap-1">
-          <%= button_to [:edit, task, bid],
-                        method: :get,
-                        class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
-                        data: { "tooltip-target": "tooltip-edit-task", turbo_frame: nested_dom_id(task, bid) } do %>
-            <%= render 'icons/edit' %>
-            <div id="tooltip-edit-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                <%= t("pages.common.edit") %>
-                <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-          <% end %>
-          <%= button_to [task, bid],
-                        method: :delete,
-                        form: { data: { turbo_confirm: t("pages.common.sure") } },
-                        class: "btn bg-negative hover:bg-negative-light px-[10px]",
-                        data: { "tooltip-target": "tooltip-delete-task" } do %>
-            <%= render 'icons/delete' %>
-            <div id="tooltip-delete-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                <%= t("pages.common.delete") %>
-                <div class="tooltip-arrow" data-popper-arrow></div>
-            </div>
-          <% end %>
-        </div>
-      <% else %>
-        <% if current_user == task.user %>
-          <%= button_to t("pages.task.accept"), accept_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: t("pages.common.sure") }, class: "btn bg-third hover:bg-third-light w-auto" if task.bided? %>
-          <% if task.unpaid? %>
-            <% if bid.has_payment? %>
-              <div class="btn bg-third w-auto cursor-default">
-                <%= t("pages.task.validating") %>
-              </div>
-            <% else %>
-              <%= link_to t("pages.task.deposit"), new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
-            <% end %>
-          <% end %>
-        <% else %>
-          <% if task.unpaid? %>
-            <div class="btn bg-third w-auto cursor-default"><%= t("pages.task.pending") %></div>
-          <% end %>
-        <% end %>
-        <div class="flex gap-1">
-          <% if (task.assigned? && task.owner?(current_user) || (bid.accepted? && bid.owner?(current_user))) %>
-            <%= button_to t("pages.task.finish"), finish_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: task.owner?(current_user) ? t("pages.task.finish_owner_message") : t("pages.task.finish_bidder_message") }, class: "btn bg-primary hover:bg-primary-light w-auto" %>
-            <%= link_to messages_path(uuid: task.channel.uuid),
-                        class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
-                        data: { "tooltip-target": "tooltip-chat", turbo_frame: "_top" } do %>
-              <%= render 'icons/chat' %>
-              <div id="tooltip-chat" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                  <%= t("pages.task.chat") %>
-                  <div class="tooltip-arrow" data-popper-arrow></div>
-              </div>
-            <% end %>
-          <% end %>
-          <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-third w-auto cursor-default" if task.owner?(current_user) && task.finished? %>
-          <% if bid.owner?(current_user) && bid.finished? && task.finished? %>
-            <% if bid.cashout.nil? %>
-              <%= link_to t("pages.task.cashout"),
-                          new_bid_cashout_path(bid_id: bid),
-                          data: { turbo_frame: "_top" },
-                          class: "btn bg-third hover:bg-third-light w-auto" %>
-            <% else %>
-              <%= button_to t("pages.task.pending"), "#", disabled: true, class: "btn bg-orange-400 w-auto cursor-default" %>
-            <% end %>
-          <% end %>
-          <%= button_to t("pages.task.pending"), "#", disabled: true, data: { "tooltip-target": "tooltip-owner-finish-pending" }, class: "btn bg-third w-auto" if bid.owner?(current_user) && bid.finished? && !task.finished? %>
-          <% if bid.owner?(current_user) && bid.paid? %>
-            <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-third w-auto cursor-default" %>
-          <% end %>
-          <div id="tooltip-owner-finish-pending" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-              <%= t("pages.task.owner_finish_pending") %>
-              <div class="tooltip-arrow" data-popper-arrow></div>
-          </div>
-        </div>
-      <% end %>
-    </div>
     <div class="w-full">
       <div class="flex justify-between items-center">
         <p class="text-lg font-medium"><%= number_to_currency(bid.amount, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %></p>
@@ -94,6 +11,84 @@
         <% else %>
           <p class=""><%= "No description" %></p>
         <% end %>
+      </div>
+      <div class="flex items-center gap-2 justify-between mt-3">
+        <% if Bids::EditPolicy.new(user: current_user, bid: bid).allowed? %>
+          <div class="flex justify-end gap-1">
+            <%= button_to [:edit, task, bid],
+                          method: :get,
+                          class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
+                          data: { "tooltip-target": "tooltip-edit-task", turbo_frame: nested_dom_id(task, bid) } do %>
+              <%= render 'icons/edit' %>
+              <div id="tooltip-edit-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                  <%= t("pages.common.edit") %>
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            <% end %>
+            <%= button_to [task, bid],
+                          method: :delete,
+                          form: { data: { turbo_confirm: t("pages.common.sure") } },
+                          class: "btn bg-negative hover:bg-negative-light px-[10px]",
+                          data: { "tooltip-target": "tooltip-delete-task" } do %>
+              <%= render 'icons/delete' %>
+              <div id="tooltip-delete-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                  <%= t("pages.common.delete") %>
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <% if current_user == task.user %>
+            <%= button_to t("pages.task.accept"), accept_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: t("pages.common.sure") }, class: "btn bg-third hover:bg-third-light w-auto" if task.bided? %>
+            <% if task.unpaid? %>
+              <% if bid.has_payment? %>
+                <div class="btn bg-third w-auto cursor-default">
+                  <%= t("pages.task.validating") %>
+                </div>
+              <% else %>
+                <%= link_to t("pages.task.deposit"), new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% if task.unpaid? %>
+              <div class="btn bg-third w-auto cursor-default"><%= t("pages.task.pending") %></div>
+            <% end %>
+          <% end %>
+          <div class="flex gap-1">
+            <% if (task.assigned? && task.owner?(current_user) || (bid.accepted? && bid.owner?(current_user))) %>
+              <%= button_to t("pages.task.finish"), finish_task_bid_path(task, bid), data: { turbo_frame: "_top", turbo_confirm: task.owner?(current_user) ? t("pages.task.finish_owner_message") : t("pages.task.finish_bidder_message") }, class: "btn bg-primary hover:bg-primary-light w-auto" %>
+              <%= link_to messages_path(uuid: task.channel.uuid),
+                          class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
+                          data: { "tooltip-target": "tooltip-chat", turbo_frame: "_top" } do %>
+                <%= render 'icons/chat' %>
+                <div id="tooltip-chat" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    <%= t("pages.task.chat") %>
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              <% end %>
+            <% end %>
+            <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-third w-auto cursor-default" if task.owner?(current_user) && task.finished? %>
+            <% if bid.owner?(current_user) && bid.finished? && task.finished? %>
+              <% if bid.cashout.nil? %>
+                <%= link_to t("pages.task.cashout"),
+                            new_bid_cashout_path(bid_id: bid),
+                            data: { turbo_frame: "_top" },
+                            class: "btn bg-third hover:bg-third-light w-auto" %>
+              <% else %>
+                <%= button_to t("pages.task.pending"), "#", disabled: true, class: "btn bg-orange-400 w-auto cursor-default" %>
+              <% end %>
+            <% end %>
+            <%= button_to t("pages.task.pending"), "#", disabled: true, data: { "tooltip-target": "tooltip-owner-finish-pending" }, class: "btn bg-third w-auto" if bid.owner?(current_user) && bid.finished? && !task.finished? %>
+            <% if bid.owner?(current_user) && bid.paid? %>
+              <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-third w-auto cursor-default" %>
+            <% end %>
+            <div id="tooltip-owner-finish-pending" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                <%= t("pages.task.owner_finish_pending") %>
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          </div>
+        <% end %>
+        <%= render "shared/user", user: bid.user %>
       </div>
     </div>
   </div>

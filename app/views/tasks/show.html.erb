@@ -59,14 +59,7 @@
           <div class="btn cursor-default border-dotted border-2 border-gray-600 text-sm text-gray-600 w-auto px-3 py-1.5 bg-gray-50">
             <%= number_to_currency(@task.reward.round, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %>
           </div>
-          <div class="flex items-center">
-            <div class="text-sm font-medium text-primary mr-2">
-              @<%= @task.user.username %>
-            </div>
-            <div class="w-7 h-7 flex">
-              <%= avatar(@task.user) %>
-            </div>
-          </div>
+          <%= render "shared/user", user: @task.user %>
         </div>
       </div>
     </div>
