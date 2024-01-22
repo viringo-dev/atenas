@@ -33,7 +33,7 @@
   <div class="mb-2 flex gap-x-2">
     <div class="w-1/2">
       <%= form.label :username, class: "label" %>
-      <%= form.text_field :username, required: true, class: "input", placeholder: "elonmusk" %>
+      <%= form.text_field :username, required: true, class: "input", minlength: User::USERNAME_MIN_LENGTH, maxlength: User::USERNAME_MAX_LENGTH, placeholder: "elonmusk" %>
     </div>
     <div class="w-1/2">
       <%= form.label :phone, class: "label" %>
