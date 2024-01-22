@@ -7,7 +7,7 @@ FactoryBot.define do
 
     factory :accepted_bid do
       status { Bid.statuses[:accepted] }
-      association :task, factory: :unpaid_task
+      association :task, factory: :assigned_task
     end
 
     factory :finished_bid do
