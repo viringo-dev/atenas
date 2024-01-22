@@ -2,6 +2,7 @@ class Cashout < ApplicationRecord
   ## ASSOCIATIONS ##
   belongs_to :task
   belongs_to :bid
+  has_one_attached :attachment
 
   ## VALIDATIONS ##
   validates :phone, presence: { allow_blank: false }
