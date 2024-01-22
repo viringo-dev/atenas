@@ -59,4 +59,7 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Evitar que se habra letter_opener en el navegador en test
+  config.active_job.queue_adapter = :inline
 end
