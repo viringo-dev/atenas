@@ -34,6 +34,8 @@ module ApplicationHelper
       params = { task_name: notification.resource.task.name }
     when :payment_validated
       params = { task_name: notification.resource.name }
+    when :cashout_validated
+      params = { task_name: notification.resource.task.name }
     else
       params = {}
     end

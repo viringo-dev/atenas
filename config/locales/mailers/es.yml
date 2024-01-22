@@ -69,3 +69,14 @@ es:
 
           <p>Saludos,</p>
           <p>El equipo de %{app_name}</p>
+      cashout_validated:
+        subject: "Se ha realizado el pago por la tarea %{task_name}"
+        body_html: |
+          <p>Hola %{name},</p>
+
+          <p>Enhorabuena, se ha realizado el pago por la tarea <b>%{task_name}</b>.</p>
+
+          <a href="%{link}" style="color: #19A7CE;">Ver tarea</a>
+
+          <p>Saludos,</p>
+          <p>El equipo de Atenas</p>
