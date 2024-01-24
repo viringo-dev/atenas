@@ -17,6 +17,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :password_digest, null: false
       t.datetime :confirmed_at
       t.integer :role, null: false, default: 0
+      t.float :rate, null: false, default: 0
 
       t.timestamps
     end
