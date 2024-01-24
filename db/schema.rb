@@ -134,6 +134,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_18_214118) do
     t.index ["task_id"], name: "index_payments_on_task_id"
   end
 
+  create_table "rates", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "task_id"
+    t.bigint "bid_id"
+    t.float "value", default: 0.0, null: false
+    t.text "comment"
+    t.integer "rate_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["bid_id"], name: "index_rates_on_bid_id"
+    t.index ["task_id"], name: "index_rates_on_task_id"
+    t.index ["user_id"], name: "index_rates_on_user_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
