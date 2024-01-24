@@ -8,7 +8,7 @@ class Bid < ApplicationRecord
   has_one :payment, dependent: :nullify
   has_one :cashout, dependent: :nullify
   has_many :notifications, as: :resource, dependent: :destroy
-  has_many :rates, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
   ## VALIDATIONS ##
   validates :amount, presence: { allow_blank: false, message: :blank }, numericality: { only_float: true, greater_than: 0 }
@@ -31,11 +31,11 @@ class Bid < ApplicationRecord
   end
 
   def has_owner_rate?
-    rates.task_owner.exists?
+    ratings.task_owner.exists?
   end
 
   def has_assignee_rate?
-    rates.task_assignee.exists?
+    ratings.task_assignee.exists?
   end
 
   private

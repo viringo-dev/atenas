@@ -5,8 +5,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
-    @pagy, @rates = pagy(@user.rates
-                              .ordered)
+    @pagy, @ratings = pagy(@user.ratings
+                                .ordered)
   end
 
   def create
