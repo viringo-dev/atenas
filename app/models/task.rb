@@ -9,6 +9,7 @@ class Task < ApplicationRecord
   has_one :channel, dependent: :nullify
   has_one :payment, dependent: :nullify
   has_one :cashout, dependent: :nullify
+  has_many :rates, dependent: :destroy
 
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false, message: :blank }
@@ -21,8 +22,6 @@ class Task < ApplicationRecord
   enum status: { bided: 0, paused: 1, unpaid: 2, assigned: 3, finished: 4, unfinished: 5 }
 
   ## SCOPES ##
-  scope :ordered, -> { order(created_at: :desc) }
-  scope :paginated, ->(params={}) { page(params[:page]).per(params[:per_page]) }
   scope :with_bids_by, ->(user) { includes(:bids).where(bids: { user: user }) }
 
   def has_payment?
@@ -31,5 +30,16 @@ class Task < ApplicationRecord
 
   def bid_by_user(user)
     bids.find { |bid| bid.user_id == user.id }
+  end
+
+  def assignee
+    bids.where.not(status: Bid.statuses[:offered])
+        .first
+        &.user
+  end
+
+  def assigned_bid
+    bids.where.not(status: Bid.statuses[:offered])
+        .first
   end
 end

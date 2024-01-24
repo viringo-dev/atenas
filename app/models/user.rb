@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :channel_users, dependent: :nullify
   has_many :channels, through: :channel_users
   has_many :notifications, dependent: :destroy
+  has_many :rates, dependent: :destroy
 
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false }
