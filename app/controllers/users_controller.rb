@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :destroy, :update]
   before_action :redirect_if_authenticated, only: [:create, :new]
   before_action :check_password_params, only: [:update]
+  before_action :set_user, only: [:show]
+
+  def show
+    @pagy, @rates = pagy(@user.rates
+                              .ordered)
+  end
 
   def create
     @user = User.new(create_user_params)
@@ -60,6 +66,18 @@ class UsersController < ApplicationController
     unless params[:user][:password].present? || params[:user][:password_confirmation].present?
       params[:user][:password] = params[:user][:current_password]
       params[:user].delete(:password_confirmation)
+    end
+  end
+
+  def set_user
+    @user = User.find_by(username: params[:username])
+    unless @user
+      if turbo_frame_request?
+        flash[:alert] = t("pages.user.alerts.not_found")
+        render turbo_stream: turbo_stream.action(:redirect, root_path)
+      else
+        redirect_to root_path, alert: t("pages.user.alerts.not_found")
+      end
     end
   end
 end
