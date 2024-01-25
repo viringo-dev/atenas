@@ -1,4 +1,4 @@
-<div class="flex items-center gap-1">
+<%= link_to user_path(username: user.username), class: "flex items-center gap-1", data: { turbo_frame: "_top" } do %>
   <div class="w-8 h-8 flex">
     <%= avatar(user) %>
   </div>
@@ -7,10 +7,10 @@
       @<%= user.username %>
     </div>
     <div class="flex items-center gap-1">
-      <div class="w-4 h-w-4">
+      <div class="w-4 h-4 text-star">
         <%= render "icons/star" %>
       </div>
-      <div class="text-sm font-medium">4.5</div>
+      <div class="text-sm font-medium"><%= user.rating %></div>
     </div>
   </div>
-</div>
+<% end %>
