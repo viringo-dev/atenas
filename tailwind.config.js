@@ -17,7 +17,8 @@ module.exports = {
         'dark': '#303543',
         'light': '#303543',
         'negative': '#E63946',
-        'negative-light': '#E84C58'
+        'negative-light': '#E84C58',
+        "star": "#FACA15"
       },
       fontFamily: {
         sans: ['Open Sans']
