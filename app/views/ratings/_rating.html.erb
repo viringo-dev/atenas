@@ -1,0 +1,17 @@
+<%= turbo_frame_tag "ratings" do %>
+  <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow flex gap-3 flex-col-reverse sm:flex-row">
+    <div class="w-full flex flex-col gap-1">
+      <div class="flex gap-1">
+        <% (1..5).each do |n| %>
+          <div class="w-5 h-5 cursor-pointer <%= n > rating.value ? "text-gray-400" : "text-star" %>">
+            <%= render 'icons/star' %>
+          </div>
+        <% end %>
+      </div>
+      <div class=""><%= rating.comment %></div>
+      <div class="self-end">
+        <%= render 'shared/user', user: rating.rater %>
+      </div>
+    </div>
+  </div>
+<% end %>
