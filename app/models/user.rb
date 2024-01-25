@@ -10,7 +10,12 @@ class User < ApplicationRecord
   ## ASSOCIATIONS ##
   has_many :active_sessions, dependent: :destroy
   has_many :tasks, dependent: :destroy
-  has_one_attached :avatar
+  has_one_attached :avatar do |attachable|
+    attachable.variant :thumb, resize_to_fill: [128, 128]
+    attachable.variant :small, resize_to_fill: [256, 256]
+    attachable.variant :medium, resize_to_fill: [512, 512]
+    attachable.variant :large, resize_to_fill: [1024, 1024]
+  end
   has_many :channel_users, dependent: :nullify
   has_many :channels, through: :channel_users
   has_many :notifications, dependent: :destroy
