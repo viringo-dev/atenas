@@ -2,6 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 
+// Update stimulus controllers after Turbo requests
 document.addEventListener("turbo:load", () => {
   initLibraries();
 });
