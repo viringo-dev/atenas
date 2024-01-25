@@ -1,5 +1,5 @@
 <%= active_link_to messages_path(uuid: channel.uuid), class: "flex items-center p-2 text-gray-900 rounded-lg bg-white hover:bg-gray-100 group", active_class: "!bg-gray-200" do %>
-  <span class="flex-1 whitespace-nowrap"><%= channel.name %></span>
+  <span class="flex-1 whitespace-nowrap line-clamp-1"><%= channel.name %></span>
   <%= tag.div id: channel.uuid do %>
     <% if !current_page?(messages_path(uuid: channel.uuid)) && channel.unread_messages_count.positive? %>
       <div class="channel-notification"></div>
