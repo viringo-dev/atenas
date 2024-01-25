@@ -33,3 +33,6 @@ application.register("new-notification", NewNotificationController)
 
 import PreviewsController from "./previews_controller"
 application.register("previews", PreviewsController)
+
+import RatingController from "./rating_controller"
+application.register("rating", RatingController)
