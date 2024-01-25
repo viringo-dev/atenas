@@ -82,6 +82,16 @@
             <% if bid.owner?(current_user) && bid.paid? %>
               <%= button_to t("pages.task.finished"), "#", disabled: true, class: "btn bg-third w-auto cursor-default" %>
             <% end %>
+            <% if Ratings::CreatePolicy.new(user: current_user, bid: bid).allowed? %>
+              <%= button_to new_bid_rating_path(bid_id: bid.id),method: :get, data: { turbo_frame: nested_dom_id(bid, Rating.new) }, class: "btn bg-primary hover:bg-primary-light w-auto flex items-center gap-1" do %>
+                <div class="hidden md:block">
+                  <%= t("pages.task.rate") %>
+                </div>
+                <div class="w-5 h-w-5 text-star h-fit">
+                  <%= render 'icons/star' %>
+                </div>
+              <% end %>
+            <% end %>
             <div id="tooltip-owner-finish-pending" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                 <%= t("pages.task.owner_finish_pending") %>
                 <div class="tooltip-arrow" data-popper-arrow></div>
@@ -90,6 +100,8 @@
         <% end %>
         <%= render "shared/user", user: bid.user %>
       </div>
+      <%= turbo_frame_tag nested_dom_id(bid, Rating.new) do %>
+      <% end %>
     </div>
   </div>
 <% end %>
