@@ -13,7 +13,13 @@ class UsersController < ApplicationController
     @user = User.new(create_user_params)
     if @user.save
       @user.send_confirmation_email!
-      redirect_to root_path, notice: t("pages.confirmation.notices.check_email")
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: t("pages.confirmation.notices.check_email") }
+        format.turbo_stream do
+          flash[:notice] = t("pages.confirmation.notices.check_email")
+          render turbo_stream: turbo_stream.action(:redirect, root_path)
+        end
+      end
     else
       render :new, status: :unprocessable_entity
     end
