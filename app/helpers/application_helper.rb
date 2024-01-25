@@ -8,8 +8,7 @@ module ApplicationHelper
   end
 
   def avatar(user)
-    image_tag user.avatar.attached? ? user.avatar : "/default-avatar.png",
-              data: { previews_target: "preview" },
+    image_tag user.avatar.attached? ? user.avatar.variant(:thumb) : "/default-avatar.png",
               class: "rounded-full cursor-pointer"
   end
 
