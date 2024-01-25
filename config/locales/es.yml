@@ -123,6 +123,9 @@ es:
       notices:
         data_updated: "Datos actualizados"
       sign_out: "Cerrar sesión"
+    user:
+      alerts:
+        not_found: "Usuario no encontrado"
     sign_in:
       alerts:
         invalid: "Usuario o contraseña incorrectos"
@@ -188,6 +191,7 @@ es:
       finish_bidder_message: "¿Estás seguro de finalizar la tarea? Asegúrate que la tarea esté completa"
       cashout: "Cobrar"
       owner_finish_pending: "Esta pendiente la finalización de la tarea por parte del creador"
+      rate: "Calificar"
     bids:
       payment_process: "Proceso de depósito"
       deposit_step: "1) Deposita %{amount} por Yape/Plin"
@@ -203,12 +207,12 @@ es:
       new_bid_html: "<b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>"
       accepted_bid_html: "Tu oferta por la tarea <b>%{task_name}</b> ha sido aceptada"
       payment_validated_html: "Tu pago por la tarea <b>%{task_name}</b> ha sido validado"
-      cashout_html: "Se ha realizado el pago por la tarea <b>%{task_name}</b>"
+      cashout_validated_html: "Se ha realizado el pago por la tarea <b>%{task_name}</b>"
       empty: "No tienes notificaciones"
       alerts:
         not_found: "Notificación no encontrada"
     cashout:
       cashout: "Retiro"
       payment_process: "Proceso de depósito"
-      earning_message: "El monto abonado a tu billeterá será %{earning}"
+      earning_message: "El monto abonado a tu billetera digital será %{earning}"
       notification_message: "Te notificaremos cuando hayamos abonado el pago"
