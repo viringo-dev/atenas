@@ -1,0 +1,31 @@
+<%= form_with model: [bid, rating], class: "p-2 w-full mt-2 border-2 rounded-lg" do |form| %>
+  <%= render partial: "shared/form_errors", locals: { object: form.object } %>
+  <div class="flex flex-col md:flex-row gap-1">
+    <div class="flex flex-col gap-2 w-full">
+      <div class="w-full" data-controller="rating">
+        <div class="flex gap-1" data-rating-target="currentRating">
+          <% (1..5).each do |n| %>
+            <div class="w-5 h-5 cursor-pointer text-gray-400" data-action="click->rating#handleRating" data-rating-target=<%= n %>>
+              <%= render 'icons/star' %>
+            </div>
+          <% end %>
+          <%= form.hidden_field :value, data: { rating_target: "valueField" } %>
+          <%= form.hidden_field :rating_type, value: bid.owner?(current_user) ? :task_assignee : :task_owner %>
+        </div>
+      </div>
+      <div class="w-full">
+        <%= form.text_area :comment, rows: 2, maxlength: 200, autofocus: true, class: "input text-sm resize-none", placeholder: "Comentario (opcional)" %>
+      </div>
+    </div>
+    <div class="flex flex-col gap-1 self-end w-full md:w-auto">
+      <div class="w-full">
+        <%= form.button class: "btn bg-third hover:bg-third-light" do %>
+          <%= render partial: "shared/spinner", locals: { text: t("pages.common.send") } %>
+        <% end %>
+      </div>
+      <div class="w-full">
+        <%= link_to t("pages.common.cancel"), task_path(bid.task), class: "btn bg-negative hover:bg-negative-light" %>
+      </div>
+    </div>
+  </div>
+<% end %>

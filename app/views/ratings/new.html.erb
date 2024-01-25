@@ -1,0 +1,5 @@
+<%= turbo_frame_tag nested_dom_id(@bid, @rating) do %>
+  <%= render "form",
+             bid: @bid,
+             rating: @rating %>
+<% end %>
