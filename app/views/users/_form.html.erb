@@ -10,7 +10,7 @@
   <div class="mb-2 flex justify-center" data-controller="previews">
     <%= form.label :avatar do %>
       <%= image_tag form.object.avatar.attached? ? form.object.avatar : "/default-avatar.png",
-                    data: { previews_target: "preview" },
+                    data: { previews_target: "preview", action: "click->previews#openFileInput" },
                     class: "w-20 h-20 rounded cursor-pointer shadow-sm border-2 border-gray-300 shadow-gray-300" %>
     <% end %>
     <%= form.hidden_field :avatar, value: form.object.avatar.blob.signed_id if form.object.avatar.attached? %>

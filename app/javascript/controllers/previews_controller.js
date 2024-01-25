@@ -22,4 +22,8 @@ export default class extends Controller {
       preview.src = ""
     }
   }
+
+  openFileInput() {
+    this.inputTarget.click()
+  }
 }
