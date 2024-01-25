@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :bids, only: [] do
     resources :cashouts, only: [:new, :create]
+    resources :ratings, only: [:new, :create]
   end
 
   resources :payments, only: [:new, :create]
