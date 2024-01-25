@@ -3,6 +3,7 @@ class Rating < ApplicationRecord
 
   ## ASSOCIATIONS ##
   belongs_to :user
+  belongs_to :rater, class_name: "User", foreign_key: :rater_id
   belongs_to :task
   belongs_to :bid
 
@@ -16,4 +17,7 @@ class Rating < ApplicationRecord
   enum rating_type: { task_owner: 0,
                       task_assignee: 1
                     }
+
+  ## CALLBACKS ##
+  after_create_commit -> { UpdateUserRatingJob.perform_later(self.id) }
 end
