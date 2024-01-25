@@ -60,7 +60,7 @@ es:
           attributes:
             username:
               blank: "no puede estar en blanco"
-              invalid: "debe contener letras, números y guiones bajos"
+              invalid: "solo puede contener letras, números y guiones bajos"
             phone:
               invalid: "debe tener el formato +51 987654321"
             password:
