@@ -44,7 +44,7 @@
     <% end %>
     <%= form.file_field :files,
                         multiple: true,
-                        data: { controller: "files", files_target: "input", action: "change->files#checkFiles" },
+                        data: { controller: "files", files_target: "input", action: "change->files#checkFiles", "files-max-attachment-size-value": Payment::MAX_ATTACHMENT_SIZE },
                         class: "input" %>
   </div>
   <div class="flex gap-2 flex-col md:flex-row">
