@@ -1,17 +1,36 @@
 class PasswordsController < ApplicationController
   before_action :redirect_if_authenticated
+  skip_before_action :authenticate_user!, only: [:new, :create, :edit, :update]
 
   def create
     @user = User.find_by(email: params[:user][:email].downcase)
     if @user.present?
       if @user.confirmed?
         @user.send_password_reset_email!
-        redirect_to root_path, notice: t("pages.password.notices.if_user_exists")
+        respond_to do |format|
+          format.html { redirect_to root_path, notice: t("pages.password.notices.if_user_exists") }
+          format.turbo_stream do
+            flash[:notice] = t("pages.password.notices.if_user_exists")
+            render turbo_stream: turbo_stream.action(:redirect, root_path)
+          end
+        end
       else
-        redirect_to new_confirmation_path, alert: t("pages.password.alerts.confirm_email")
+        respond_to do |format|
+          format.html { redirect_to new_confirmation_path, alert: t("pages.password.alerts.confirm_email") }
+          format.turbo_stream do
+            flash[:alert] = t("pages.password.alerts.confirm_email")
+            render turbo_stream: turbo_stream.action(:redirect, new_confirmation_path)
+          end
+        end
       end
     else
-      redirect_to root_path, notice: t("pages.password.notices.if_user_exists")
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: t("pages.password.notices.if_user_exists") }
+        format.turbo_stream do
+          flash[:notice] = t("pages.password.notices.if_user_exists")
+          render turbo_stream: turbo_stream.action(:redirect, root_path)
+        end
+      end
     end
   end
 
