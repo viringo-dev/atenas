@@ -1,12 +1,14 @@
-<div class="m-auto w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
+<div class="flex flex-col mx-auto max-w-xs">
   <%= form_with url: passwords_path, scope: :user, class: "p-4 border border-gray-300 rounded-lg" do |form| %>
     <div class="mb-4 text-lg">
       <%= t("pages.password.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.email_field :email, required: true, class: "input", placeholder: "" %>
       <%= form.label :email, t("activerecord.attributes.user.email"), class: "label" %>
+      <%= form.email_field :email, required: true, class: "input", placeholder: "" %>
     </div>
-    <%= form.submit t("pages.password.verb"), class: "btn bg-primary hover:bg-primary-light" %>
+    <%= form.button class: "btn bg-primary hover:bg-primary-light" do %>
+      <%= render "shared/spinner", text: t("pages.password.verb") %>
+    <% end %>
   <% end %>
 </div>

@@ -1,17 +1,19 @@
-<div class="m-auto w-full md:w-1/2 lg:w-1/3 xl:w-1/4">
+<div class="flex flex-col mx-auto max-w-xs">
   <%= form_with url: password_path(params[:password_reset_token]), scope: :user, method: :put, class: "p-4 border border-gray-300 rounded-lg" do |form| %>
     <%= render partial: "shared/form_errors", locals: { object: @user } %>
     <div class="mb-4 text-lg">
       <%= t("pages.password.reset.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.password_field :password, required: true, placeholder: "", class: "input" %>
       <%= form.label :email, t("activerecord.attributes.user.password"), class: "label" %>
+      <%= form.password_field :password, required: true, placeholder: "", class: "input" %>
     </div>
     <div class="mb-4 relative">
-      <%= form.password_field :password_confirmation, required: true, placeholder: "", class: "input" %>
       <%= form.label :password_confirmation, t("activerecord.attributes.user.password_confirmation"), class: "label" %>
+      <%= form.password_field :password_confirmation, required: true, placeholder: "", class: "input" %>
     </div>
-    <%= form.submit t("pages.password.reset.verb"), class: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center" %>
+    <%= form.button class: "btn bg-primary hover:bg-primary-light" do %>
+      <%= render partial: "shared/spinner", locals: { text: t("pages.password.reset.verb") } %>
+    <% end %>
   <% end %>
 </div>
