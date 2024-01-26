@@ -169,6 +169,7 @@ es:
       sure: "¿Estás seguro?"
       send: "Enviar"
       see_more: "Ver más"
+      back: "Atrás"
       alerts:
         not_allowed_action: "Acción no permitida"
     tasks:
