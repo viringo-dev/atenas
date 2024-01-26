@@ -32,11 +32,10 @@ Rails.application.routes.draw do
   end
 
   resources :bids, only: [] do
+    resources :payments, only: [:new, :create]
     resources :cashouts, only: [:new, :create]
     resources :ratings, only: [:new, :create]
   end
-
-  resources :payments, only: [:new, :create]
 
   resources :channels, only: [] do
     put :mark_as_read, on: :member

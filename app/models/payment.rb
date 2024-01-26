@@ -1,6 +1,6 @@
 class Payment < ApplicationRecord
   ## CONSTANTS ##
-  MAX_ATTACHMENT_SIZE = 3
+  MAX_ATTACHMENT_SIZE = 5
 
   ## ASSOCIATIONS ##
   belongs_to :task

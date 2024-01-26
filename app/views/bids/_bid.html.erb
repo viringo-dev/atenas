@@ -46,7 +46,7 @@
                   <%= t("pages.task.validating") %>
                 </div>
               <% else %>
-                <%= link_to t("pages.task.deposit"), new_payment_path(bid_id: bid.id), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
+                <%= link_to t("pages.task.deposit"), new_bid_payment_path(bid), data: { turbo_frame: "_top" }, class: "btn bg-third hover:bg-third-light w-auto" %>
               <% end %>
             <% end %>
           <% else %>

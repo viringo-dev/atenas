@@ -12,7 +12,10 @@ class PaymentsController < ApplicationController
     if @payment.save
       respond_to do |format|
         format.html { redirect_to root_path, notice: t("pages.payments.we_going_to_validate") }
-        format.turbo_stream { flash.now[:notice] = t("pages.payments.we_going_to_validate") }
+        format.turbo_stream do
+          flash[:notice] = t("pages.payments.we_going_to_validate")
+          render turbo_stream: turbo_stream.action(:redirect, root_path)
+        end
       end
     else
       render :new, status: :unprocessable_entity

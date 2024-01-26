@@ -52,7 +52,7 @@ class BidsController < ApplicationController
   def accept
     result = Bids::AcceptService.new(user: current_user, task: @task, bid: @bid).call
     if result.success?
-      redirect_to new_payment_path(bid_id: @bid.id)
+      redirect_to new_bid_payment_path(@bid)
     else
       redirect_to task_path(@task), alert: t("pages.common.alerts.not_allowed_action")
     end

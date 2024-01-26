@@ -5,7 +5,7 @@
     <p class=""><%= t("pages.bids.fill_form_step") %></p>
   </div>
 
-  <%= form_with model: @payment, class: "p-2 w-full mb-2 border-dotted border-2 rounded-lg", data: { turbo: turbo_frame_request? } do |form| %>
+  <%= form_with model: @payment, url: bid_payments_path, method: :post, class: "p-2 w-full mb-2 border-dotted border-2 rounded-lg" do |form| %>
     <%= render partial: "shared/form_errors", locals: { object: form.object } %>
     <div class="flex flex-col gap-2">
       <%= form.hidden_field :bid_id, value: @bid.id %>
@@ -16,7 +16,10 @@
       </div>
       <div class="">
         <%= form.label :attachment, class: "label" %>
-        <%= form.file_field :attachment, required: true, class: "input" %>
+        <%= form.file_field :attachment,
+                            required: true,
+                            data: { controller: "files", files_target: "input", action: "change->files#checkFilesSize", "files-max-attachment-size-value": Payment::MAX_ATTACHMENT_SIZE },
+                            class: "input" %>
       </div>
       <div class="flex items-end">
         <%= form.button class: "btn bg-primary hover:bg-primary-light" do %>
