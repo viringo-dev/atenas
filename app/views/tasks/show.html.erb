@@ -19,7 +19,7 @@
             <% end %>
             <div class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow absolute w-full" data-dropdown-target="menu">
               <ul class="text-sm text-gray-700">
-                <% @task.files.each do |file| %>
+                <% @task.files.includes(:blob).each do |file| %>
                   <li>
                     <%= link_to file.filename, file, target: "_blank", data: { action: "dropdown#toggle" }, class: "block px-4 py-2 hover:bg-gray-100" %>
                   </li>

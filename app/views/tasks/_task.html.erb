@@ -17,7 +17,7 @@
           <% end %>
           <div id="files-dropdown-<%= task.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow">
             <ul class="text-sm text-gray-700" aria-labelledby="">
-              <% task.files.each do |file| %>
+              <% task.files.includes(:blob).each do |file| %>
                 <li>
                   <%= link_to truncate(file.filename.to_s, length: 20), file, target: "_blank", class: "block px-4 py-2 hover:bg-gray-100" %>
                 </li>
