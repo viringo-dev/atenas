@@ -11,7 +11,7 @@
       <%= form.label :password, t("activerecord.attributes.user.password"), class: "label" %>
       <%= form.password_field :password, required: true, class: "input", placeholder: "" %>
     </div>
-    <div class="mb-4 flex items-center">
+    <div class="mb-4 flex items-center gap-1">
       <%= form.check_box :remember_me, class: "checkbox" %>
       <%= form.label t("pages.account.form.remember_me"), class: "text-sm" %>
     </div>

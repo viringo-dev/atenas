@@ -44,7 +44,7 @@ button[disabled] .show-when-enabled {
   }
 
   .checkbox {
-    @apply w-5 bg-gray-50 border text-gray-900 text-sm rounded-lg !outline-none border-gray-300 hover:border-gray-400 p-2.5
+    @apply w-5 bg-gray-50 border text-gray-900 text-sm rounded-lg !outline-none border-gray-300 hover:border-gray-400 p-2.5 cursor-pointer
   }
 
   .channel-notification {
