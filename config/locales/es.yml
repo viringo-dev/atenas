@@ -62,7 +62,7 @@ es:
               blank: "no puede estar en blanco"
               invalid: "solo puede contener letras, números y guiones bajos"
             phone:
-              invalid: "debe tener el formato +51 987654321"
+              invalid: "debe tener el formato +XX XXXXXXXXX"
             password:
               invalid: "debe contener letras y números"
               blank: "no puede estar en blanco"
