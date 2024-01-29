@@ -156,11 +156,11 @@ es:
         verb: "Restablecer contraseña"
     header:
       tasks: "Tareas"
-      publications: "Publicaciones"
+      my_tasks: "Mis tareas"
       sign_in: "Iniciar sesión"
       sign_up: "Registrarse"
       how_it_works: "¿Cómo funciona?"
-      bids: "Ofertas"
+      my_bids: "Mis ofertas"
       account: "Cuenta"
     common:
       save: "Guardar"
