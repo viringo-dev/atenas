@@ -2,7 +2,7 @@
   <nav class="bg-primary">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-8 py-3">
       <a href="/" class="flex items-center">
-        <span class="text-white self-center text-2xl font-semibold whitespace-nowrap">ATENAS</span>
+        <span class="text-white self-center text-2xl font-medium whitespace-nowrap">ATENAS</span>
       </a>
       <div class="flex items-center md:order-2">
         <% if current_user %>
@@ -28,17 +28,17 @@
           </button>
           <!-- Dropdown menu -->
           <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow" id="user-dropdown">
-            <ul class="p-4" aria-labelledby="user-menu-button">
+            <ul class="" aria-labelledby="user-menu-button">
               <li>
-                <%= link_to current_user.email, account_path, class: "block text-sm text-gray-900 font-semibold truncate" %>
+                <%= link_to t("pages.header.account"), account_path, class: "block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 w-full text-left hover:rounded-t-lg" %>
               </li>
             </ul>
             <ul class="" aria-labelledby="user-menu-button">
-              <li>
+              <%# <li>
                 <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-              </li>
+              </li> %>
               <li>
-                <%= button_to t("pages.account.sign_out"), logout_path, method: :delete, data: { turbo: false }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left" %>
+                <%= button_to t("pages.account.sign_out"), logout_path, method: :delete, data: { turbo: false }, class: "block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 w-full text-left" %>
               </li>
             </ul>
           </div>
