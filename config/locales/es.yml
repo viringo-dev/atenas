@@ -61,8 +61,8 @@ es:
             username:
               blank: "no puede estar en blanco"
               invalid: "solo puede contener letras, números y guiones bajos"
-            phone:
-              invalid: "debe tener el formato +XX XXXXXXXXX"
+            # phone:
+            #   invalid: "debe tener el formato +XX XXXXXXXXX"
             password:
               invalid: "debe contener letras y números"
               blank: "no puede estar en blanco"
