@@ -1,13 +1,14 @@
 <%= turbo_frame_tag task do %>
-  <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow">
+  <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow" data-controller="read-more">
     <%= link_to_conditionally !current_page?(task_path(task)), task_path(task), data: { turbo_frame: "_top" } do %>
       <div class="flex justify-between items-start gap-x-2">
         <div class="text-xl font-semibold break-all">
           <%= task.name %>
         </div>
       </div>
-      <div class="mb-2 text-base font-normal"><%= truncate(task.description, length: 250) { link_to "Ver más", task_path(task), data: { turbo_frame: "_top" }, class: "text-primary whitespace-nowrap" } %></div>
     <% end %>
+    <div class="mb-2 text-base font-normal" data-read-more-target="shortText"><%= truncate(task.description, length: 250) { tag.span "Ver más", data: { action: "click->read-more#handle" }, class: "text-primary whitespace-nowrap cursor-pointer" } %></div>
+    <div class="mb-2 text-base font-normal hidden" data-read-more-target="longText"><%= task.description %></div>
     <div class="flex items-start sm:items-center justify-between flex-col sm:flex-row mb-3 gap-3">
       <div class="flex items-center justify-between w-full">
         <div class="">

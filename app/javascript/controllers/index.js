@@ -36,3 +36,6 @@ application.register("previews", PreviewsController)
 
 import RatingController from "./rating_controller"
 application.register("rating", RatingController)
+
+import ReadMoreController from "./read_more_controller"
+application.register("read-more", ReadMoreController)
