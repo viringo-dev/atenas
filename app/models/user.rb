@@ -32,7 +32,7 @@ class User < ApplicationRecord
   validates :password, presence: { allow_blank: false }, length: { minimum: 8 }, format: { with: /\A^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }, if: :password_required?
 
   ## CALLBACKS ##
-  before_save :downcase_email
+  before_validation :format_fields
 
   ## ENUMS ##
   enum gender: { male: 0, female: 1, other: 2 }
@@ -74,7 +74,11 @@ class User < ApplicationRecord
     new_record? || password.present?
   end
 
-  def downcase_email
-    self.email = email.downcase
+  def format_fields
+    self.email = self.email.to_s.strip.downcase
+    self.username = self.username.to_s.strip.downcase
+    self.phone = self.phone.to_s.strip.downcase
+    self.name = self.name.to_s.strip
+    self.surname = self.surname.to_s.strip
   end
 end
