@@ -6,6 +6,7 @@
           <%= task.name %>
         </div>
       </div>
+      <p class="text-sm text-gray-400"><%= t("activerecord.attributes.task.deadline") %>: <%= l(task.deadline, locale: :es, format: :long) %></p>
     <% end %>
     <div class="mb-2 text-base font-normal" data-read-more-target="shortText"><%= truncate(task.description, length: 250) { tag.span "Ver más", data: { action: "click->read-more#handle" }, class: "text-primary whitespace-nowrap cursor-pointer" } %></div>
     <div class="mb-2 text-base font-normal hidden" data-read-more-target="longText"><%= task.description %></div>
