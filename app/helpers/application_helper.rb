@@ -40,4 +40,12 @@ module ApplicationHelper
     end
     t("pages.notifications.#{notification.notification_type}_html", **params)
   end
+
+  def link_to_conditionally(condition, *args, &block)
+    if condition
+      link_to(*args, &block)
+    else
+      capture(&block)
+    end
+  end
 end

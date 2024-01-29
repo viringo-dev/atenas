@@ -1,11 +1,13 @@
 <%= turbo_frame_tag task do %>
   <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow">
-    <div class="flex justify-between items-start gap-x-2">
-      <div class="text-xl font-semibold break-all">
-        <%= task.name %>
+    <%= link_to_conditionally !current_page?(task_path(task)), task_path(task), data: { turbo_frame: "_top" } do %>
+      <div class="flex justify-between items-start gap-x-2">
+        <div class="text-xl font-semibold break-all">
+          <%= task.name %>
+        </div>
       </div>
-    </div>
-    <div class="mb-2 text-base font-normal"><%= truncate(task.description, length: 250) { link_to "Ver más", task_path(task), data: { turbo_frame: "_top" }, class: "text-primary whitespace-nowrap" } %></div>
+      <div class="mb-2 text-base font-normal"><%= truncate(task.description, length: 250) { link_to "Ver más", task_path(task), data: { turbo_frame: "_top" }, class: "text-primary whitespace-nowrap" } %></div>
+    <% end %>
     <div class="flex items-start sm:items-center justify-between flex-col sm:flex-row mb-3 gap-3">
       <div class="flex items-center justify-between w-full">
         <div class="">
@@ -35,7 +37,7 @@
                   <%= t("pages.common.bids") %>
                   <div class="tooltip-arrow" data-popper-arrow></div>
               </div>
-            <% end %>
+            <% end unless current_page?(task_path(task)) %>
             <% if Tasks::EditPolicy.new(user: current_user, task: task).allowed? %>
               <%= button_to edit_task_path(task),
                             method: :get,
@@ -70,7 +72,7 @@
             <%= link_to "Ofertar",
                         task_path(task),
                         data: { turbo_frame: "_top" },
-                        class: "btn bg-third hover:bg-third-light w-auto" %>
+                        class: "btn bg-third hover:bg-third-light w-auto" unless current_page?(task_path(task)) %>
           <% end %>
         <% end %>
       </div>
