@@ -28,7 +28,7 @@ module ApplicationHelper
   def notification_message(notification)
     case notification.notification_type.to_sym
     when :new_bid
-      params = { bidder_name: notification.resource.user.name, task_name: notification.resource.task.name }
+      params = { bidder_name: notification.resource.user.username, task_name: notification.resource.task.name }
     when :accepted_bid
       params = { task_name: notification.resource.task.name }
     when :payment_validated
