@@ -3,7 +3,7 @@
     <div class="w-full md:w-auto">
       <%= link_to t("pages.tasks.create_task"),
                   new_task_path,
-                  class: "btn bg-primary hover:bg-primary-light",
+                  class: "btn bg-third hover:bg-third-light",
                   data: { turbo_frame: dom_id(Task.new) } unless current_page?(my_bids_path) %>
     </div>
   </div>

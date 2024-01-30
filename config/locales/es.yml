@@ -181,6 +181,8 @@ es:
       create_task: "Crear tarea"
       alerts:
         not_found: "Tarea no encontrada"
+      heading: "Encuentra soluciones académicas"
+      subheading: "Conéctate con expertos destacados, preparados para ofrecer soluciones de manera inmediata y confiable."
     task:
       pending: "Pendiente"
       accept: "Aceptar"
