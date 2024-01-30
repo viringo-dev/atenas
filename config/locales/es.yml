@@ -93,6 +93,9 @@ es:
       task:
         one: "Tarea"
         other: "Tareas"
+      channel:
+        one: "Canal"
+        other: "Canales"
       cashout:
         one: "Retiro"
         enums:
@@ -207,6 +210,7 @@ es:
     channels:
       select: "Selecciona un canal"
       empty: "Aún no tienes canales"
+      see_task: "Ver tarea"
     notifications:
       new_bid_html: "<b>%{bidder_name}</b> ha realizado una oferta por tu tarea <b>%{task_name}</b>"
       accepted_bid_html: "Tu oferta por la tarea <b>%{task_name}</b> ha sido aceptada, ya puedes comenzar a chatear"
