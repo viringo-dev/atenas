@@ -9,7 +9,7 @@ class TasksController < ApplicationController
   def index
     @pagy, @tasks = pagy(Task.bided
                              .ordered
-                             .includes(:files_attachments, :bids, user: :avatar_attachment))
+                             .includes(:files_attachments, :bids, user: [avatar_attachment: :blob]))
   end
 
   def my_tasks
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
   def show
     @bids = @task.user == current_user ? @task.bids : @task.bids.by_user(current_user)
-    @bids = @bids.includes(user: :avatar_attachment)
+    @bids = @bids.includes(user: [avatar_attachment: :blob])
   end
 
   def create
