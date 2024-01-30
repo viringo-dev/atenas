@@ -24,6 +24,8 @@ export default class extends Controller {
   }
 
   openFileInput() {
-    this.inputTarget.click()
+    if (navigator.userAgent.includes("Firefox")) {
+      this.inputTarget.click()
+    }
   }
 }
