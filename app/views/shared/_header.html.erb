@@ -1,9 +1,16 @@
 <header class="sticky top-0 z-10">
   <nav class="bg-primary">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-2 md:px-8 py-3">
-      <a href="/" class="flex items-center">
-        <span class="text-white self-center text-2xl font-medium whitespace-nowrap">ATENAS</span>
-      </a>
+      <div class="flex">
+        <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none" aria-controls="navbar-user" aria-expanded="false">
+          <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+        </button>
+        <a href="/" class="flex items-center">
+          <span class="text-white self-center text-2xl font-medium whitespace-nowrap">ATENAS</span>
+        </a>
+      </div>
       <div class="flex items-center md:order-2">
         <% if current_user %>
           <%= turbo_stream_from current_user %>
@@ -48,11 +55,6 @@
             <%= link_to t("pages.header.sign_up"), sign_up_path, class: "btn bg-third hover:bg-third-light px-2 md:px-5" %>
           </div>
         <% end %>
-        <button data-collapse-toggle="navbar-user" type="button" class="ml-2 inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none" aria-controls="navbar-user" aria-expanded="false">
-          <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-          </svg>
-        </button>
       </div>
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
         <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
