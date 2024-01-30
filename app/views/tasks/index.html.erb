@@ -1,5 +1,5 @@
 <div class="flex flex-col mx-auto max-w-3xl">
-  <div class="pt-8 pb-12 md:pb-0 flex px-4 md:px-0">
+  <div class="pt-6 pb-8 md:pb-0 flex px-4 md:px-0">
     <div class="flex flex-col gap-3">
       <h1 class="text-third text-6xl md:text-7xl font-serif">
         <%= t("pages.tasks.heading") %>
@@ -7,19 +7,18 @@
       <p class="text-secondary text-lg md:text-xl">
         <%= t("pages.tasks.subheading") %>
       </p>
+      <div class="flex justify-start mb-2">
+        <div class="w-full md:w-auto">
+          <%= button_to t("pages.tasks.create_task"),
+                      new_task_path,
+                      method: :get,
+                      class: "btn bg-third hover:bg-third-light",
+                      data: { turbo_frame: dom_id(Task.new) } unless current_page?(my_bids_path) %>
+        </div>
+      </div>
     </div>
     <div class="">
       <%= image_tag("/homework.png", class: "hidden md:block") %>
-    </div>
-  </div>
-
-  <div class="flex justify-end mb-2">
-    <div class="w-full md:w-auto">
-      <%= button_to t("pages.tasks.create_task"),
-                  new_task_path,
-                  method: :get,
-                  class: "btn bg-third hover:bg-third-light",
-                  data: { turbo_frame: dom_id(Task.new) } unless current_page?(my_bids_path) %>
     </div>
   </div>
 
