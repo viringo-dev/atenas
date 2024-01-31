@@ -54,4 +54,12 @@ button[disabled] .show-when-enabled {
   .dot-notification {
     @apply w-3 h-3 bg-negative-light absolute top-0 -left-1 rounded-[50%]
   }
+
+  .preview-attachment {
+    @apply bg-white px-2 rounded-md relative whitespace-nowrap m-2
+  }
+
+  .preview-attachment-delete {
+    @apply absolute -top-2 -right-2 cursor-pointer
+  }
 }
