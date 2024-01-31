@@ -21,7 +21,7 @@
   </div>
 
   <div class="flex-1 relative border-2 border-primary rounded-md">
-    <aside data-channels-target="sidebar" id="default-sidebar" class="rounded border-2 border-primary absolute z-9 w-64 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <aside data-channels-target="sidebar" id="default-sidebar" class="z-10 rounded border-2 border-primary absolute z-9 w-64 h-full transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
       <div class="h-full p-2 overflow-y-auto rounded-sm bg-primary flex flex-col gap-1">
         <%= render partial: "messages/channel", collection: @channels %>
       </div>
