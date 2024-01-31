@@ -1,6 +1,13 @@
 <%= turbo_frame_tag message, class: "w-full flex flex-col items-start pr-16 cont-#{message.user.id}", data: { controller: "message" } do %>
-    <%= tag.p class: "bg-gray-400 text-white text-sm rounded-md p-2 msg-#{message.user.id}" do %>
-      <%= message.content %>
+    <%= tag.div class: "bg-gray-400 text-white text-sm rounded-md p-2 msg-#{message.user.id}" do %>
+      <p class="">
+        <%= message.content %>
+      </p>
+      <% message.attachments.each do |attachment| %>
+        <p class="mb-1">
+          <%= link_to attachment.blob.filename, rails_blob_path(attachment, disposition: "attachment"), target: "_blank", class: "underline italic font-light" %>
+        </p>
+      <% end %>
     <% end %>
     <p class="text-[10px] text-gray-500"><%= message.created_at.strftime("%d/%m/%Y %H:%M:%S") %></p>
 <% end %>
