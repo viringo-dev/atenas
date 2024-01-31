@@ -15,7 +15,8 @@ class Notification < ApplicationRecord
   enum notification_type: { new_bid: 0,
                             accepted_bid: 1,
                             payment_validated: 2,
-                            cashout_validated: 3
+                            finished_task_and_bid: 3,
+                            cashout_validated: 4
                           }
 
   ## SCOPES ##

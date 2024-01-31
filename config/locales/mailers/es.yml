@@ -80,3 +80,14 @@ es:
 
           <p>Saludos,</p>
           <p>El equipo de Atenas</p>
+      finished_task_and_bid:
+        subject: "Ya puedes cobrar por la tarea %{task_name}"
+        body_html: |
+          <p>Hola %{name},</p>
+
+          <p>Enhorabuena, la tarea <b>%{task_name}</b> ha sido completada y ya puedes cobrar por ella.</p>
+
+          <a href="%{link}" style="color: #19A7CE;">Ver tarea</a>
+
+          <p>Saludos,</p>
+          <p>El equipo de Atenas</p>

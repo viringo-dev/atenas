@@ -36,6 +36,14 @@ class NotificationJob < ApplicationJob
           NotificationMailer.cashout_validated(notification.id).deliver_later
         end
       end
+    when Notification.notification_types[:finished_task_and_bid]
+      bid = Bid.find_by(id: resource_id)
+      if bid
+        notification = Notification.new(resource: bid, user: bid.user, notification_type: notification_type, path: task_path(bid.task_id))
+        if notification.save
+          NotificationMailer.finished_task_and_bid(notification.id).deliver_later
+        end
+      end
     else
     end
   end

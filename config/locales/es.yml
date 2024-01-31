@@ -216,6 +216,7 @@ es:
       accepted_bid_html: "Tu oferta por la tarea <b>%{task_name}</b> ha sido aceptada, ya puedes comenzar a chatear"
       payment_validated_html: "Tu pago por la tarea <b>%{task_name}</b> ha sido validado, ya puedes comenzar a chatear"
       cashout_validated_html: "Se ha realizado el pago por la tarea <b>%{task_name}</b>"
+      finished_task_and_bid_html: "La tarea <b>%{task_name}</b> ha sido completada y ya puedes cobrar por ella"
       empty: "No tienes notificaciones"
       alerts:
         not_found: "Notificación no encontrada"

@@ -6,12 +6,12 @@ class Bids::FinishService < ApplicationService
   end
 
   def call
-    # binding.pry
     return Failure.new(nil) unless allowed?
 
     ActiveRecord::Base.transaction do
       task.finished! if task_belongs_to_user?
       bid.finished! if bid_belongs_to_user?
+      NotificationJob.perform_later(bid.id, Notification.notification_types[:finished_task_and_bid]) if task.finished? && bid.finished?
     rescue ActiveRecord::Rollback
       return Failure.new(nil)
     end

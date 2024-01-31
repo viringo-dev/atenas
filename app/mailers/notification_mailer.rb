@@ -39,6 +39,17 @@ class NotificationMailer < ApplicationMailer
     return unless @bid
 
     @task = @bid.task
-    mail to: @bid.user.email, subject: t("mailers.notification_mailer.cashout_validated.subject")
+    mail to: @bid.user.email, subject: t("mailers.notification_mailer.cashout_validated.subject", task_name: @task.name)
+  end
+
+  def finished_task_and_bid(notification_id)
+    @notification = Notification.find_by(id: notification_id)
+    return unless @notification
+
+    @bid = @notification.resource
+    return unless @bid
+
+    @task = @bid.task
+    mail to: @bid.user.email, subject: t("mailers.notification_mailer.finished_task_and_bid.subject", task_name: @task.name)
   end
 end
