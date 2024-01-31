@@ -2,6 +2,7 @@ class Message < ApplicationRecord
   ## ASSOCIATIONS ##
   belongs_to :channel
   belongs_to :user
+  has_many_attached :attachments, dependent: :destroy
 
   ## VALIDATIONS ##
   validates :content, presence: { allow_blank: false, message: :blank }, if: -> { attachments.empty? }
