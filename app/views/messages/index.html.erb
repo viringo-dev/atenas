@@ -30,7 +30,7 @@
     <div class="rounded-lg sm:ml-64 flex flex-col h-full" data-action="click->channels#hideSidebar" data-controller="files" data-files-max-attachment-size-value="<%= Payment::MAX_ATTACHMENT_SIZE %>">
       <% if @channel %>
         <div class="flex-1">
-          <%= turbo_frame_tag "#{@channel.uuid}-messages", class: "flex flex-col-reverse gap-3 overflow-y-auto h-[calc(100dvh-17rem)] md:h-[calc(100dvh-14.1rem)] p-2", data: { "channels-target": "messages" } do %>
+          <%= turbo_frame_tag "#{@channel.uuid}-messages", class: "flex flex-col-reverse gap-3 overflow-y-auto h-[calc(100dvh-17rem)] md:h-[calc(100dvh-17.3rem)] p-2 md:p-4", data: { "channels-target": "messages" } do %>
             <%= render @messages %>
             <%= turbo_frame_tag "#{@channel.uuid}-messages-pagination", src: messages_path(uuid: @channel.uuid, page: @pagy.next, format: :turbo_stream) %>
             <div id=<%= "#{@channel.uuid}-messages-loader" %> class="w-full flex justify-center mt-3 text-primary">
