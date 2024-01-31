@@ -27,7 +27,7 @@
       </div>
     </aside>
 
-    <div class="rounded-lg sm:ml-64 flex flex-col h-full" data-action="click->channels#hideSidebar">
+    <div class="rounded-lg sm:ml-64 flex flex-col h-full" data-action="click->channels#hideSidebar" data-controller="files" data-files-max-attachment-size-value="<%= Payment::MAX_ATTACHMENT_SIZE %>">
       <% if @channel %>
         <div class="flex-1">
           <%= turbo_frame_tag "#{@channel.uuid}-messages", class: "flex flex-col-reverse gap-3 overflow-y-auto h-[calc(100dvh-17rem)] md:h-[calc(100dvh-14.1rem)] p-2", data: { "channels-target": "messages" } do %>
@@ -40,18 +40,21 @@
             </div>
           <% end %>
         </div>
-        <%= form_with model: Message.new, data: { "channels-target": "form", action: "turbo:submit-end->channels#resetForm turbo:submit-end->channels#scrollToBottom" } do |form| %>
+        <div class="relative">
+          <div class="absolute left-0 bottom-0 flex gap-2 overflow-x-scroll w-full bg-gray-300" data-files-target="previewBox">
+          </div>
+        </div>
+        <%= form_with model: Message.new, data: { "channels-target": "form", "files-target": "form", action: "turbo:submit-end->channels#resetForm turbo:submit-end->channels#scrollToBottom turbo:submit-end->files#resetForm" } do |form| %>
           <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50">
-            <button type="button" class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100">
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
-                    <path fill="currentColor" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z"/>
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z"/>
-                </svg>
-                <span class="sr-only">Upload image</span>
-            </button>
+            <%= form.label :attachments, class: "w-9 h-9 cursor-pointer flex items-center" do %>
+              <%= render "icons/clip" %>
+            <% end %>
+            <%= form.file_field :attachments,
+                                multiple: true,
+                                data: { files_target: "input", action: "change->files#checkFiles" },
+                                class: "hidden" %>
             <%= form.hidden_field :channel_id, value: @channel.id %>
-            <%= form.text_area :content, rows: 1, data: { action: "keydown->channels#checkForSubmit" }, required: true, class: "input resize-none" %>
+            <%= form.text_area :content, rows: 1, data: { action: "keydown->channels#checkForSubmit" }, required: false, class: "input resize-none" %>
             <%= form.button class: "inline-flex justify-center p-2 text-primary rounded-full cursor-pointer hover:bg-blue-100" do %>
               <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                   <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z"/>

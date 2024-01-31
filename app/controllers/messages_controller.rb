@@ -15,8 +15,10 @@ class MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-    unless @message.save
-      render turbo_stream: turbo_stream.action(:redirect, messages_url(uuid: @channel.uuid))
+    if @message.save
+      head :created
+    else
+      head :bad_request
     end
   end
 
@@ -27,6 +29,6 @@ class MessagesController < ApplicationController
   end
 
   def message_params
-    params.require(:message).permit(:content, :channel_id).merge(user: current_user)
+    params.require(:message).permit(:content, :channel_id, attachments: []).merge(user: current_user)
   end
 end
