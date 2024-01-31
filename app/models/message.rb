@@ -4,7 +4,7 @@ class Message < ApplicationRecord
   belongs_to :user
 
   ## VALIDATIONS ##
-  validates :content, presence: { allow_blank: false, message: :blank }
+  validates :content, presence: { allow_blank: false, message: :blank }, if: -> { attachments.empty? }
 
   ## CALLBACKS ##
   after_create_commit :broadcast_message
