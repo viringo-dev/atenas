@@ -8,7 +8,9 @@
           </svg>
         </button>
         <a href="/" class="flex items-center">
-          <span class="text-white self-center text-2xl font-medium whitespace-nowrap">ATENAS</span>
+          <%= link_to root_path, class: "flex items-center" do %>
+            <%= image_tag("/logo.png", class: "h-8") %>
+          <% end %>
         </a>
       </div>
       <div class="flex items-center md:order-2">
