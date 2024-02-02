@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root   "tasks#index"
 
+  get "how-it-works", to: "landing#how_it_works"
+
   post   "sign_up", to: "users#create"
   get    "sign_up", to: "users#new"
 
