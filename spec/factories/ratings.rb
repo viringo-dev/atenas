@@ -12,6 +12,7 @@ FactoryBot.define do
     after(:build) do |rating|
       rating.task = rating.bid.task
       rating.user = rating.task.user
+      rating.rater = rating.bid.user
     end
   end
 end
