@@ -4,7 +4,7 @@ class BidsController < ApplicationController
   before_action :set_task, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_my_task, only: [:index, :accept]
   before_action :set_my_bid, only: [:edit, :update, :destroy]
-  before_action :set_bid, only: [:accept, :payment, :finish]
+  before_action :set_bid, only: [:accept, :finish]
   before_action :can_edit_bid?, only: [:edit, :update, :destroy]
 
   def index
