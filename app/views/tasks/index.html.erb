@@ -25,7 +25,7 @@
   <%= turbo_frame_tag Task.new %>
   
   <%= turbo_frame_tag "tasks" do %>
-    <%= render @tasks %>
+    <%= render(TaskComponent.with_collection(@tasks, current_user: current_user)) %>
   <% end %>
 
   <%= turbo_frame_tag "tasks-pagination", src: root_path(page: @pagy.next, format: :turbo_stream) %>
