@@ -93,6 +93,9 @@ es:
       task:
         one: "Tarea"
         other: "Tareas"
+      bid:
+        one: "Oferta"
+        other: "Ofertas"
       channel:
         one: "Canal"
         other: "Canales"
