@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class HeaderComponent < ApplicationComponent
-  attr_reader :channels
-  def initialize(channels:)
+  attr_reader :channels, :current_user
+  def initialize(channels:, current_user: nil)
     @channels = channels
+    @current_user = current_user
   end
 
   erb_template <<-ERB
