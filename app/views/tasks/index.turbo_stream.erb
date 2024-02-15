@@ -1,5 +1,5 @@
 <%= turbo_stream.append "tasks" do %>
-  <%= render partial: "task", :collection => @tasks, as: :task %>
+  <%= render(TaskComponent.with_collection(@tasks, current_user: current_user)) %>
 <% end %>
 <% if @pagy.next.present? %>
   <%= turbo_stream.replace "tasks-pagination" do %>

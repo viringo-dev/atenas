@@ -1,0 +1,94 @@
+<%= turbo_frame_tag task do %>
+  <div class="w-full px-4 py-3 mb-4 bg-white border border-gray-200 rounded-lg shadow" data-controller="read-more">
+    <%= link_to_conditionally !current_page_is_task_path?, task_path(task), data: { turbo_frame: "_top" } do %>
+      <div class="flex justify-between items-start gap-x-2">
+        <div class="text-xl font-semibold break-all">
+          <%= task.name %>
+        </div>
+      </div>
+      <p class="text-sm text-gray-400"><%= t("activerecord.attributes.task.deadline") %>: <%= l(task.deadline, locale: :es, format: :long) %></p>
+    <% end %>
+    <div class="mb-2 text-base font-normal" data-read-more-target="shortText"><%= truncate(task.description, length: 250) { tag.span "Ver más", data: { action: "click->read-more#handle" }, class: "text-primary whitespace-nowrap cursor-pointer" } %></div>
+    <div class="mb-2 text-base font-normal hidden" data-read-more-target="longText"><%= task.description %></div>
+    <div class="flex items-start sm:items-center justify-between flex-col sm:flex-row mb-3 gap-3">
+      <div class="flex items-center justify-between w-full">
+        <div class="">
+          <%= button_tag data: { dropdown_toggle: "files-dropdown-#{task.id}" },
+                         class: "#{"hidden" if task.files.empty?} text-white bg-primary hover:bg-primary-light font-medium rounded-lg text-sm px-5 py-2 text-center inline-flex items-center" do %>
+            <%= t("activerecord.attributes.task.files") %>
+            <svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+            </svg>
+          <% end %>
+          <div id="files-dropdown-<%= task.id %>" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow">
+            <ul class="text-sm text-gray-700" aria-labelledby="">
+              <% task.files.includes(:blob).each do |file| %>
+                <li>
+                  <%= link_to truncate(file.filename.to_s, length: 20), file, target: "_blank", class: "block px-4 py-2 hover:bg-gray-100" %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="flex items-center gap-x-1">
+          <% if task.owner?(current_user) %>
+            <%= link_to task_path(task),
+                        class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
+                        data: { "tooltip-target": "tooltip-task-bids", turbo_frame: "_top" } do %>
+              <%= render 'icons/bid' %>
+              <div id="tooltip-task-bids" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                  <%= t("activerecord.models.bid.other") %>
+                  <div class="tooltip-arrow" data-popper-arrow></div>
+              </div>
+            <% end unless current_page_is_task_path? %>
+            <% if current_user_can_edit_task? %>
+              <%= button_to edit_task_path(task),
+                            method: :get,
+                            class: "btn bg-third hover:bg-third-light px-[10px] w-auto",
+                            data: { "tooltip-target": "tooltip-edit-bid" } do %>
+                <%= render 'icons/edit' %>
+                <div id="tooltip-edit-bid" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    <%= t("pages.common.edit") %>
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              <% end %>
+              <%= button_to task_path(task),
+                            method: :delete,
+                            form: { data: { turbo_confirm: t("pages.common.sure") } },
+                            class: "btn bg-negative hover:bg-negative-light px-[10px]",
+                            data: { "tooltip-target": "tooltip-delete-task" } do %>
+                <%= render 'icons/delete' %>
+                <div id="tooltip-delete-task" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                    <%= t("pages.common.delete") %>
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                </div>
+              <% end %>
+            <% end %>
+          <% else %>
+            <% unless current_page_is_task_path? %>
+              <% if bid %>
+                <%= link_to number_to_currency(bid.amount.round, precision: 2, unit: "S/.", format: "%u %n", separator: "."),
+                            task_path(task),
+                            data: { turbo_frame: "_top" },
+                            class: "btn bg-third w-auto" %>
+              <% else %>
+                <%= link_to t("pages.task.bid"),
+                            task_path(task),
+                            data: { turbo_frame: "_top" },
+                            class: "btn bg-third hover:bg-third-light w-auto" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-between items-center gap-2">
+      <div class="flex items-center justify-between w-full">
+        <div class="btn cursor-default border-dotted border-2 border-gray-600 text-sm text-gray-600 w-auto px-3 py-1.5 bg-gray-50">
+          <%= number_to_currency(task.reward.round, precision: 2, unit: "S/.", format: "%u %n", separator: ".") %>
+        </div>
+        <%= render "shared/user", user: task.user %>
+      </div>
+    </div>
+  </div>
+<% end %>

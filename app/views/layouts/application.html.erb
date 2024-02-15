@@ -18,7 +18,7 @@
   </head>
 
   <body class="flex flex-col text-dark h-[calc(100dvh)]">
-    <%= render partial: "shared/header" %>
+    <%= render HeaderComponent.new(channels: @channels, current_user: current_user) %>
     <main class="flex-1 p-4 bg-gray-50">
       <div id="flash" class="fixed z-10 left-1/2 -translate-x-1/2 top-10 mx-4 flex flex-col items-center gap-2">
         <%= render partial: "shared/flash" %>

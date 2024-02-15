@@ -68,6 +68,10 @@ class User < ApplicationRecord
     UserMailer.password_reset(self, password_reset_token).deliver_now
   end
 
+  def has_unread_notifications?
+    notifications.unread.any?
+  end
+
   private
 
   def password_required?

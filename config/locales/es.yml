@@ -93,6 +93,9 @@ es:
       task:
         one: "Tarea"
         other: "Tareas"
+      bid:
+        one: "Oferta"
+        other: "Ofertas"
       channel:
         one: "Canal"
         other: "Canales"
@@ -187,6 +190,7 @@ es:
       heading: "Encuentra soluciones académicas"
       subheading: "Conéctate con expertos destacados, preparados para ofrecer soluciones de manera inmediata y confiable."
     task:
+      bid: "Ofertar"
       pending: "Pendiente"
       accept: "Aceptar"
       chat: "Chat"
