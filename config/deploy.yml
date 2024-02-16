@@ -102,6 +102,7 @@ accessories:
     roles:
       - web
       - job
+    cmd: "redis-server"
     volumes:
       - /var/lib/redis:/data
     options:
