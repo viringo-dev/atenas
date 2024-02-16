@@ -63,6 +63,7 @@ env:
     HOSTNAME: atenas.app
     DB_HOST: 5.78.78.254
     RAILS_LOG_TO_STDOUT: true
+    REDIS_URL: redis://atenas-redis:6379/0
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
