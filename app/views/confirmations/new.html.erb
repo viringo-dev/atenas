@@ -4,8 +4,8 @@
       <%= t("pages.confirmation.noun") %>
     </div>
     <div class="mb-4 relative">
-      <%= form.email_field :email, required: true, class: "input", placeholder: "" %>
-      <%= form.label :email, class: "input" %>
+      <%= form.label :email, class: "label" %>
+      <%= form.email_field :email, required: true, class: "input", placeholder: "john@example.com" %>
     </div>
     <%= form.submit t("pages.confirmation.verb"), class: "btn bg-primary hover:bg-primary-light" %>
   <% end %>
