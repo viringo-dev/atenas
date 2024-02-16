@@ -4,9 +4,47 @@ service: atenas
 # Name of the container image.
 image: kevinenv/atenas
 
+# Setup Traefik
+traefik:
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+    network: "private"
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    certificatesResolvers.letsencrypt.acme.email: "support@atenas.app"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+
 # Deploy to these servers.
 servers:
-  - 192.168.90.129
+  web:
+    hosts:
+      - 5.78.78.254
+    labels:
+      traefik.http.routers.atenas.rule: Host(`atenas.app`)
+      traefik.http.routers.atenas_secure.entrypoints: websecure
+      traefik.http.routers.atenas_secure.rule: Host(`atenas.app`)
+      traefik.http.routers.atenas_secure.tls: true
+      traefik.http.routers.atenas_secure.tls.certresolver: letsencrypt
+    options:
+      network: "private"
+  job:
+    hosts:
+      - 5.78.78.254
+    # Or something like bin/job
+    cmd: bundle exec sidekiq
+    # Limit workers resources
+    #
+    # options:
+    #   cap-add: true
+    #   cpu-count: 2
+    options:
+      network: "private"
 
 # Credentials for your image host.
 registry:
@@ -22,7 +60,9 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 192.168.90.129
+    HOSTNAME: atenas.app
+    DB_HOST: 5.78.78.254
+    RAILS_LOG_TO_STDOUT: true
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -39,13 +79,13 @@ env:
 #     - GITHUB_TOKEN
 #   remote:
 #     arch: amd64
-#     host: ssh://app@192.168.90.129
+#     host: ssh://app@5.78.78.254
 
 # Use accessory services (secrets come from .env).
 accessories:
   db:
     image: postgres:15
-    host: 192.168.90.129
+    host: 5.78.78.254
     port: 5432
     env:
       clear:
@@ -58,11 +98,14 @@ accessories:
     directories:
       - data:/var/lib/postgresql/data
   redis:
-    image: redis:7.0
-    host: 192.168.90.129
-    port: 6379
-    directories:
-      - data:/data
+    image: redis:latest
+    roles:
+      - web
+      - job
+    volumes:
+      - /var/lib/redis:/data
+    options:
+      network: "private"
 
 # Configure custom arguments for Traefik
 # traefik:
