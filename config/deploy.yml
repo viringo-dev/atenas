@@ -69,6 +69,8 @@ env:
     - POSTGRES_PASSWORD
     - GMAIL_SMTP_USERNAME
     - GMAIL_SMTP_PASSWORD
+    - SIDEKIQ_USERNAME
+    - SIDEKIQ_PASSWORD
 
 # Use a different ssh user than root
 # ssh:
