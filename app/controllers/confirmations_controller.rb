@@ -7,9 +7,21 @@ class ConfirmationsController < ApplicationController
 
     if @user.present? && @user.unconfirmed?
       @user.send_confirmation_email!
-      redirect_to root_path, notice: t("pages.confirmation.notices.check_email")
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: t("pages.confirmation.notices.check_email") }
+        format.turbo_stream do
+          flash[:notice] = t("pages.confirmation.notices.check_email")
+          render turbo_stream: turbo_stream.action(:redirect, root_path)
+        end
+      end
     else
-      redirect_to new_confirmation_path, alert: t("pages.confirmation.alerts.no_email_or_already_confirmed")
+      respond_to do |format|
+        format.html { redirect_to new_confirmation_path, alert: t("pages.confirmation.alerts.no_email_or_already_confirmed") }
+        format.turbo_stream do
+          flash[:alert] = t("pages.confirmation.alerts.no_email_or_already_confirmed")
+          render turbo_stream: turbo_stream.action(:redirect, new_confirmation_path)
+        end
+      end
     end
   end
 
@@ -19,9 +31,21 @@ class ConfirmationsController < ApplicationController
     if @user.present? && @user.unconfirmed?
       @user.confirm!
       login @user
-      redirect_to root_path, notice: t("pages.confirmation.notices.confirmed")
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: t("pages.confirmation.notices.confirmed") }
+        format.turbo_stream do
+          flash[:notice] = t("pages.confirmation.notices.confirmed")
+          render turbo_stream: turbo_stream.action(:redirect, root_path)
+        end
+      end
     else
-      redirect_to new_confirmation_path, alert: t("pages.confirmation.alerts.invalid_token")
+      respond_to do |format|
+        format.html { redirect_to new_confirmation_path, alert: t("pages.confirmation.alerts.invalid_token") }
+        format.turbo_stream do
+          flash[:alert] = t("pages.confirmation.alerts.invalid_token")
+          render turbo_stream: turbo_stream.action(:redirect, new_confirmation_path)
+        end
+      end
     end
   end
 
