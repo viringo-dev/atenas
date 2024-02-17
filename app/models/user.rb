@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   CONFIRMATION_TOKEN_EXPIRATION = 30.minutes
-  MAILER_FROM_EMAIL = "no-reply@atenas.com"
+  MAILER_FROM_EMAIL = "no-reply@atenas.app"
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
   USERNAME_MIN_LENGTH = 3
   USERNAME_MAX_LENGTH = 12
