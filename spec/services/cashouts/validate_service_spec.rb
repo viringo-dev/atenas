@@ -22,7 +22,7 @@ RSpec.describe Cashouts::ValidateService, type: :service do
   end
 
   context 'when transaction fails' do
-    before { allow_any_instance_of(Cashout).to receive(:transferred!).and_raise(ActiveRecord::Rollback) }
+    before { allow_any_instance_of(Cashout).to receive(:transferred!).and_raise(ActiveRecord::RecordInvalid) }
 
     it 'does not validate the cashout' do
       expect { subject }.not_to change { cashout.reload.transferred? }

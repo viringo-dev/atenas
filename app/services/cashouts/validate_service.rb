@@ -11,10 +11,10 @@ class Cashouts::ValidateService < ApplicationService
       bid.paid!
       cashout.transferred!
       NotificationJob.perform_later(bid.id, Notification.notification_types[:cashout_validated])
-    rescue ActiveRecord::Rollback
-      return Failure.new(nil)
     end
     Success.new(nil)
+  rescue ActiveRecord::RecordInvalid
+    Failure.new(nil)
   end
 
   private

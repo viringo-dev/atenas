@@ -46,7 +46,7 @@ RSpec.describe Payments::ValidateService, type: :service do
 
   context 'when transaction fails' do
     before do
-      allow(Channel).to receive(:create).and_raise(ActiveRecord::Rollback)
+      allow(Channel).to receive(:create!).and_raise(ActiveRecord::RecordInvalid)
     end
 
     it 'does not validate the payment' do
