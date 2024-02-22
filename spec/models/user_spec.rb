@@ -25,14 +25,14 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
     end
 
-    it "is not valid if phone contains only numbers" do
+    it "is valid if phone contains only numbers" do
       subject.phone = "987654321"
-      expect(subject).to_not be_valid
+      expect(subject).to be_valid
     end
 
-    it "is valid if phone contains numbers and country code" do
+    it "is not valid if phone contains numbers and country code" do
       subject.phone = "+51 987654321"
-      expect(subject).to be_valid
+      expect(subject).to_not be_valid
     end
 
     it "is not valid if username contains space or symbol different than underscore" do
