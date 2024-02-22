@@ -34,8 +34,8 @@ RSpec.describe Tasks::EditPolicy, type: :policy do
     end
   end
 
-  context 'when the task is unpaid' do
-    let(:task) { build(:task, user: user, status: :unpaid) }
+  context 'when the task is bided or paused' do
+    let(:task) { build(:task, user: user, status: :bided) }
 
     it 'allows the user to edit the task' do
       expect(subject).to be_truthy
