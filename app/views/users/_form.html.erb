@@ -80,7 +80,7 @@
       <div class="flex items-center h-5">
         <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required>
       </div>
-      <label for="remember" class="ml-2 text-sm font-medium text-gray-900"><%= t("pages.account.form.accept") %><%= link_to t("pages.account.form.terms_and_conditions"), sign_up_path, class: "text-primary" %></label>
+      <label for="remember" class="ml-2 text-sm font-medium text-gray-900"><%= t("pages.account.form.accept") %><%= link_to t("pages.account.form.terms_and_conditions"), terms_and_conditions_path, class: "text-primary" %></label>
     </div>
   <% end %>
   <%= form.button class: "btn bg-primary hover:bg-primary-light", style: "cursor: pointer;" do %>

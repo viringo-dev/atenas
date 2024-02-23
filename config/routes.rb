@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root   "tasks#index"
 
   get "how-it-works", to: "landing#how_it_works"
+  get "terms-and-conditions", to: "landing#terms_and_conditions"
 
   post   "sign_up", to: "users#create"
   get    "sign_up", to: "users#new"

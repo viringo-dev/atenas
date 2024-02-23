@@ -5,4 +5,7 @@ class LandingController < ApplicationController
 
   def how_it_works
   end
+
+  def terms_and_conditions
+  end
 end
