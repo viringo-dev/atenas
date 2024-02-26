@@ -15,7 +15,10 @@ traefik:
   args:
     entryPoints.web.address: ":80"
     entryPoints.websecure.address: ":443"
-    certificatesResolvers.letsencrypt.acme.email: "support@atenas.app"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    certificatesResolvers.letsencrypt.acme.email: "atenas.app@gmail.com"
     certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
     certificatesResolvers.letsencrypt.acme.httpchallenge: true
     certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
@@ -26,11 +29,9 @@ servers:
     hosts:
       - 5.78.78.254
     labels:
+      traefik.http.routers.atenas.entrypoints: websecure
       traefik.http.routers.atenas.rule: Host(`atenas.app`)
-      traefik.http.routers.atenas_secure.entrypoints: websecure
-      traefik.http.routers.atenas_secure.rule: Host(`atenas.app`)
-      traefik.http.routers.atenas_secure.tls: true
-      traefik.http.routers.atenas_secure.tls.certresolver: letsencrypt
+      traefik.http.routers.atenas.tls.certresolver: letsencrypt
     options:
       network: "private"
   job:
