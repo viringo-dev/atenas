@@ -11,6 +11,7 @@ traefik:
       - "443:443"
     volume:
       - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+    network: "private"
   args:
     entryPoints.web.address: ":80"
     entryPoints.websecure.address: ":443"
@@ -32,6 +33,7 @@ servers:
       traefik.http.routers.atenas.rule: Host(`atenas.app`)
       traefik.http.routers.atenas.tls.certresolver: letsencrypt
     options:
+      network: "private"
   job:
     hosts:
       - 5.78.78.254
@@ -43,6 +45,7 @@ servers:
     #   cap-add: true
     #   cpu-count: 2
     options:
+      network: "private"
 
 # Credentials for your image host.
 registry:
@@ -61,8 +64,7 @@ env:
     HOSTNAME: atenas.app
     DB_HOST: 5.78.78.254
     RAILS_LOG_TO_STDOUT: true
-    REDIS_URL: "redis://localhost:6379/0"
-    WEB_CONCURRENCY: 1
+    REDIS_URL: "redis://atenas-redis:6379/0"
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -110,6 +112,7 @@ accessories:
     volumes:
       - /var/lib/redis:/data
     options:
+      network: "private"
 
 # Configure custom arguments for Traefik
 # traefik:
