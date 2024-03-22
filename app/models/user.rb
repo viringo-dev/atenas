@@ -7,6 +7,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  ## GEMS ##
+  extend FriendlyId
+  friendly_id :full_name, use: :slugged
+
   ## ASSOCIATIONS ##
   has_many :active_sessions, dependent: :destroy
   has_many :tasks, dependent: :destroy
