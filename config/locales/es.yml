@@ -36,7 +36,7 @@ es:
         name: "Nombre"
         surname: "Apellido"
         email: "Correo electrónico"
-        username: "Usuario"
+        slug: "Usuario"
         phone: "Teléfono"
         birthdate: "Nacimiento"
         gender: "Género"
@@ -58,7 +58,7 @@ es:
       models:
         user:
           attributes:
-            username:
+            slug:
               blank: "no puede estar en blanco"
               invalid: "solo puede contener letras, números y guiones bajos"
             # phone:

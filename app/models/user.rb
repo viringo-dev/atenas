@@ -2,8 +2,8 @@ class User < ApplicationRecord
   CONFIRMATION_TOKEN_EXPIRATION = 30.minutes
   MAILER_FROM_EMAIL = "no-reply@atenas.app"
   PASSWORD_RESET_TOKEN_EXPIRATION = 10.minutes
-  USERNAME_MIN_LENGTH = 3
-  USERNAME_MAX_LENGTH = 12
+  SLUG_MIN_LENGTH = 3
+  SLUG_MAX_LENGTH = 12
 
   has_secure_password
 
@@ -28,19 +28,22 @@ class User < ApplicationRecord
   ## VALIDATIONS ##
   validates :name, presence: { allow_blank: false }
   validates :surname, presence: { allow_blank: false }
-  validates :birthdate, presence: { allow_blank: false }
-  validates :gender, presence: { allow_blank: false }
-  validates :username, presence: { allow_blank: false }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_]+\Z/ }, length: { minimum: USERNAME_MIN_LENGTH, maximum: USERNAME_MAX_LENGTH }
+  validates :birthdate, presence: { allow_blank: false }, if: :persisted?
+  validates :gender, presence: { allow_blank: false }, if: :persisted?
+  validates :slug, presence: { allow_blank: false }, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9_]+\Z/ }, length: { minimum: SLUG_MIN_LENGTH, maximum: SLUG_MAX_LENGTH }, if: :persisted?
   validates :email, presence: { allow_blank: false }, uniqueness: { case_sensitive: false }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
-  validates :phone, presence: { allow_blank: false }, format: { with: /\A\d{1,15}\z/ }
-  validates :password, presence: { allow_blank: false }, length: { minimum: 8 }, format: { with: /\A^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }, if: :password_required?
+  validates :phone, presence: { allow_blank: false }, format: { with: /\A\d{1,15}\z/ }, if: :persisted?
+  validates :password, presence: { allow_blank: false }, length: { minimum: 8 }, format: { with: /\A^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/ }, if: -> { password_digest_changed? || new_record? }
 
   ## CALLBACKS ##
   before_validation :format_fields
 
   ## ENUMS ##
   enum gender: { male: 0, female: 1, other: 2 }
-  enum role: { user: 0, admin: 1 }
+
+  def full_name
+    "#{name} #{surname}"
+  end
 
   def confirm!
     update_columns(confirmed_at: Time.current)
@@ -76,6 +79,10 @@ class User < ApplicationRecord
     notifications.unread.any?
   end
 
+  def normalize_friendly_id(string)
+    super.gsub("-", "_")
+  end
+
   private
 
   def password_required?
@@ -84,7 +91,7 @@ class User < ApplicationRecord
 
   def format_fields
     self.email = self.email.to_s.strip.downcase
-    self.username = self.username.to_s.strip.downcase
+    self.slug = self.slug.to_s.strip.downcase
     self.phone = self.phone.to_s.strip.downcase
     self.name = self.name.to_s.strip
     self.surname = self.surname.to_s.strip

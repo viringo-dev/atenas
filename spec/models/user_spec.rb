@@ -8,7 +8,6 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:name).with_message(I18n.t("activerecord.errors.models.user.attributes.name.blank")) }
     it { should validate_presence_of(:surname).with_message(I18n.t("activerecord.errors.models.user.attributes.surname.blank")) }
     it { should validate_presence_of(:email).with_message(I18n.t("activerecord.errors.models.user.attributes.email.blank")) }
-    it { should validate_presence_of(:username).with_message(I18n.t("activerecord.errors.models.user.attributes.username.blank")) }
 
     it "is not valid with email foo@example" do
       subject.email = "foo@example"
@@ -35,21 +34,21 @@ RSpec.describe User, type: :model do
       expect(subject).to_not be_valid
     end
 
-    it "is not valid if username contains space or symbol different than underscore" do
-      subject.username = "foo bar"
+    it "is not valid if slug contains space or symbol different than underscore" do
+      subject.slug = "foo bar"
       expect(subject).to_not be_valid
-      subject.username = "foo$bar"
+      subject.slug = "foo$bar"
       expect(subject).to_not be_valid
-      subject.username = "foo-bar"
+      subject.slug = "foo-bar"
       expect(subject).to_not be_valid
     end
 
-    it "is valid if username contains number, letter, or underscore" do
-      subject.username = "foobar"
+    it "is valid if slug contains number, letter, or underscore" do
+      subject.slug = "foobar"
       expect(subject).to be_valid
-      subject.username = "foo_bar"
+      subject.slug = "foo_bar"
       expect(subject).to be_valid
-      subject.username = "foobar2000"
+      subject.slug = "foobar2000"
       expect(subject).to be_valid
     end
 

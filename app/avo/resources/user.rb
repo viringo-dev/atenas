@@ -8,7 +8,7 @@ class Avo::Resources::User < Avo::BaseResource
     field :id, as: :id
     field :name, as: :text
     field :surname, as: :text
-    field :username, as: :text
+    field :slug, as: :text
     field :email, as: :text
     # field :phone, as: :text
     # field :phone_code, as: :text

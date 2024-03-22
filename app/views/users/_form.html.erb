@@ -27,40 +27,42 @@
     <%= form.label :surname, class: "label" %>
     <%= form.text_field :surname, required: true, class: "input", placeholder: "Musk" %>
   </div>
-  <div class="mb-2">
+  <%= tag.div class: "mb-2" do %>
     <%= form.label :email, class: "label" %>
-    <%= form.email_field :email, disabled: user.persisted?, class: "input", placeholder: "elon@example.com" %>
-  </div>
-  <div class="mb-2 flex gap-x-2">
-    <div class="w-1/2">
-      <%= form.label :username, class: "label" %>
-      <%= form.text_field :username, required: true, class: "input", minlength: User::USERNAME_MIN_LENGTH, maxlength: User::USERNAME_MAX_LENGTH, placeholder: "elonmusk" %>
+    <%= form.email_field :email, class: "input", placeholder: "elon@example.com" %>
+  <% end if form.object.new_record? %>
+  <% if form.object.persisted? %>
+    <div class="mb-2 flex gap-x-2">
+      <div class="w-1/2">
+        <%= form.label :slug, class: "label" %>
+        <%= form.text_field :slug, required: true, class: "input", minlength: User::SLUG_MIN_LENGTH, maxlength: User::SLUG_MAX_LENGTH, placeholder: "elonmusk" %>
+      </div>
+      <div class="w-1/2">
+        <%= form.label :phone, class: "label" %>
+        <%= form.telephone_field :phone, required: true, class: "input", placeholder: "987654321" %>
+      </div>
     </div>
-    <div class="w-1/2">
-      <%= form.label :phone, class: "label" %>
-      <%= form.telephone_field :phone, required: true, class: "input", placeholder: "987654321" %>
+    <div class="mb-2 flex gap-x-2">
+      <div class="w-1/2">
+        <%= form.label :gender, class: "label" %>
+        <%= form.select :gender, User.genders.keys.map { |k| [t("activerecord.models.user.enums.gender.#{k}"), k] }, {}, { class: "select" } %>
+      </div>
+      <div class="w-1/2">
+        <%= form.label :birthdate, class: "label" %>
+        <%= form.text_field :birthdate,
+                            required: true,
+                            class: "input",
+                            data: { controller: "flatpickr",
+                                    "flatpickr-params-value": {
+                                      dateFormat: "d-m-Y",
+                                      defaultDate: form.object.birthdate.present? ? form.object.birthdate.strftime("%d-%m-%Y") : Date.today.strftime("%d-%m-%Y"),
+                                      maxDate: Date.today.strftime("%d-%m-%Y"),
+                                      minDate: (Date.today - 100.years).strftime("%d-%m-%Y")
+                                    }
+                                  } %>
+      </div>
     </div>
-  </div>
-  <div class="mb-2 flex gap-x-2">
-    <div class="w-1/2">
-      <%= form.label :gender, class: "label" %>
-      <%= form.select :gender, User.genders.keys.map { |k| [t("activerecord.models.user.enums.gender.#{k}"), k] }, {}, { class: "select" } %>
-    </div>
-    <div class="w-1/2">
-      <%= form.label :birthdate, class: "label" %>
-      <%= form.text_field :birthdate,
-                          required: true,
-                          class: "input",
-                          data: { controller: "flatpickr",
-                                  "flatpickr-params-value": {
-                                    dateFormat: "d-m-Y",
-                                    defaultDate: form.object.birthdate.present? ? form.object.birthdate.strftime("%d-%m-%Y") : Date.today.strftime("%d-%m-%Y"),
-                                    maxDate: Date.today.strftime("%d-%m-%Y"),
-                                    minDate: (Date.today - 100.years).strftime("%d-%m-%Y")
-                                  }
-                                } %>
-    </div>
-  </div>
+  <% end %>
   <div class="mb-2">
     <%= form.label :password, class: "label" %>
     <%= form.password_field :password, required: user.new_record?, class: "input", placeholder: "" %>
@@ -69,18 +71,14 @@
     <%= form.label :password_confirmation, class: "label" %>
     <%= form.password_field :password_confirmation, required: user.new_record?, class: "input", placeholder: "" %>
   </div>
-  <% if user.persisted? %>
-    <div class="mb-2">
-      <%= form.label :current_password, t("pages.account.form.current_password"), class: "label" %>
-      <%= form.password_field :current_password, required: true, class: "input", placeholder: "" %>
-    </div>
-  <% end %>
   <% if user.new_record? %>
-    <div class="flex items-start mb-2">
+    <div class="mb-3 flex items-start">
       <div class="flex items-center h-5">
-        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required>
+        <%= form.check_box :rgpd_accepted, required: true, class: "checkbox" %>
       </div>
-      <label for="remember" class="ml-2 text-sm font-medium text-gray-900"><%= t("pages.account.form.accept") %><%= link_to t("pages.account.form.terms_and_conditions"), terms_and_conditions_path, class: "text-primary" %></label>
+      <%= form.label :rgpd_accepted, class: "label font-normal text-justify" do %>
+        <%= t("pages.account.form.accept") %><%= link_to t("pages.account.form.terms_and_conditions"), terms_and_conditions_path, class: "text-primary" %>
+      <% end %>
     </div>
   <% end %>
   <%= form.button class: "btn bg-primary hover:bg-primary-light", style: "cursor: pointer;" do %>

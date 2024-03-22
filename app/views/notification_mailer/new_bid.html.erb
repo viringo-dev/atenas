@@ -1,1 +1,1 @@
-<%= t("mailers.notification_mailer.new_bid.body_html", name: @task.user.name, bidder_name: @bid.user.username, task_name: @task.name, app_name: 'Atenas', link: notification_url(@notification)) %>
+<%= t("mailers.notification_mailer.new_bid.body_html", name: @task.user.name, bidder_name: @bid.user.slug, task_name: @task.name, app_name: 'Atenas', link: notification_url(@notification)) %>

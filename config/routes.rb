@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get    "account", to: "users#edit"
   delete "account", to: "users#destroy"
 
-  resources :users, only: [:show], param: :username
+  resources :users, only: [:show], param: :slug
 
   resources :tasks do
     resources :bids, only: [:index, :new, :create, :edit, :update, :destroy] do

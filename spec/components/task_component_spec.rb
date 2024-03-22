@@ -7,7 +7,7 @@ RSpec.describe TaskComponent, type: :component do
   let!(:task) { create(:task) }
   let!(:current_user) { create(:confirmed_user) }
 
-  it "renders the task title, description, deadline, reward, and owner username" do
+  it "renders the task title, description, deadline, reward, and owner slug" do
     expect(
       render_inline(described_class.new(task: task, current_user: current_user)).to_html
     ).to include(
@@ -15,7 +15,7 @@ RSpec.describe TaskComponent, type: :component do
       task.description,
       I18n.l(task.deadline, locale: :es, format: :long),
       task.reward.to_s,
-      task.user.username
+      task.user.slug
     )
   end
 
