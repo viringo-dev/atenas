@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show], param: :slug
 
-  resources :tasks do
+  resources :tasks, param: :slug do
     resources :bids, only: [:index, :new, :create, :edit, :update, :destroy] do
       member do
         post :accept

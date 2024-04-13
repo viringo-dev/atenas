@@ -70,7 +70,7 @@ class BidsController < ApplicationController
   private
 
   def set_task
-    @task = Task.find_by(id: params[:task_id])
+    @task = Task.find_by(slug: params[:task_slug])
     unless @task
       if turbo_frame_request?
         flash[:alert] = t("pages.tasks.alerts.not_found")
@@ -82,7 +82,7 @@ class BidsController < ApplicationController
   end
 
   def set_my_task
-    @task = current_user.tasks.find_by(id: params[:task_id])
+    @task = current_user.tasks.find_by(slug: params[:task_slug])
     unless @task
       if turbo_frame_request?
         flash[:alert] = t("pages.tasks.alerts.not_found")
