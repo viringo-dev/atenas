@@ -187,7 +187,7 @@ es:
       create_task: "Crear tarea"
       alerts:
         not_found: "Tarea no encontrada"
-      heading: "¡Publica o encuentra tareas!"
+      heading: "¡Publica o encuentra tareas académicas!"
       subheading: "Publica una tarea y recibe ofertas de personas dispuestas a ayudarte a resolverla, o encuentra tareas que puedas realizar."
     task:
       bid: "Ofertar"
