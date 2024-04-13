@@ -147,6 +147,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_174447) do
   create_table "tasks", force: :cascade do |t|
     t.uuid "uuid", default: -> { "gen_random_uuid()" }, null: false
     t.string "name", null: false
+    t.string "slug", null: false
     t.text "description", null: false
     t.float "reward", null: false
     t.integer "currency", default: 0, null: false
@@ -155,6 +156,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_174447) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_tasks_on_slug", unique: true
     t.index ["user_id"], name: "index_tasks_on_user_id"
     t.index ["uuid"], name: "index_tasks_on_uuid", unique: true
   end

@@ -86,7 +86,7 @@ class TasksController < ApplicationController
   end
 
   def set_task
-    @task = Task.find_by(id: params[:id])
+    @task = Task.find_by(slug: params[:slug])
     unless @task
       if turbo_frame_request?
         flash[:alert] = t("pages.tasks.alerts.not_found")

@@ -2,6 +2,10 @@ class Task < ApplicationRecord
   include Ownerable
   include SharedScopes
 
+  ## GEMS ##
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   ## ASSOCIATIONS ##
   belongs_to :user
   has_many_attached :files

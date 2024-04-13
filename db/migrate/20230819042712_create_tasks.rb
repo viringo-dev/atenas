@@ -3,6 +3,7 @@ class CreateTasks < ActiveRecord::Migration[7.0]
     create_table :tasks do |t|
       t.uuid :uuid, null: false, default: "gen_random_uuid()", index: { unique: true }
       t.string :name, null: false
+      t.string :slug, null: false, index: { unique: true }
       t.text :description, null: false
       t.float :reward, null: false
       t.integer :currency, null: false, default: 0
