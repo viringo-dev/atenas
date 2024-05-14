@@ -58,6 +58,15 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libvips postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
+# Install packages for libjemalloc2
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y libjemalloc2
+
+# Set up libjemalloc2
+ENV LD_PRELOAD="libjemalloc.so.2" \
+    MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true,stats_print:true" \
+    RUBY_YJIT_ENABLE="1"
+
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
