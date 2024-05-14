@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Atenas
 concurrency:
   group: production
   cancel-in-progress: true
